@@ -215,3 +215,7 @@ body{
     color: var(--blackColor);
     font-size: 13px;
 }
+.highlight-card:hover{
+    background-color: var(--whiteColor);
+    box-shadow: rgba(176, 176, 176, 0.2) 0px 2px 8px 0px;
+}
