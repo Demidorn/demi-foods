@@ -1,14 +1,19 @@
 #!/usr/bin/python3
-from flask import Flask
+"""Mamaput app"""
+from flask import Flask, render_template
+
+
 
 app = Flask(__name__)
 
+
+@app.route('/home')
 @app.route('/', strict_slashes=False)
 def homePage():
     """
         returns the home Page
     """
-    return "Welcome to Mamaput"
+    return render_template('index.html')
 
 @app.route('/login', strict_slashes=False)
 def Login():
