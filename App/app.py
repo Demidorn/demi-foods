@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -8,7 +8,7 @@ def homePage():
     """
         returns the home Page
     """
-    return "Welcome to Mamaput"
+    render_template()
 
 @app.route('/login', strict_slashes=False)
 def Login():
