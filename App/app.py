@@ -43,6 +43,13 @@ def contactUs():
     """
     return "Welcome to conatct page"
 
+@app.route('/menu', strict_slashes=False)
+def menu():
+    """
+        returns the menu Page
+    """
+    return render_template('menu.html')
+
 
 if __name__ == "__main__":
     """ main function """
