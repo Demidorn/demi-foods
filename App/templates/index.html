@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
+    <!-- adding opensans google font-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Mamaput Online food</title>
+    {% endif %}
+</head>
+<body>
+    <!-- sidebar-->
+    <div class="sidebar">
+        <!--logo-->
+        <h1 class="logo"><i>MamaPut</i></h1>
+
+        <!-- List of menus-->
+        <div class="sidebar-menu">
+            <a href="#"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+            <a href="{{ url_for('profile') }}"><ion-icon name="person-outline"></ion-icon>Profile</a>
+            <a href="{{ url_for('recipe') }}"><ion-icon name="fast-food-sharp"></ion-icon>My Recipe</a>
+            <a href="{{ url_for('orders') }}"><ion-icon name="receipt-outline"></ion-icon>Orders</a>
+            <a href="#"><ion-icon name="notifications-outline"></ion-icon>Notification</a>
+            <a href="#"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
+        </div>
+
+        <!-- Logout-->
+        <div class="sidebar-logout">
+            <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+        </div>
+
+    </div>
+    <!-- main-->
+    <div class="main">
+        <!-- main navbar -->
+        <div class="main-navbar">
+            <!-- menu when appears on moble version-->
+            <ion-icon class="menu-togle" name="menu-outline"></ion-icon>
+            <!-- search bar -->
+            <div class="search">
+                <input type="text" placeholder="What you want to eat?">
+                <button class="search-btn">Search</button>
+            </div> 
+            <!-- cart icon on left side of navbar-->
+            <div class="cart">
+                <a class="cart" href="#"><ion-icon name="cart-outline"></ion-icon></a>
+            </div>
+        </div>
+        <!-- main highlight -->
+        {% block content %}
+        {% endblock content %}
+        <!-- main menu/oder -->
+    </div>
+</body>
+<!-- adding icons-->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>
