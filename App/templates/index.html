@@ -6,8 +6,11 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
     <!-- adding opensans google font-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-
-    <title>Mamaput Online Food</title>
+    {% if title %}
+        <title>{{ title }}</title>
+    {% else %}
+        <title>Mamaput Online food</title>
+    {% endif %}
 </head>
 <body>
     <!-- sidebar-->
@@ -18,11 +21,11 @@
         <!-- List of menus-->
         <div class="sidebar-menu">
             <a href="#"><ion-icon name="storefront-outline"></ion-icon>Home</a>
-            <a href="{{ url_for('menu') }}"><ion-icon name="receipt-outline"></ion-icon>Menu</a>
-            <a href="#"><ion-icon name="terminal-outline"></ion-icon>Wishlist</a>
+            <a href="{{ url_for('profile') }}"><ion-icon name="person-outline"></ion-icon>Profile</a>
+            <a href="{{ url_for('recipe') }}"><ion-icon name="fast-food-sharp"></ion-icon>My Recipe</a>
+            <a href="{{ url_for('orders') }}"><ion-icon name="receipt-outline"></ion-icon>Orders</a>
             <a href="#"><ion-icon name="notifications-outline"></ion-icon>Notification</a>
             <a href="#"><ion-icon name="chatbubbles-outline"></ion-icon>Contact Us</a>
-            <a href="#"><ion-icon name="settings-outline"></ion-icon>Setting</a>
         </div>
 
         <!-- Logout-->
@@ -41,49 +44,15 @@
             <div class="search">
                 <input type="text" placeholder="What you want to eat?">
                 <button class="search-btn">Search</button>
-            </div>
-            <!-- profile icon on left side of navbar-->
-            <div class="profile">
+            </div> 
+            <!-- cart icon on left side of navbar-->
+            <div class="cart">
                 <a class="cart" href="#"><ion-icon name="cart-outline"></ion-icon></a>
-                <a class="user" href="#"><ion-icon name="person-outline"></ion-icon></a>
             </div>
         </div>
         <!-- main highlight -->
-        <div class="main-highlight">
-            <!-- title section and arrow-->
-            <div class="main-header">
-                <h2 class="main-title">Recommendations</h2>
-                <div class="main-arrow">
-                    <ion-icon class="back" name="chevron-back-circle-outline"></ion-icon>
-                    <ion-icon class="next" name="chevron-forward-circle-outline"></ion-icon>
-                </div>
-            </div>
-            <!-- highlight menu-->
-            <div class="highligt-wrapper">
-                <div class="highlight-card">
-			<img class="highlight-img" src="{{ url_for('static', filename='images/mamaputimages/eguis-soup4.PNG') }}">
-                    <div class="highligt-desc">
-                        <h4>Egusi Soup</h4>
-                        <p>Naira 2500</p>
-                    </div>
-                </div>
-                <div class="highlight-card">
-			<img class="highlight-img" src="{{ url_for('static', filename='images/mamaputimages/jollof1.jpg') }}">
-                    <div class="highligt-desc">
-                        <h4>Jollof Rice</h4>
-                        <p>Naira 4500</p>
-                    </div>
-                </div>
-                <div class="highlight-card">
-			<img class="highlight-img" src="{{ url_for('static', filename='images/mamaputimages/ogbono1.PNG') }}">
-                    <div class="highligt-desc">
-                        <h4>Ogbono</h4>
-                        <p>Naira 5000</p>
-                    </div>
-                </div>
-            
-            </div>
-        </div>
+        {% block content %}
+        {% endblock content %}
         <!-- main menu/oder -->
     </div>
 </body>

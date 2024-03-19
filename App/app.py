@@ -3,7 +3,6 @@
 from flask import Flask, render_template, url_for
 
 
-
 app = Flask(__name__)
 
 
@@ -15,12 +14,14 @@ def homePage():
     """
     return render_template('index.html')
 
+
 @app.route('/login', strict_slashes=False)
 def Login():
     """
         returns the login Page
     """
     return "Welcome to Login"
+
 
 @app.route('/signup', strict_slashes=False)
 def signup():
@@ -29,12 +30,14 @@ def signup():
     """
     return "Welcome to signup"
 
+
 @app.route('/about', strict_slashes=False)
 def aboutPage():
     """
         returns the about Page
     """
     return "Welcome to about page"
+
 
 @app.route('/contactUs', strict_slashes=False)
 def contactUs():
@@ -43,12 +46,29 @@ def contactUs():
     """
     return "Welcome to conatct page"
 
-@app.route('/menu', strict_slashes=False)
-def menu():
+
+@app.route('/recipe', strict_slashes=False)
+def recipe():
     """
-        returns the menu Page
+        returns the recipe Page
     """
-    return render_template('menu.html')
+    return render_template('recipe.html', title='Recipe')
+
+
+@app.route('/order', strict_slashes=False)
+def orders():
+    """
+        returns order the Page
+    """
+    return render_template('order.html', title='Order')
+
+
+@app.route('/profile', strict_slashes=False)
+def profile():
+    """
+        returns the profile Page
+    """
+    return render_template('profile.html', title='Profile')
 
 
 if __name__ == "__main__":
