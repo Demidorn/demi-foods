@@ -14,10 +14,10 @@ class RegForm(FlaskForm):
     confirm_pwd = StirngField('Confirm password', validators[DataRequired(), Equalto('pwd')])
     submit = SubmitField('Sign up')
 
+
 class LoginForm(FlaskForm):
     """ Log in form """
     email = StirngField('Email address', validators[DataRequired(), Email()])
     pwd = StirngField('Password', validators[DataRequired()])
     remember = BooleanField('Remember me')
     submit = SubmitField('Sign in')
-    

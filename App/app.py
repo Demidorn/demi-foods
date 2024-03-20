@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """Mamaput app"""
 from flask import Flask, render_template, url_for
+from forms import RegForm, LoginForm
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'c2a00dc657699d079ab8c8b36d94b4d146b6902b0b05e3bdbe34b4e400685fb5'
 
 
 @app.route('/home')
@@ -16,11 +18,12 @@ def homePage():
 
 
 @app.route('/login', strict_slashes=False)
-def Login():
+def login():
     """
         returns the login Page
     """
-    return "Welcome to Login"
+    loginform = LoginForm()
+    return render_template('login.html', title='Log in', loginform=loginform)
 
 
 @app.route('/signup', strict_slashes=False)
@@ -69,6 +72,13 @@ def profile():
         returns the profile Page
     """
     return render_template('profile.html', title='Profile')
+
+
+@app.route('/register', strict_slashes=False)
+def register():
+    """ returns the registration page """
+    regform = RegForm()
+    return render_template('register.html', title='Registration', regform=regform)
 
 
 if __name__ == "__main__":
