@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Mamaput app"""
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, flash, redirect
 from forms import RegForm, LoginForm
 
 
@@ -74,10 +74,13 @@ def profile():
     return render_template('profile.html', title='Profile')
 
 
-@app.route('/register', strict_slashes=False)
+@app.route('/register', methods=['GET', 'POST'], strict_slashes=False)
 def register():
     """ returns the registration page """
     regform = RegForm()
+    if regform.validate_on_submit():
+        flash('Successfull account creation for {}'.format(regform.first_name.data), 'success')
+        return redirect(url_for('homePage'))
     return render_template('register.html', title='Registration', regform=regform)
 
 
