@@ -1,10 +1,10 @@
 {% extends "index.html" %}
 {% block content %}
     <div class="form">
+        <div class="title">Welcome</div>
+        <div class="subtitle">Let's create your account!</div>
         <form method="POST", action="">
             {{ regform.hidden_tag() }}
-            <div class="title">Welcome</div>
-            <div class="subtitle">Let's create your account!</div>
             <div class="input-container ic1">
                 {{ regform.first_name(class="input") }}
                 <div class="cut"></div>
@@ -12,7 +12,7 @@
             </div>
             <div class="input-container ic2">
                 {{ regform.last_name(class="input") }}
-                <div class="cut"></div>
+                <div class="cut "></div>
                 {{ regform.last_name.label(class="placeholder") }}
             </div>
             <div class="input-container ic2">

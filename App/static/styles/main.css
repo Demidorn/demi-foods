@@ -230,10 +230,10 @@ body {
   }
   
   .form {
-    background-color: #b8bacb;
+    background-color: #efedae6b;
     border-radius: 20px;
     box-sizing: border-box;
-    height: 0px;
+    height: max-content;
     padding: 20px;
     width: 500px;
   }
