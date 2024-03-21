@@ -6,21 +6,27 @@ from flask import Flask, render_template, url_for
 app = Flask(__name__)
 
 
-@app.route('/home')
-@app.route('/', strict_slashes=False)
+#@app.route('/home')
+@app.route('/home', strict_slashes=False)
 def homePage():
     """
         returns the home Page
     """
-    return render_template('index.html')
+    return render_template('index.html',title='Home')
 
+@app.route('/', strict_slashes=False)
+def LandingPage():
+    """
+        returns the landing Page
+    """
+    return render_template('landingPage.html',title='LandingPage')
 
 @app.route('/login', strict_slashes=False)
 def Login():
     """
         returns the login Page
     """
-    return "Welcome to Login"
+    return render_template('login.html', title='Login')
 
 
 @app.route('/signup', strict_slashes=False)
@@ -28,7 +34,7 @@ def signup():
     """
         returns the sign Page
     """
-    return "Welcome to signup"
+    return render_template('signup.html', title='SignUp')
 
 
 @app.route('/about', strict_slashes=False)
@@ -36,7 +42,7 @@ def aboutPage():
     """
         returns the about Page
     """
-    return "Welcome to about page"
+    return render_template('about.html', title='About')
 
 
 @app.route('/contactUs', strict_slashes=False)
@@ -44,7 +50,7 @@ def contactUs():
     """
         returns the contact us Page
     """
-    return "Welcome to conatct page"
+    return render_template('contactUs.html', title='ContactUs')
 
 
 @app.route('/recipe', strict_slashes=False)

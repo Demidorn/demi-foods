@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+{% block content %}
+    <div class="login">
+        <h2>LOGIN</h2>
+        <div class="links">
+            <a href="/login'" class="active">Login</a>
+            <a href="">Signup</a>
+        </div>
+        <div class="fa-forms">
+            <form method="post" action="/login">
+                <label for="Username">
+                    <i class="fa-user"></i>
+                </label>
+                <input  type="text" name="username" placeholder="Username" id="username" autofocus="" required> 
+                <br><br>
+                <label for="password">
+                    <i class="fa-lock"></i>
+                </label>  
+                <input type="password" name="password" placeholder="Enter password" required> 
+                <div class="msg">msg</div>
+                <input type="submit"  value="Longin">
+            </form>
+        </div>
+    </div>
+{% endblock content %}
