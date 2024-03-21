@@ -350,7 +350,7 @@ body {
 .form-group.required .control-label:after {
     content:"*";
     color:red;
-=======
+
 body, h2 {
     margin: 0;
     padding: 0;
@@ -433,4 +433,5 @@ input[type="submit"] {
 
 input[type="submit"]:hover {
     background-color: #555;
+}
 }

@@ -8,20 +8,21 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'c2a00dc657699d079ab8c8b36d94b4d146b6902b0b05e3bdbe34b4e400685fb5'
 
 
-#@app.route('/home')
-@app.route('/home', strict_slashes=False)
-def homePage():
+@app.route('/dashboard', strict_slashes=False)
+def dashboard():
     """
-        returns the home Page
+        returns the users dashboard Page
     """
-    return render_template('index.html',title='Home')
+    return render_template('dashboard.html',title='Dashboard')
 
+
+@app.route('/home')
 @app.route('/', strict_slashes=False)
-def LandingPage():
+def landingPage():
     """
         returns the landing Page
     """
-    return render_template('landingPage.html',title='LandingPage')
+    return render_template('landingPage.html',title='Home-Page')
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
@@ -32,18 +33,10 @@ def login():
     if loginform.validate_on_submit():
         if loginform.email.data == 'test@qa.team' and loginform.pwd.data == 'password':
             flash('You have successfully logged in', 'success')
-            return redirect(url_for('homePage'))
+            return redirect(url_for('landingPage'))
         else:
             flash('Email or Password not correct, try again', 'warning' )
     return render_template('login.html', title='Log in', loginform=loginform)
-
-
-@app.route('/signup', strict_slashes=False)
-def signup():
-    """
-        returns the sign Page
-    """
-    return render_template('signup.html', title='SignUp')
 
 
 @app.route('/about', strict_slashes=False)
@@ -92,7 +85,7 @@ def register():
     regform = RegForm()
     if regform.validate_on_submit():
         flash('Successfull account creation for {}'.format(regform.first_name.data), 'success')
-        return redirect(url_for('homePage'))
+        return redirect(url_for('login'))
     return render_template('register.html', title='Registration', regform=regform)
 
 
