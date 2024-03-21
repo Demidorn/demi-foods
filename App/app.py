@@ -8,14 +8,20 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'c2a00dc657699d079ab8c8b36d94b4d146b6902b0b05e3bdbe34b4e400685fb5'
 
 
-@app.route('/home')
-@app.route('/', strict_slashes=False)
+#@app.route('/home')
+@app.route('/home', strict_slashes=False)
 def homePage():
     """
         returns the home Page
     """
-    return render_template('index.html')
+    return render_template('index.html',title='Home')
 
+@app.route('/', strict_slashes=False)
+def LandingPage():
+    """
+        returns the landing Page
+    """
+    return render_template('landingPage.html',title='LandingPage')
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
@@ -37,7 +43,7 @@ def signup():
     """
         returns the sign Page
     """
-    return "Welcome to signup"
+    return render_template('signup.html', title='SignUp')
 
 
 @app.route('/about', strict_slashes=False)
@@ -45,7 +51,7 @@ def aboutPage():
     """
         returns the about Page
     """
-    return "Welcome to about page"
+    return render_template('about.html', title='About')
 
 
 @app.route('/contactUs', strict_slashes=False)
@@ -53,7 +59,7 @@ def contactUs():
     """
         returns the contact us Page
     """
-    return "Welcome to conatct page"
+    return render_template('contactUs.html', title='ContactUs')
 
 
 @app.route('/recipe', strict_slashes=False)
