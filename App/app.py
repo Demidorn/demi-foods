@@ -1,12 +1,14 @@
 #!/usr/bin/python3
 """Mamaput app"""
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, url_for, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from flasl_login import LoginManager, UserMixin, login_user, login_required, logout_user
 from .models.user import User
+from forms import RegForm, LoginForm
+
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] =  '123456789'
+app.config['SECRET_KEY'] = 'c2a00dc657699d079ab8c8b36d94b4d146b6902b0b05e3bdbe34b4e400685fb5'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
@@ -43,6 +45,7 @@ def get_login():
     return render_template('login.html')
 
 
+
 @app.route('/signup', methods=['GET'])
 def get_signup():
     return render_template('signup.html')
@@ -64,6 +67,16 @@ def loginPage():
         else:
             msg = 'Invalid username or password'
     return render_template('login.html', msg=msg)
+=======
+
+@app.route('/login', strict_slashes=False)
+def login():
+    """
+        returns the login Page
+    """
+    loginform = LoginForm()
+    return render_template('login.html', title='Log in', loginform=loginform)
+
 
 
 @app.route('/signup', methods=['POST'], strict_slashes=False)
@@ -98,6 +111,7 @@ def logout():
 
 
 
+
 @app.route('/about', strict_slashes=False)
 def aboutPage():
     """
@@ -105,12 +119,44 @@ def aboutPage():
     """
     return "Welcome to about page"
 
+
 @app.route('/contactUs', strict_slashes=False)
 def contactUs():
     """
         returns the contact us Page
     """
     return "Welcome to conatct page"
+
+
+@app.route('/recipe', strict_slashes=False)
+def recipe():
+    """
+        returns the recipe Page
+    """
+    return render_template('recipe.html', title='Recipe')
+
+
+@app.route('/order', strict_slashes=False)
+def orders():
+    """
+        returns order the Page
+    """
+    return render_template('order.html', title='Order')
+
+
+@app.route('/profile', strict_slashes=False)
+def profile():
+    """
+        returns the profile Page
+    """
+    return render_template('profile.html', title='Profile')
+
+
+@app.route('/register', strict_slashes=False)
+def register():
+    """ returns the registration page """
+    regform = RegForm()
+    return render_template('register.html', title='Registration', regform=regform)
 
 
 if __name__ == "__main__":
