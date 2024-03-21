@@ -17,12 +17,18 @@ def homePage():
     return render_template('index.html')
 
 
-@app.route('/login', strict_slashes=False)
+@app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
     """
         returns the login Page
     """
     loginform = LoginForm()
+    if loginform.validate_on_submit():
+        if loginform.email.data == 'test@qa.team' and loginform.pwd.data == 'password':
+            flash('You have successfully logged in', 'success')
+            return redirect(url_for('homePage'))
+        else:
+            flash('Email or Password not correct, try again', 'warning' )
     return render_template('login.html', title='Log in', loginform=loginform)
 
 

@@ -347,3 +347,7 @@ body {
     background-color: #06b;
   }
   
+.form-group.required .control-label:after {
+    content:"*";
+    color:red;
+}

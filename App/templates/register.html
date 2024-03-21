@@ -5,34 +5,79 @@
         <div class="subtitle">Let's create your account!</div>
         <form method="POST", action="">
             {{ regform.hidden_tag() }}
-            <div class="input-container ic1">
+            <div class="form-group required">
                 {{ regform.first_name(class="input") }}
                 <div class="cut"></div>
-                {{ regform.first_name.label(class="placeholder") }}
+                {% if regform.first_name.errors %}
+                    {{ regform.first_name.label(class="control-label needs-validation") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.first_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.first_name.label(class="control-label") }}
+                {% endif %}
             </div>
             <div class="input-container ic2">
                 {{ regform.last_name(class="input") }}
                 <div class="cut "></div>
-                {{ regform.last_name.label(class="placeholder") }}
+                {% if regform.last_name.errors %}
+                    {{ regform.last_name.label(class="placeholder needs-validation") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.last_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.last_name.label(class="placeholder") }}
+                {% endif %}
             </div>
             <div class="input-container ic2">
                 {{ regform.email(class="input") }}
                 <div class="cut cut-short"></div>
-                {{ regform.email.label(class="placeholder") }}
+                {% if regform.email.errors %}
+                    {{ regform.email.label(class="placeholder was-validated") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.email.label(class="placeholder") }}
+                {% endif %}
             </div>
             <div class="input-container ic2">
                 {{ regform.pwd(class="input") }}
                 <div class="cut"></div>
-                {{ regform.pwd.label(class="placeholder") }}
+                {% if regform.pwd.errors %}
+                    {{ regform.pwd.label(class="placeholder was-validated") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.pwd.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.pwd.label(class="placeholder") }}
+                {% endif %}
             </div>
             <div class="input-container ic2">
                 {{ regform.confirm_pwd(class="input") }}
                 <div class="cut"></div>
-                {{ regform.confirm_pwd.label(class="placeholder") }}
+                {% if regform.confirm_pwd.errors %}
+                    {{ regform.confirm_pwd.label(class="placeholder was-validated") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.confirm_pwd.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.confirm_pwd.label(class="placeholder") }}
+                {% endif %}
             </div>
-            <button>
+            <div>
                 {{ regform.submit(class="submit")}}
-            </button>
+            </div>
         </form>
     </div>
     <div>
