@@ -219,3 +219,86 @@ body{
     background-color: var(--whiteColor);
     box-shadow: rgba(176, 176, 176, 0.2) 0px 2px 8px 0px;
 }
+body, h2 {
+    margin: 0;
+    padding: 0;
+    background-color: var(--softGreenColor);
+}
+h2 {
+    padding-bottom: 10px;
+}
+
+/* Center the login form */
+.login , .signup {
+    width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    border-bottom: 2px solid var(--primaryColor);
+
+}
+
+h2 {
+    text-align: center;
+}
+
+/* Style the links */
+.links {
+    text-align: center;
+}
+
+.links a {
+    margin: 0 10px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.links a.active {
+    background-color: var(--darkGrayColor);
+    color: var(--primaryColor);
+}
+
+/* Style the form */
+form {
+    text-align: center;
+}
+
+label {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.msg {
+    color: var(--blackColor);
+    margin-bottom: 10px;
+}
+
+input[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}
