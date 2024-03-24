@@ -2,6 +2,7 @@
 """app v1 initialization """
 import os
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 from flask import Flask
 
 # Retrieve the set environment values
@@ -14,7 +15,7 @@ app.config['SECRET_KEY'] = 'c2a00dc657699d079ab8c8b36d94b4d146b6902b0b05e3bdbe34
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://{}:{}@localhost/{}'.format(usr, passwd, usr_db)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
 db = SQLAlchemy(app)
-
+bcrypt = Bcrypt(app)
 # Ensure that database tables are created within the application context
 app.app_context().push()
 

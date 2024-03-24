@@ -9,7 +9,7 @@
                 {{ regform.first_name(class="input") }}
                 <div class="cut"></div>
                 {% if regform.first_name.errors %}
-                    {{ regform.first_name.label(class="control-label needs-validation") }}
+                    {{ regform.first_name(class="control-label needs-validation") }}
                     <div class="invalid-feedback">
                         {% for error in regform.first_name.errors %}
                             <span>{{ error }}</span>
@@ -23,7 +23,7 @@
                 {{ regform.last_name(class="input") }}
                 <div class="cut "></div>
                 {% if regform.last_name.errors %}
-                    {{ regform.last_name.label(class="placeholder needs-validation") }}
+                    {{ regform.last_name(class="placeholder needs-validation") }}
                     <div class="invalid-feedback">
                         {% for error in regform.last_name.errors %}
                             <span>{{ error }}</span>
@@ -37,7 +37,7 @@
                 {{ regform.email(class="input") }}
                 <div class="cut cut-short"></div>
                 {% if regform.email.errors %}
-                    {{ regform.email.label(class="placeholder was-validated") }}
+                    {{ regform.email(class="placeholder was-validated") }}
                     <div class="invalid-feedback">
                         {% for error in regform.email.errors %}
                             <span>{{ error }}</span>
@@ -51,7 +51,7 @@
                 {{ regform.pwd(class="input") }}
                 <div class="cut"></div>
                 {% if regform.pwd.errors %}
-                    {{ regform.pwd.label(class="placeholder was-validated") }}
+                    {{ regform.pwd(class="placeholder was-validated") }}
                     <div class="invalid-feedback">
                         {% for error in regform.pwd.errors %}
                             <span>{{ error }}</span>
@@ -65,7 +65,7 @@
                 {{ regform.confirm_pwd(class="input") }}
                 <div class="cut"></div>
                 {% if regform.confirm_pwd.errors %}
-                    {{ regform.confirm_pwd.label(class="placeholder was-validated") }}
+                    {{ regform.confirm_pwd(class="placeholder was-validated") }}
                     <div class="invalid-feedback">
                         {% for error in regform.confirm_pwd.errors %}
                             <span>{{ error }}</span>

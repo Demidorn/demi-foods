@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ all site routes """
-from App.v1 import app
+from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm
 from App.v1.models import User, Product, Order
 from flask import render_template, url_for, flash, redirect
@@ -81,6 +81,14 @@ def register():
     """ returns the registration page """
     regform = RegForm()
     if regform.validate_on_submit():
-        flash('Successfull account creation for {}'.format(regform.first_name.data), 'success')
+        hash_pwd = bcrypt.generate_password_hash(regform.pwd.data).decode(utf-8)
+        user = User(first_name=regform.first_name.data,
+                    last_name=regform.last_name.data,
+                    email=regform.email.data,
+                    pwd=hash_pwd)
+        db.session.add(user)
+        db.session.commit()
+                
+        flash('Successful account creation for {}'.format(regform.first_name.data), 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Registration', regform=regform)

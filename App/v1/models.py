@@ -16,8 +16,8 @@ class User(db.Model):
 
     def __repr__(self):
         """ returns a string representation of the user """
-        return '{}({} {} {})'.format(self.__class__.__name__, self.id,
-                                     self.first_name, self.email)
+        return "{}('{}', '{}', '{}')".format(self.__class__.__name__, self.id,
+                                             self.first_name, self.email)
 
 
 class Product(db.Model):
@@ -32,8 +32,8 @@ class Product(db.Model):
 
     def __repr__(self):
         """ returns a string representation of the product """
-        return '{}({} {} {})'.format(self.__class__.__name__, self.id,
-                                     self.name, self.price)
+        return "{}('{}', '{}', '{}')".format(self.__class__.__name__, self.id,
+                                             self.name, self.price)
 
 
 class Order(db.Model):
