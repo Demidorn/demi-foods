@@ -18,6 +18,6 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 # Ensure that database tables are created within the application context
 app.app_context().push()
-db.create_all()
+# db.create_all()
 
 from App.v1 import routes

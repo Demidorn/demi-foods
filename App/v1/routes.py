@@ -86,6 +86,7 @@ def register():
                     last_name=regform.last_name.data,
                     email=regform.email.data,
                     password=hash_pwd)
+        db.create_all()
         db.session.add(user)
         db.session.commit()
 

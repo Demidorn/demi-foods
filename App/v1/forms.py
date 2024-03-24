@@ -2,7 +2,8 @@
 """ Forms collection """
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Email, Length, EqualTo
+from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from App.v1.models import User
 
 
 class RegForm(FlaskForm):
@@ -13,6 +14,12 @@ class RegForm(FlaskForm):
     pwd = PasswordField('New password', validators=[DataRequired()])
     confirm_pwd = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('pwd')])
     submit = SubmitField('Sign up')
+
+    def check_email(self, email):
+        """ function checks if email exists in database """
+        email = User.query.filter_by(email=email.data).first()
+        if email:
+            raise ValidationError('Email already exist.')
 
 
 class LoginForm(FlaskForm):
