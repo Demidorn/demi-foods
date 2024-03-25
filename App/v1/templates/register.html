@@ -30,14 +30,14 @@
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ regform.last_name.label(class="control-label) }}
+                    {{ regform.last_name.label(class="control-label") }}
                 {% endif %}
             </div>
             <div class="form-group required">
                 {{ regform.email(class="input") }}
-                <div class="cut cut-short"></div>
+                
                 {% if regform.email.errors %}
-                    {{ regform.email(class="control-label was-validated") }}
+                    {{ regform.email(class="control-label needs-validation") }}
                     <div class="invalid-feedback">
                         {% for error in regform.email.errors %}
                             <span>{{ error }}</span>
