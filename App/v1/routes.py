@@ -4,8 +4,11 @@ from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm
 from App.v1.models import User, Product, Order
 from flask import render_template, url_for, flash, redirect
+from flask_login import login_user, current_user, logout_user, login_required
+
 
 @app.route('/dashboard', strict_slashes=False)
+@login_required
 def dashboard():
     """
         returns the users dashboard Page
@@ -26,10 +29,14 @@ def login():
     """
         returns the login Page
     """
+    if current_user.is_authenticated:
+        return redirect(url_for('landingPage'))
     loginform = LoginForm()
     if loginform.validate_on_submit():
-        if loginform.email.data == 'test@qa.team' and loginform.pwd.data == 'password':
-            flash('You have successfully logged in', 'success')
+        user = User.query.filter_by(email=loginform.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, loginform.pwd.data):
+            login_user(user, remember=loginform.remember.data)
+            # flash('You have successfully logged in', 'success')
             return redirect(url_for('landingPage'))
         else:
             flash('Email or Password not correct, try again', 'warning')
@@ -79,6 +86,8 @@ def profile():
 @app.route('/register', methods=['GET', 'POST'], strict_slashes=False)
 def register():
     """ returns the registration page """
+    if current_user.is_authenticated:
+        return redirect(url_for('landingPage'))
     regform = RegForm()
     if regform.validate_on_submit():
         hash_pwd = bcrypt.generate_password_hash(regform.pwd.data).decode('utf-8')
@@ -93,3 +102,11 @@ def register():
         flash('Successful account creation for {}'.format(regform.first_name.data), 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Registration', regform=regform)
+
+
+@app.route('/logout', strict_slashes=False)
+def logout():
+    """ function logs out of the users session """
+    logout_user()
+    return redirect(url_for('landingPage'))
+    

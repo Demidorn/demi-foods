@@ -2,9 +2,16 @@
 """ Models contains the databases """
 import secrets
 from datetime import datetime
-from App.v1 import db
+from flask_login import UserMixin
+from App.v1 import db, login_manager
 
-class User(db.Model):
+
+@login_manager.user_loader
+def load_user(user_id):
+    """ A callback used to reload user object from user ID stored in session """
+    return User.query.get(int(user_id))
+
+class User(db.Model, UserMixin):
     """ Object representation of the User table """
     __tablename__ = 'Users'
     id = db.Column(db.Integer, primary_key=True)

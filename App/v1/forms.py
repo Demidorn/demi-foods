@@ -15,7 +15,7 @@ class RegForm(FlaskForm):
     confirm_pwd = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('pwd')])
     submit = SubmitField('Sign up')
 
-    def check_email(self, email):
+    def validate_email(self, email):
         """ function checks if email exists in database """
         email = User.query.filter_by(email=email.data).first()
         if email:
