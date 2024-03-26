@@ -1,11 +1,6 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
-""" runs site Application """
-from App.v1 import app
-=======
 """Mamaput app"""
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegForm, LoginForm
+from App.v1 import app
 
 
 app = Flask(__name__)
@@ -92,7 +87,6 @@ def register():
         flash('Successfull account creation for {}'.format(regform.first_name.data), 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Registration', regform=regform)
->>>>>>> 47a23f1d41508013759983e14519f5dbd873fcab
 
 
 if __name__ == "__main__":
