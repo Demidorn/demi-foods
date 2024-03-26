@@ -18,10 +18,10 @@
     <nav>
       <h1 class="nav-left">MamaPut</h1>
       <div class="nav-right">
-        <h3>Home</h3>
-        <h3>Menu</h3>
-        <h3>Contact Us</h3>
-        <h3>Blog</h3>
+        <h3> <a href="#">Home</a></h3>
+        <h3><a href="#">Menu</a></h3>
+        <h3> <a href="#">Contact Us</a></h3>
+        <h3> <a href="#">Blog</a></h3>
 	   {% if current_user.is_authenticated %}
 	      <h3><a href="{{url_for('dashboard')}}">Account</a></h3>
 	   {% else %}

@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ Forms collection """
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, HiddenField
+from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, NumberRange
 from App.v1.models import User
 
 
@@ -28,3 +28,20 @@ class LoginForm(FlaskForm):
     pwd = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember me')
     submit = SubmitField('Sign in')
+
+
+class AddToCartForm(FlaskForm):
+    """ Add to cart form """
+    product_id = HiddenField('Product ID', validators=[DataRequired()])
+    product_name = HiddenField('Product Name', validators=[DataRequired()])
+    quantity = StringField('Quantity', validators=[DataRequired(), NumberRange(min=1)])
+    submit = SubmitField('Add to cart')
+    
+    
+
+class MakeOrderForm(FlaskForm):
+    """ Make order form """
+    full_name = StringField('Full name', validators=[DataRequired(), Length(min=2, max=40)])
+    phone_number = IntegerField('Phone number', validators=[DataRequired()])
+    address = TextAreaField('Address', validators=[DataRequired()])
+    submit = SubmitField('Make order')

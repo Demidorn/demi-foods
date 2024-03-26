@@ -1,12 +1,17 @@
 #!/usr/bin/python3
 """ all site routes """
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm
+from App.v1.forms import RegForm, LoginForm, AddToCartForm, MakeOrderForm
 from App.v1.models import User, Product, Order
-from flask import render_template, url_for, flash, redirect
-from flask_login import login_user, current_user, logout_user, login_required
+from flask import render_template, url_for, flash, redirect, session
+from flask_login import login_user, current_user, logout_user, login_required 
 
 
+#@login_manager.user_loader
+#def user_loader(user_id):
+   #clear return User.query.get(int(user_id))
+
+                          
 @app.route('/dashboard', strict_slashes=False)
 @login_required
 def dashboard():
@@ -23,6 +28,7 @@ def landingPage():
         returns the landing Page
     """
     return render_template('landingPage.html', title='Home-Page')
+
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
@@ -67,13 +73,48 @@ def recipe():
     return render_template('recipe.html', title='Recipe')
 
 
-@app.route('/order', strict_slashes=False)
-def orders():
+@app.route('/order/<int:product_id>', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def orders(product_id):
     """
         returns order the Page
     """
-    return render_template('order.html', title='Order')
+    form = MakeOrderForm()
+    product = Product.query.get_or_404(product_id)
+    if form.validate_on_submit():
+        order = Order(full_name=form.full_name.data, phone_number=form.phone_number.data,
+                      address=form.address.data, user_id=current_user.id)
+        db.session.add(order)
+        db.session.commit()
+        flash('Order placed successfully', 'success')
+        return redirect(url_for('landingPage'))
+    return render_template('make-order.html', title='Order', form=form, product=product)
 
+
+@app.route('/add_to_cart/<int:product_id>', methods=['GET', 'POST'], strict_slashes=False)
+def add_to_cart(product_id):
+    """
+        returns the add to cart Page
+    """
+    form = AddToCartForm()
+    product = Product.query.get_or_404(product_id)
+    if form.validate_on_submit():
+        quantity = form.quantity.data
+        cart = session.get('cart', {})
+        if product_id in cart:
+            #cart[product_id]['quantity'] += form.quantity.data 
+            cart[product_id] = int(cart[product_id]) + int(quantity)
+        else:
+            cart[product_id] = {'name': product.name, 'price': product.price, 'quantity': quantity}
+        session['cart'] = cart
+        flash('Product added to cart', 'success')
+        return redirect(url_for('landingPage'))
+    
+    form.product_id.data = product.id
+    form.product_name.data = product.name
+    
+    return render_template('add_to_cart.html', title='Add to cart', product=product, form=form)
+   
 
 @app.route('/profile', strict_slashes=False)
 def profile():
@@ -109,4 +150,9 @@ def logout():
     """ function logs out of the users session """
     logout_user()
     return redirect(url_for('landingPage'))
-    
+
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404

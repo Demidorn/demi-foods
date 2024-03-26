@@ -47,6 +47,7 @@ class Order(db.Model):
     """ Object representation of the Order table """
     __tablename__ = 'Orders'
     id = db.Column(db.Integer, primary_key=True)
+    
     tracking_id = db.Column(db.String(12), unique=True, nullable=False, default=secrets.token_hex(6))
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
