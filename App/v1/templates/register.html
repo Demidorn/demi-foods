@@ -9,7 +9,7 @@
                 {{ regform.first_name(class="input") }}
         
                 {% if regform.first_name.errors %}
-                    {{ regform.first_name(class="control-label needs-validation") }}
+                    {{ regform.first_name(class="form-control form-control-lg needs-validation") }}
                     <div class="invalid-feedback">
                         {% for error in regform.first_name.errors %}
                             <span>{{ error }}</span>
@@ -23,7 +23,7 @@
                 {{ regform.last_name(class="input") }}
                 
                 {% if regform.last_name.errors %}
-                    {{ regform.last_name(class="control-label needs-validation") }}
+                    {{ regform.last_name(class="form-control form-control-lg needs-validation") }}
                     <div class="invalid-feedback">
                         {% for error in regform.last_name.errors %}
                             <span>{{ error }}</span>
@@ -33,25 +33,24 @@
                     {{ regform.last_name.label(class="control-label") }}
                 {% endif %}
             </div>
-            <div class="form-group required">
-                {{ regform.email(class="input") }}
-                
+            <div class="form-group required">                
                 {% if regform.email.errors %}
-                    {{ regform.email(class="control-label needs-validation") }}
+                    {{ regform.email(class="form-control is-invalid") }}
                     <div class="invalid-feedback">
                         {% for error in regform.email.errors %}
-                            <span>{{ error }}</span>
+                            <span>{{ error }}</span></br>
                         {% endfor %}
                     </div>
                 {% else %}
-                    {{ regform.email.label(class="control-label") }}
+                    {{ regform.email(class="form-control") }}
                 {% endif %}
+                {{ regform.email.label(class="control-label required") }}
             </div>
             <div class="form-group required">
                 {{ regform.pwd(class="input") }}
-                <div class="cut"></div>
+
                 {% if regform.pwd.errors %}
-                    {{ regform.pwd(class="control-label was-validated") }}
+                    {{ regform.pwd(class="form-control form-control-lg was-validated") }}
                     <div class="invalid-feedback">
                         {% for error in regform.pwd.errors %}
                             <span>{{ error }}</span>
@@ -63,9 +62,9 @@
             </div>
             <div class="form-group required">
                 {{ regform.confirm_pwd(class="input") }}
-                <div class="cut"></div>
+
                 {% if regform.confirm_pwd.errors %}
-                    {{ regform.confirm_pwd(class="control label was-validated") }}
+                    {{ regform.confirm_pwd(class="form-control form-control-lg was-validated") }}
                     <div class="invalid-feedback">
                         {% for error in regform.confirm_pwd.errors %}
                             <span>{{ error }}</span>

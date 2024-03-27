@@ -3,6 +3,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from flask_login import current_user
 from App.v1.models import User
 
 
@@ -28,3 +29,19 @@ class LoginForm(FlaskForm):
     pwd = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember me')
     submit = SubmitField('Sign in')
+
+
+class AddressForm(FlaskForm):
+    """ Address form to add Users address """
+    first_name = StringField('First name', validators=[DataRequired(), Length(min=2, max=20)])
+    last_name = StringField('Last name', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email address', validators=[DataRequired(), Email()])
+    addr = StringField('Address', validators=[DataRequired(), Length(min=2, max=500)])
+    submit = SubmitField('Save')
+
+    def validate_email(self, email):
+        """ custom validation to check if email is in database """
+        if email.data != current_user.email:
+            email = User.query.filter_by(email=email.data).first()
+            if email:
+                raise ValidationError('Email already exist!')

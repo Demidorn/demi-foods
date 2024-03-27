@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     order = db.relationship('Order', backref='customer', lazy=True)
+    address = db.relationship('Address', uselist=False, backref='user' )
 
     def __repr__(self):
         """ returns a string representation of the user """
@@ -31,7 +32,7 @@ class Product(db.Model):
     """ Object representation of the Product table """
     __tablename__ = 'Products'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    food_name = db.Column(db.String(120), unique=True, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     image = db.Column(db.String(60), nullable=False, default='prod_img.jpg')
     status = db.Column(db.Boolean, nullable=False, default=True)
@@ -53,13 +54,23 @@ class Order(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
 
     def __repr__(self):
-        """returns a string representation of the product """
+        """returns a string representation of the order """
         return '{}({})'.format(self.__class__.__name__, self.__dict__)
 
+
+class Address(db.Model):
+    """ Object representation of the User address table """
+    __tablename__ = 'User_address'
+    id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
+
+    def __str__(self):
+        """ returns only the string address """
+        return self.address
+
+    def __repr__(self):
+        """ returns a string representation of the address """
+        return "Address('{}', '{}')".format(self.id, self.address,)
 # with app.app_context():
-#    db.create_all()
-
-
-
-
-
+db.create_all()

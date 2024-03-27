@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ all site routes """
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm
-from App.v1.models import User, Product, Order
-from flask import render_template, url_for, flash, redirect
+from App.v1.forms import RegForm, LoginForm, AddressForm
+from App.v1.models import User, Product, Order, Address
+from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -75,12 +75,33 @@ def orders():
     return render_template('order.html', title='Order')
 
 
-@app.route('/profile', strict_slashes=False)
+@app.route('/profile', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
 def profile():
     """
         returns the profile Page
     """
-    return render_template('profile.html', title='Profile')
+    addrform = AddressForm()
+    address = Address.query.filter_by(user_id=current_user.id).first()
+    if addrform.validate_on_submit():
+        if address:
+            address.address = addrform.addr.data
+            current_user.email = addrform.email.data
+            flash('Your information has been updated!', 'success')
+        else:
+            address = Address(user_id=current_user.id,
+                              address=addrform.addr.data)
+            db.session.add(address)
+            flash('Your address has been added!', 'success')
+        db.session.commit()
+        return redirect(url_for('profile'))
+    elif request.method == 'GET':
+        addrform.first_name.data = current_user.first_name
+        addrform.last_name.data = current_user.last_name
+        addrform.email.data = current_user.email
+        addrform.addr.data = current_user.address
+    next_page = request.args.get('next')
+    return redirect(next_page) if next_page else render_template('profile.html', addrform=addrform, title= 'Profile')
 
 
 @app.route('/register', methods=['GET', 'POST'], strict_slashes=False)
@@ -95,7 +116,7 @@ def register():
                     last_name=regform.last_name.data,
                     email=regform.email.data,
                     password=hash_pwd)
-        db.create_all()
+
         db.session.add(user)
         db.session.commit()
 
