@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 """ Forms collection """
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+from flask_wtf.file import FileField, FileAllowed, FileRequired
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DecimalField, TextAreaField
+from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, NumberRange
 from flask_login import current_user
 from App.v1.models import User
 
@@ -45,3 +46,13 @@ class AddressForm(FlaskForm):
             email = User.query.filter_by(email=email.data).first()
             if email:
                 raise ValidationError('Email already exist!')
+
+class ProdForm(FlaskForm):
+    """ Form to add product to database """
+    food_name = StringField('Name of dish', validators=[DataRequired(), Length(min=2, max=20)])
+    price = DecimalField('Price', validators=[DataRequired(), NumberRange(min=0)])
+    status = BooleanField('Available')
+    description = TextAreaField('Description')
+    image = FileField('Upload image', validators=[FileRequired(),
+                      FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
+    submit = SubmitField('Upload')

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ all site routes """
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm, AddressForm
+from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm
 from App.v1.models import User, Product, Order, Address
 from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
@@ -130,4 +130,10 @@ def logout():
     """ function logs out of the users session """
     logout_user()
     return redirect(url_for('landingPage'))
-    
+
+
+@app.route('/upload', methods=['GET', 'POST'], strict_slashes=False)
+def upload():
+    """ function upload product to database """
+    upload = ProdForm()
+    return render_template('upload.html', title='Admin - area', upload=upload)
