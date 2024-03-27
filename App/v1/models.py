@@ -4,6 +4,7 @@ import secrets
 from datetime import datetime
 from flask_login import UserMixin
 from App.v1 import db, login_manager
+from sqlalchemy.orm import relationship
 
 
 @login_manager.user_loader
@@ -51,10 +52,33 @@ class Order(db.Model):
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('Products.id'), nullable=False)
+    order_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    
+    Product = db.relationship('Product', backref=db.backref('product', lazy=True))
 
     def __repr__(self):
         """returns a string representation of the product """
-        return '{}({})'.format(self.__class__.__name__, self.__dict__)
+        return "order('{}', '{}','{}','{}')".format(self.id, self.tracking_id, self.created_date, self.user_id)   
+    
+
+
+class Cart(db.Model):
+    __tablename__ = 'cart'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('Products.id'), nullable=False)
+    
+    Product = relationship("Product", back_populates='carts')
+
+    Product.carts = relationship("Cart", back_populates='product')
+    
+    def is_product_in_cart(user_id, product_id):
+        """Check if the product is already in the user's cart"""
+        return Cart.query.filter_by(user_id=user_id, product_id=product_id).first() is not None
+
+    
+
 
 # with app.app_context():
 #    db.create_all()

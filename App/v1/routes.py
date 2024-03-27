@@ -1,12 +1,18 @@
 #!/usr/bin/python3
 """ all site routes """
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm
+from App.v1.forms import RegForm, LoginForm, AddToCartForm, MakeOrderForm, UpdateOrderForm, NewProductForm
 from App.v1.models import User, Product, Order
-from flask import render_template, url_for, flash, redirect
-from flask_login import login_user, current_user, logout_user, login_required
+from flask import render_template, url_for, flash, redirect, session, request, abort, secure_filename
+from flask_login import login_user, current_user, logout_user, login_required, admin_required
+from models import Cart
+import os
 
+#@login_manager.user_loader
+#def user_loader(user_id):
+   #clear return User.query.get(int(user_id))
 
+                          
 @app.route('/dashboard', strict_slashes=False)
 @login_required
 def dashboard():
@@ -23,6 +29,7 @@ def landingPage():
         returns the landing Page
     """
     return render_template('landingPage.html', title='Home-Page')
+
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
@@ -60,6 +67,7 @@ def contactUs():
 
 
 @app.route('/recipe', strict_slashes=False)
+@login_required
 def recipe():
     """
         returns the recipe Page
@@ -67,13 +75,125 @@ def recipe():
     return render_template('recipe.html', title='Recipe')
 
 
-@app.route('/order', strict_slashes=False)
-def orders():
+@app.route('/order/<int:product_id>', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def orders(product_id):
     """
         returns order the Page
     """
-    return render_template('order.html', title='Order')
+    form = MakeOrderForm()
+    product = Product.query.get_or_404(product_id)
+    
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            if is_product_in_cart(current_user.id, product_id):
+                return redirect(url_for('cart'))
+            order = Order(full_name=form.full_name.data, phone_number=form.phone_number.data,
+                        address=form.address.data, user_id=current_user.id)
+            db.session.add(order)
+            db.session.commit()
+            flash('Order placed successfully', 'success')
+            return redirect(url_for('product-display'))
+        else:
+            flash('Order not placed', 'danger')
+            return redirect(url_for('orders', product_id=product_id))
+                
+    return render_template('make-order.html', title='Order', form=form, product=product)
 
+
+
+
+def is_product_in_cart(user_id, product_id):
+        """Check if the product is already in the user's cart"""
+        return Cart.query.filter_by(user_id=user_id, product_id=product_id).first() is not None
+
+
+
+@app.route('/admin/orders/<int:order_id>/update', methods=['GET', 'POST'], strict_slashes=False)
+@admin_required
+def update_order(order_id):
+    """
+        returns the update order Page
+    """
+    order = Order.query.get_or_404(order_id)
+    form = UpdateOrderForm(obj=order)
+    if form.validate_on_submit():
+        form.populate_obj(order)
+        db.session.commit()
+        flash('Order updated successfully', 'success')
+        return redirect(url_for('admin_orders'))
+    return render_template('update-order.html', title='Update Order', form=form, order=order)
+
+
+
+@app.route('/admin/orders/<int:order_id>/delete', methods=['POST'], strict_slashes=False)
+@admin_required
+def delete_order(order_id):
+    """
+        returns the delete order Page
+    """
+    order = Order.query.get_or_404(order_id)
+    db.session.delete(order)
+    db.session.commit()
+    flash('Order deleted successfully', 'success')
+    return redirect(url_for('admin_orders'))
+
+
+
+@app.route('/admin/products/add', methods=['GET', 'POST'])
+@admin_required
+def add_product():
+    """
+        create a new Product object with data from the form
+    """
+    form = NewProductForm()  
+    if form.validate_on_submit():  
+        new_product = Product(
+            name=form.name.data,
+            description=form.description.data,
+            price=form.price.data
+        )
+        image = form.image.data
+        if image:
+            filename = secure_filename(image.filename)
+            image_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            image.save(image_path)
+            new_product.image = image_path
+            
+        
+        db.session.add(new_product)
+        db.session.commit()
+        
+        flash('New product added successfully', 'success')
+        return redirect(url_for('product_listing'))
+
+    return render_template('add_product.html', title='Add Product', form=form)
+    
+@app.route('/add_to_cart/<int:product_id>', methods=['GET', 'POST'], strict_slashes=False)
+def add_to_cart(product_id):
+    """
+        returns the add to cart Page
+    """
+    if request.method == 'POST':
+        form = AddToCartForm()
+        product = Product.query.get_or_404(product_id)
+        if form.validate_on_submit():
+            quantity = form.quantity.data
+            cart = session.get('cart', {})
+            if product_id in cart:
+                #cart[product_id]['quantity'] += form.quantity.data 
+                cart[product_id] = int(cart[product_id]) + int(quantity)
+            else:
+                cart[product_id] = {'name': product.name, 'price': product.price, 'quantity': quantity}
+            session['cart'] = cart
+            flash('Product added to cart', 'success')
+            return redirect(url_for('landingPage'))
+        
+        form.product_id.data = product.id
+        form.product_name.data = product.name
+    
+    return render_template('add_to_cart.html', title='Add to cart', product=product, form=form)
+   
 
 @app.route('/profile', strict_slashes=False)
 def profile():
@@ -109,4 +229,9 @@ def logout():
     """ function logs out of the users session """
     logout_user()
     return redirect(url_for('landingPage'))
-    
+
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404

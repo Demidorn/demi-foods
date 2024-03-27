@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """ Forms collection """
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, HiddenField, TextAreaField, NumberRange
+from wtforms import DecimalField, FileField, FileAllowed
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 from App.v1.models import User
 
@@ -28,3 +29,33 @@ class LoginForm(FlaskForm):
     pwd = PasswordField('Password', validators=[DataRequired()])
     remember = BooleanField('Remember me')
     submit = SubmitField('Sign in')
+
+
+class AddToCartForm(FlaskForm):
+    """ Add to cart form """
+    product_id = HiddenField('Product ID', validators=[DataRequired()])
+    product_name = HiddenField('Product Name', validators=[DataRequired()])
+    quantity = StringField('Quantity', validators=[DataRequired(), NumberRange(min=1)])
+    submit = SubmitField('Add to cart')
+    
+    
+class MakeOrderForm(FlaskForm):
+    full_name = StringField('Full name', validators=[DataRequired(), Length(min=2, max=40)])
+    phone_number = StringField('Phone number', validators=[DataRequired()])
+    address = TextAreaField('Address', validators=[DataRequired()])
+    submit = SubmitField('Make order')
+    
+
+class UpdateOrderForm(FlaskForm):
+    full_name = StringField('Full Name', validators=[DataRequired()])
+    phone_number = StringField('Phone Number', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
+    submit = SubmitField('Update Order')
+    
+    
+class NewProductForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
+    description = TextAreaField('Description', validators=[DataRequired()])
+    price = DecimalField('Price (Naira)', validators=[DataRequired(), NumberRange(min=0.01)])
+    image = FileField('Image', validators=[FileAllowed(['jpg', 'png'])])
+    submit = SubmitField('Add Product')
