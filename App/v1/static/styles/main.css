@@ -20,6 +20,9 @@
 body{
     width: 100%;
     height: auto;
+    /* display: flex; */
+}
+.container {
     display: flex;
 }
 .sidebar{
@@ -434,4 +437,50 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: #555;
 }
+}
+/* Footer */
+.footBG {
+    background:grey;
+}
+#footer {
+    display: flex;
+    margin-top: 20px;
+    margin-left: 20px;
+    line-height: 20px;
+    justify-content: space-between;
+}
+footer h1 {
+    font-size: 20px;
+}
+footer ul {
+    list-style: none;
+}
+footer p {
+    width: 250px;
+}
+div .icons {
+    display: flex;
+    gap: 5px;
+}
+div .icons img {
+    width: 30px;
+}
+.icons img :nth-child(2) {
+    padding-left: 20px;
+}
+span {
+    display: block;
+}
+
+/* Register */
+.subtitle {
+    padding-bottom: 10px;
+}
+
+/* Login */
+ .cut, .placeholder{
+    /* Can't adjust the width below 102px bcos of the flask_wtf css */
+    width: 102px;
+    margin-top: -12px;
+    margin-left: -15px;
 }
