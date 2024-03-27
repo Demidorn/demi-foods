@@ -37,13 +37,13 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">Menu</a>
+            <a class="nav-link" href="{{ url_for('menu') }}">Menu</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
+            <a class="nav-link" href="{{url_for('contactUs')}}">Contact Us</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Blog</a>
+            <a class="nav-link" href="">Blog</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('register')}}">SignUp</a>
@@ -55,47 +55,8 @@
       </div>
     </nav>
     <section class="banner"></section>
-    <section>
-      <h1 class="about">About Us</h1>
-      <p class="pGraph">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae
-        esse excepturi obcaecati? Et esse, ratione aut beatae pariatur deserunt
-        molestiae architecto rem ex corrupti quis at minus, corporis est unde.
-      </p>
-    </section>
-    <section>
-      <h1 class="menu">Our Menu</h1>
-      <div class="foodCategory">
-        <img src="../static/images/mamaputimages/efo stewjpg.jpg" alt="" />
-        <img src="../static/images/mamaputimages/veg.jpg" alt="" />
-        <img src="../static/images/mamaputimages/efo stewjpg.jpg" alt="" />
-        <img src="../static/images/mamaputimages/porridge.jpg" alt="" />
-      </div>
-      <div class="foodCategory">
-        <img
-          src="../static/images/mamaputimages/veggies.jpg"
-          alt="Pounded Yam with vegetable sauce"
-          class="img1"
-        />
-        <img src="../static/images/mamaputimages/northafricacuisine.jpg" alt="" class="img2" />
-        <img src="../static/images/mamaputimages/masmasa.jpg" alt="" class="img3" />
-        <img src="../static/images/mamaputimages/northafricacuisine.jpg" alt="" class="img2" />
-      </div>
-      <div class="foodCategory">
-        <img src="../static/images/mamaputimages/fishsauce.jpg" alt="" />
-        <img src="../static/images/mamaputimages/northafricacuisine.jpg" alt="" class="img2" />
-        <img src="../static/images/mamaputimages/masmasa.jpg" alt="" class="img3" />
-        <img src="../static/images/mamaputimages/northafricacuisine.jpg" alt="" class="img2" />
-      </div>
-    </section>
-    <section>
-      <h1 class="contact">Contact Us</h1>
-      <p class="pGraph">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit minima
-        autem assumenda fuga itaque qui dolorem delectus laboriosam eos id?
-        Nulla, libero aut. Enim cumque iure eaque in illum magnam.
-      </p>
-    </section>
+    {% block content %}
+ 
      <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -143,6 +104,7 @@
           <p>732/21 Second Street, Koboko, Uganda</p>
         </div>
       </footer>
+      {% endblock content %}
     </section>
   </body>
 </html>

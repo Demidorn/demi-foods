@@ -1,53 +1,69 @@
-{% extends "dashboard.html" %}
-{% block content %}
-    <div class="form">
-        <div class="title">Welcome</div>
-        <div class="subtitle">Log in your account!</div>
-        <form method="POST", action="">
+{% extends "landingPage.html" %} {% block content %}
+<!-- <div class="login-body">
+    <div class="form-container">
+        <div class="form">
+          <div class="title">Welcome</div>
+          <div class="subtitle">Log in your account!</div>
+          <form method="POST", action="">
             {{ loginform.hidden_tag() }}
             <div class="input-container ic2">
-                {{ loginform.email(class="input") }}
-                <div class="cut "></div>
-                {% if loginform.email.errors %}
-                    {{ loginform.email.label(class="placeholder needs-validation") }}
-                    <div class="invalid-feedback">
-                        {% for error in loginform.email.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ loginform.email.label(class="placeholder") }}
-                {% endif %}
+              {{ loginform.email(class="input") }}
+              <div class="cut"></div>
+              {% if loginform.email.errors %} {{ loginform.email(class="input
+              is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in loginform.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ loginform.email.label(class="placeholder") }} {% endif %}
             </div>
             <div class="input-container ic2">
-                {{ loginform.pwd(class="input") }}
-                <div class="cut"></div>
-                {% if loginform.pwd.errors %}
-                    {{ loginform.pwd.label(class="placeholder was-validated") }}
-                    <div class="invalid-feedback">
-                        {% for error in loginform.pwd.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ loginform.pwd.label(class="placeholder") }}
-                {% endif %}
+              {{ loginform.pwd(class="input") }}
+              {% if loginform.pwd.errors %} {{ loginform.pwd.label(class="placeholder
+              was-validated") }}
+              <div class="invalid-feedback">
+                {% for error in loginform.pwd.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ loginform.pwd.label(class="placeholder") }} {% endif %}
             </div>
             <div class="custom-control custom-check">
-                {{ loginform.remember(class="custom-control-input") }}
-                {{ loginform.remember.label(class="custom-control-label") }}
+              {{ loginform.remember(class="custom-control-input") }} {{
+              loginform.remember.label(class="custom-control-label") }}
             </div>
-            <div>
-                {{ loginform.submit(class="submit")}}
-            </div>
+            <div>{{ loginform.submit(class="submit")}}</div>
             <small class="text-muted">
-                <a href="#">Forgot Password?</a>
+              <a href="#">Forgot Password?</a>
             </small>
-        </form>
-    </div>
-    <div>
+          </form>
+        </div>
+      </div>
+      <div class="form-container">
         <small>
-            Do not have an Account? <a href="{{ url_for ('register')}}">Sign up</a>
+          Do not have an Account?
+          <a href="{{ url_for ('register')}}" class="signup-btn" type="button">
+            Sign up</a
+          >
         </small>
-    </div>
+      </div>
+</div> -->
+<div class="main-body">
+    <div class="main">
+        <h2>Registration Form</h2>
+        <form action="">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required/>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"
+            pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.[a-zA-Z0-9])\S{8,}$"
+            title="Password must contain at least one number,
+            one alphabet, one symbol, and be at 
+            least 8 chracters long" required/>
+            <button type="submit">Sigin</button>
+        </form>
+    </div>  
+</div>
+
 {% endblock content %}
