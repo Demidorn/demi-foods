@@ -54,5 +54,11 @@ class ProdForm(FlaskForm):
     status = BooleanField('Available')
     description = TextAreaField('Description')
     image = FileField('Upload image', validators=[FileRequired(),
-                      FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')])
+                      FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Upload')
+
+    def validate_email(self, food_name):
+        """ custom validation to check if food_name is in database """
+        food_name = Product.query.filter_by(food_name=food_name.data).first()
+        if food_name:
+            raise ValidationError('Food is available')

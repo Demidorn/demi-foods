@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 """ all site routes """
+import os
+import secrets
+from PIL import Image
 from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm
 from App.v1.models import User, Product, Order, Address
-from flask import render_template, url_for, flash, redirect, request
+from flask import render_template, url_for, flash, redirect, request, current_app
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -37,9 +40,11 @@ def login():
         if user and bcrypt.check_password_hash(user.password, loginform.pwd.data):
             login_user(user, remember=loginform.remember.data)
             # flash('You have successfully logged in', 'success')
-            return redirect(url_for('landingPage'))
+            next_page = request.args.get('next')
+            return redirect(next_page) if next_page else redirect(url_for('landingPage'))
         else:
             flash('Email or Password not correct, try again', 'warning')
+        
     return render_template('login.html', title='Log in', loginform=loginform)
 
 
@@ -100,8 +105,7 @@ def profile():
         addrform.last_name.data = current_user.last_name
         addrform.email.data = current_user.email
         addrform.addr.data = current_user.address
-    next_page = request.args.get('next')
-    return redirect(next_page) if next_page else render_template('profile.html', addrform=addrform, title= 'Profile')
+    return render_template('profile.html', addrform=addrform, title= 'Profile')
 
 
 @app.route('/register', methods=['GET', 'POST'], strict_slashes=False)
@@ -132,8 +136,41 @@ def logout():
     return redirect(url_for('landingPage'))
 
 
+def save_image(form_image):
+    """function to uploads image to the right path in the app """
+    hex_name = secrets.token_hex(8)
+    _, file_ext = os.path.splitext(form_image.filename)
+    image_name = hex_name + file_ext
+    image_path = os.path.join(current_app.config['UPLOAD_FOLDER'], image_name)
+
+    resize = (400, 1200)
+    img = Image.open(form_image)
+    img.thumbnail(resize)
+    img.save(image_path)
+    return image_name
+
+
 @app.route('/upload', methods=['GET', 'POST'], strict_slashes=False)
 def upload():
     """ function upload product to database """
     upload = ProdForm()
+    if upload.validate_on_submit():
+        food_name = upload.food_name.data
+        price = int(upload.price.data)
+        status = upload.status.data
+        description = upload.description.data
+        if upload.image.data:
+            image = save_image(upload.image.data)
+        product = Product(food_name=food_name, price=price, status=status,
+                          description=description, image_path=image)
+        db.session.add(product)
+        db.session.commit()
+        flash('Product added successfully', 'success')
+        return redirect(url_for('admin'))              
     return render_template('upload.html', title='Admin - area', upload=upload)
+
+
+@app.route('/admin', strict_slashes=False)
+def admin():
+    """ returns and renders the admin page """
+    return render_template('admin.html')
