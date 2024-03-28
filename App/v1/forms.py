@@ -14,7 +14,8 @@ class RegForm(FlaskForm):
     last_name = StringField('Last name', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email address', validators=[DataRequired(), Email()])
     pwd = PasswordField('New password', validators=[DataRequired()])
-    confirm_pwd = PasswordField('Confirm password', validators=[DataRequired(), EqualTo('pwd')])
+    confirm_pwd = PasswordField('Confirm password', validators=[DataRequired(),
+                                EqualTo('pwd', message='Password must match')])
     submit = SubmitField('Sign up')
 
     def validate_email(self, email):
