@@ -102,26 +102,17 @@ span {
     justify-content: center;
     align-items: center;
     height: auto;
+    
 }
 
 
-.login-body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f3f3;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-}
 .main {
     background-color: var(---greyColor);
     border-radius: 15px;
     box-shadow: 0 0 20px
         rgba(0, 0, 0, 0.2);
     padding: 20px;
-    width: 300px;
+    width: 600px;
 }
 
 .main h2 {
