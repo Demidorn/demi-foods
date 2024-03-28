@@ -73,4 +73,19 @@ class Address(db.Model):
         """ returns a string representation of the address """
         return "Address('{}', '{}')".format(self.id, self.address,)
 # with app.app_context():
+
+class Recipe(db.Model):
+    """ Object representation of the Users recipe table """
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False,
+                            default=datetime.utcnow)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
+
+    def __repr__(self):
+        """ returns a string representation of the recipe """
+        return "{}('{}', '{}')".format(self.__class__.__name__, self.id,
+                                       self.title)
+                                       
 db.create_all()

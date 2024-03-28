@@ -64,7 +64,7 @@ def contactUs():
     return render_template('contactUs.html', title='ContactUs')
 
 
-@app.route('/recipe', strict_slashes=False)
+@app.route('/recipe/new', strict_slashes=False)
 def recipe():
     """
         returns the recipe Page
