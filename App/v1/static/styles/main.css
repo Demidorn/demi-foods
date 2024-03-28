@@ -20,6 +20,9 @@
 body{
     width: 100%;
     height: auto;
+    /* display: flex; */
+}
+.container {
     display: flex;
 }
 .sidebar{
@@ -268,7 +271,11 @@ body {
   .ic2 {
     margin-top: 30px;
   }
-  
+
+  .input.is-invalid {
+    border: 5px orange;
+    
+  }
   .input {
     background-color: #303245;
     border-radius: 12px;
@@ -281,7 +288,10 @@ body {
     padding: 4px 20px 0;
     width: 100%;
   }
-  
+  .input.is-invalid ~ .invalid-feedback{
+    display: block;
+    margin-top: -40px;
+  }
   .cut {
     background-color: #15172b;
     border-radius: 10px;
