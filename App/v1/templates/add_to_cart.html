@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add to Cart - Mamaput Delivery
+{% endblock %}
+
+{% block content %}
+<main>
+    <h1>Add {{ product.name }} to Cart</h1>
+    <form method="POST">
+        {{ form.csrf_token }}
+        <input type="hidden" name="product_id" value="{{ form.product_id.data }}">
+        <input type="hidden" name="product_name" value="{{ form.product_name.data }}">
+        <label for="quantity">Quantity:</label>
+        <input type="text" id="quantity" name="quantity" value="{{ form.quantity.data }}">
+        {% for error in form.quantity.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+        <button type="submit">{{ form.submit.label }}</button>
+    </form>
+</main>
+{% endblock %}

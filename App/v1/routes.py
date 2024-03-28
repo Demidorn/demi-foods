@@ -2,11 +2,13 @@
 """ all site routes """
 from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm, AddToCartForm, MakeOrderForm, UpdateOrderForm, NewProductForm
+from App.v1.forms import RegForm, LoginForm, AddToCartForm, MakeOrderForm
 from App.v1.models import User, Product, Order
 from flask import render_template, url_for, flash, redirect, session, request, abort, secure_filename
 from flask_login import login_user, current_user, logout_user, login_required, admin_required
 from models import Cart
 import os
+
 
 #@login_manager.user_loader
 #def user_loader(user_id):
@@ -83,22 +85,23 @@ def orders(product_id):
     """
     form = MakeOrderForm()
     product = Product.query.get_or_404(product_id)
-    
     if request.method == 'POST':
         if form.validate_on_submit():
             if is_product_in_cart(current_user.id, product_id):
                 return redirect(url_for('cart'))
-            order = Order(full_name=form.full_name.data, phone_number=form.phone_number.data,
-                        address=form.address.data, user_id=current_user.id)
+            order = Order(full_name=form.full_name.data,
+                          phone_number=form.phone_number.data,
+                          address=form.address.data,
+                          user_id=current_user.id,
+                          product_id=product_id)
             db.session.add(order)
             db.session.commit()
             flash('Order placed successfully', 'success')
             return redirect(url_for('product-display'))
-        else:
-            flash('Order not placed', 'danger')
-            return redirect(url_for('orders', product_id=product_id))
-                
-    return render_template('make-order.html', title='Order', form=form, product=product)
+        elif request.method == 'GET':
+            return redirect(url_for('add_to_cart', product_id=product_id))
+        orders_for_product = product.orders         
+    return render_template('make-order.html', title='Order', form=form, product=product, orders_for_product=orders_for_product)
 
 
 
@@ -107,6 +110,32 @@ def is_product_in_cart(user_id, product_id):
         """Check if the product is already in the user's cart"""
         return Cart.query.filter_by(user_id=user_id, product_id=product_id).first() is not None
 
+
+
+@app.route('/add_to_cart/<int:product_id>', methods=['GET', 'POST'], strict_slashes=False)
+def add_to_cart(product_id):
+    """
+        returns the add to cart Page
+    """
+    form = AddToCartForm()
+    product = Product.query.get_or_404(product_id)
+    if form.validate_on_submit():
+        quantity = form.quantity.data
+        cart = session.get('cart', {})
+        if product_id in cart:
+            #cart[product_id]['quantity'] += form.quantity.data 
+            cart[product_id] = int(cart[product_id]) + int(quantity)
+        else:
+            cart[product_id] = {'name': product.name, 'price': product.price, 'quantity': quantity}
+        session['cart'] = cart
+        flash('Product added to cart', 'success')
+        return redirect(url_for('landingPage'))
+    
+    form.product_id.data = product.id
+    form.product_name.data = product.name
+    
+    return render_template('add_to_cart.html', title='Add to cart', product=product, form=form)
+   
 
 
 @app.route('/admin/orders/<int:order_id>/update', methods=['GET', 'POST'], strict_slashes=False)
@@ -168,32 +197,14 @@ def add_product():
         return redirect(url_for('product_listing'))
 
     return render_template('add_product.html', title='Add Product', form=form)
-    
-@app.route('/add_to_cart/<int:product_id>', methods=['GET', 'POST'], strict_slashes=False)
-def add_to_cart(product_id):
-    """
-        returns the add to cart Page
-    """
-    if request.method == 'POST':
-        form = AddToCartForm()
-        product = Product.query.get_or_404(product_id)
-        if form.validate_on_submit():
-            quantity = form.quantity.data
-            cart = session.get('cart', {})
-            if product_id in cart:
-                #cart[product_id]['quantity'] += form.quantity.data 
-                cart[product_id] = int(cart[product_id]) + int(quantity)
-            else:
-                cart[product_id] = {'name': product.name, 'price': product.price, 'quantity': quantity}
-            session['cart'] = cart
-            flash('Product added to cart', 'success')
-            return redirect(url_for('landingPage'))
-        
-        form.product_id.data = product.id
-        form.product_name.data = product.name
-    
-    return render_template('add_to_cart.html', title='Add to cart', product=product, form=form)
    
+@app.route('/products')
+@admin_required
+def product_listing():
+    products = Product.query.all()  
+    return render_template('product_listing.html', title='Product Listing', products=products)
+
+
 
 @app.route('/profile', strict_slashes=False)
 def profile():
@@ -235,3 +246,12 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
+@app.route('/product/<int:product_id>')
+def product_display(product_id):
+    product = Product.get(product_id)
+    if product:
+        return render_template('product_display.html', product=product)
+    else:
+        return 'Product not found', 404

@@ -37,7 +37,8 @@ class Product(db.Model):
     image = db.Column(db.String(60), nullable=False, default='prod_img.jpg')
     status = db.Column(db.Boolean, nullable=False, default=True)
     description = db.Column(db.Text, nullable=True)
-
+    orders = db.relationship('Order', backref='product', lazy=True)
+    
     def __repr__(self):
         """ returns a string representation of the product """
         return "{}('{}', '{}', '{}')".format(self.__class__.__name__, self.id,
@@ -48,6 +49,7 @@ class Order(db.Model):
     """ Object representation of the Order table """
     __tablename__ = 'Orders'
     id = db.Column(db.Integer, primary_key=True)
+    
     tracking_id = db.Column(db.String(12), unique=True, nullable=False, default=secrets.token_hex(6))
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)

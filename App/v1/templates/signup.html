@@ -1,3 +1,45 @@
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../static/styles/login-out.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet"> 
+    <title>#</title>
+</head>
+<body>
+    <div class="login">
+        <h2>LOGIN</h2>
+        <div class="links">
+            <a href="{{url_for('login') }}">Login</a>
+            <a href="{{url_for('signup')}}" class="active">Signup</a>
+        </div>
+        <form method="post" action="{{ url_for ('signup') }}" autocomplete="off">
+            <br>
+            <label for="Username">
+                <i class="fa-user"></i>
+            </label>
+            <input  type="text" name="username" placeholder="Username" id="username" autofocus="" required> 
+            <br><br>
+            <label for="password">
+                <i class="fa-lock"></i>
+            </label>  
+            <input type="password" name="password" placeholder="Enter password" required> 
+            <br><br>
+            <label for="email">
+                <i class="fa-envelope"></i>
+            </label>
+            <input type="email" name="email" placeholder="Email" id="email" required>
+            <div class="msg">{{msg}}</div>
+            <br>
+            <input type="submit"  value="Submit">
+        </form>
+    </div>
+    
+</body>
+</html>
+=======
 {% extends "index.html" %}
 {% block content %}
 <div class="login">
@@ -28,3 +70,4 @@
     </form>
 </div>
 {% endblock content %}
+>>>>>>> 65ed25231d08ea3455e4d7037dd29d42c074406a

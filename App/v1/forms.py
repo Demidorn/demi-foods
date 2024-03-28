@@ -4,6 +4,10 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, HiddenField, TextAreaField, NumberRange
 from wtforms import DecimalField, FileField, FileAllowed
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
+
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, HiddenField
+from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, NumberRange
+
 from App.v1.models import User
 
 
@@ -39,12 +43,14 @@ class AddToCartForm(FlaskForm):
     submit = SubmitField('Add to cart')
     
     
+
 class MakeOrderForm(FlaskForm):
+    """ Make order form """
     full_name = StringField('Full name', validators=[DataRequired(), Length(min=2, max=40)])
-    phone_number = StringField('Phone number', validators=[DataRequired()])
+    phone_number = IntegerField('Phone number', validators=[DataRequired()])
     address = TextAreaField('Address', validators=[DataRequired()])
     submit = SubmitField('Make order')
-    
+
 
 class UpdateOrderForm(FlaskForm):
     full_name = StringField('Full Name', validators=[DataRequired()])
@@ -56,6 +62,6 @@ class UpdateOrderForm(FlaskForm):
 class NewProductForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
     description = TextAreaField('Description', validators=[DataRequired()])
-    price = DecimalField('Price (Naira)', validators=[DataRequired(), NumberRange(min=0.01)])
-    image = FileField('Image', validators=[FileAllowed(['jpg', 'png'])])
+    price = DecimalField('Price ($)', validators=[DataRequired(), NumberRange(min=0.01)])
+    image = FileField('Image')
     submit = SubmitField('Add Product')
