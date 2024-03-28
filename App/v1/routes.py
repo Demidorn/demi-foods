@@ -60,12 +60,20 @@ def aboutPage():
     return render_template('about.html', title='About')
 
 
-@app.route('/contactUs', strict_slashes=False)
+
+@app.route('/menu', strict_slashes=False)
+def menu():
+    """
+        returns the menu Page
+    """
+    return render_template('menu.html', title='Menu')
+
+@app.route('/contact', strict_slashes=False)
 def contactUs():
     """
         returns the contact us Page
     """
-    return render_template('contactUs.html', title='ContactUs')
+    return render_template('contact.html', title='ContactUs')
 
 
 @app.route('/recipe', strict_slashes=False)

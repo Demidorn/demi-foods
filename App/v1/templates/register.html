@@ -1,6 +1,5 @@
-{% extends "dashboard.html" %}
-{% block content %}
-    <div class="form">
+{% extends "landingPage.html" %} {% block content %}
+<!-- <div class="form">
         <div class="title">Welcome</div>
         <div class="subtitle">Let's create your account!</div>
         <form method="POST", action="">
@@ -84,5 +83,40 @@
         <small>
             Already have an Account? <a href="{{ url_for ('login')}}">Sign in</a>
         </small>
-    </div>
+    </div> -->
+
+<div class="main-body">
+  <div class="main">
+    <h2>Register</h2>
+    <form action="">
+      <label for="firstname">First Name:</label>
+      <input type="text" id="first" name="first" required />
+      <label for="last">Last Name:</label>
+      <input type="text" id="last" name="last" required />
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+      <label for="password">Password:</label>
+      <!-- <input
+        type="password"
+        id="password"
+        name="password"
+        pattern=\"^(?=.*\d)(?=.*[a-zA-Z])(?=.[a-zA-Z0-9])\S{8,}$"
+        title="Password must contain at least one number,
+                one alphabet, one symbol, and be at 
+                least 8 chracters long"
+        required
+      /> -->
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+      />
+      <label for="repassword">Re-type Password:</label>
+      <input type="password" id="password" name="password" required />
+      </select>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
 {% endblock content %}

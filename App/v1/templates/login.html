@@ -1,92 +1,72 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- login page -->
+{% extends "landingPage.html" %} {% block content %}
+<!-- <div class="login-body">
+    <div class="form-container">
+        <div class="form">
+          <div class="title">Welcome</div>
+          <div class="subtitle">Log in your account!</div>
+          <form method="POST", action="">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/styles/login-out.css">
-    <title>Login Form</title>
-</head>
-<body>
-    <div class="login">
-        <h2>LOGIN</h2>
-        <div class="links">
-            <a href="/login'" class="active">Login</a>
-            <a href="">Signup</a>
-        </div>
-        <div class="fa-forms">
-            <form method="post" action="/login">
-                <label for="Username">
-                    <i class="fa-user"></i>
-                </label>
-                <input  type="text" name="username" placeholder="Username" id="username" autofocus="" required> 
-                <br><br>
-                <label for="password">
-                    <i class="fa-lock"></i>
-                </label>  
-                <input type="password" name="password" placeholder="Enter password" required> 
-                <div class="msg">msg</div>
-                <input type="submit"  value="Longin">
-            </form>
-        </div>
-    </div>
-    
-</body>
-</html>
-=======
-{% extends "dashboard.html" %}
-{% block content %}
-    <div class="form">
-        <div class="title">Welcome</div>
-        <div class="subtitle">Log in your account!</div>
-        <form method="POST", action="">
             {{ loginform.hidden_tag() }}
             <div class="input-container ic2">
-                {{ loginform.email(class="input") }}
-                <div class="cut "></div>
-                {% if loginform.email.errors %}
-                    {{ loginform.email.label(class="placeholder needs-validation") }}
-                    <div class="invalid-feedback">
-                        {% for error in loginform.email.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ loginform.email.label(class="placeholder") }}
-                {% endif %}
+              {{ loginform.email(class="input") }}
+              <div class="cut"></div>
+              {% if loginform.email.errors %} {{ loginform.email(class="input
+              is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in loginform.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ loginform.email.label(class="placeholder") }} {% endif %}
             </div>
             <div class="input-container ic2">
-                {{ loginform.pwd(class="input") }}
-                <div class="cut"></div>
-                {% if loginform.pwd.errors %}
-                    {{ loginform.pwd.label(class="placeholder was-validated") }}
-                    <div class="invalid-feedback">
-                        {% for error in loginform.pwd.errors %}
-                            <span>{{ error }}</span>
-                        {% endfor %}
-                    </div>
-                {% else %}
-                    {{ loginform.pwd.label(class="placeholder") }}
-                {% endif %}
+              {{ loginform.pwd(class="input") }}
+              {% if loginform.pwd.errors %} {{ loginform.pwd.label(class="placeholder
+              was-validated") }}
+              <div class="invalid-feedback">
+                {% for error in loginform.pwd.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ loginform.pwd.label(class="placeholder") }} {% endif %}
             </div>
             <div class="custom-control custom-check">
-                {{ loginform.remember(class="custom-control-input") }}
-                {{ loginform.remember.label(class="custom-control-label") }}
+              {{ loginform.remember(class="custom-control-input") }} {{
+              loginform.remember.label(class="custom-control-label") }}
             </div>
-            <div>
-                {{ loginform.submit(class="submit")}}
-            </div>
+            <div>{{ loginform.submit(class="submit")}}</div>
             <small class="text-muted">
-                <a href="#">Forgot Password?</a>
+              <a href="#">Forgot Password?</a>
             </small>
-        </form>
-    </div>
-    <div>
+          </form>
+        </div>
+      </div>
+      <div class="form-container">
         <small>
-            Do not have an Account? <a href="{{ url_for ('register')}}">Sign up</a>
+          Do not have an Account?
+          <a href="{{ url_for ('register')}}" class="signup-btn" type="button">
+            Sign up</a
+          >
         </small>
-    </div>
+      </div>
+</div> -->
+<div class="main-body">
+    <div class="main">
+        <h2>Login</h2>
+        <form action="">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required/>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"
+            pattern="^(?=.*\d)(?=.*[a-zA-Z])(?=.[a-zA-Z0-9])\S{8,}$"
+            title="Password must contain at least one number,
+            one alphabet, one symbol, and be at 
+            least 8 chracters long" required/>
+            <button type="submit">Sigin</button>
+        </form>
+    </div>  
+</div>
+
 {% endblock content %}
->>>>>>> 65ed25231d08ea3455e4d7037dd29d42c074406a
+
