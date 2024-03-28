@@ -180,10 +180,7 @@ header .navbar a:hover {
     color: rgb(231, 223, 221);
 }
 
-/*.footer-col ul i{
-    font-size:35px;
-    color:rgb(228, 214, 209);
-}*/
+
 
 .footer-col ul a:hover {
     color: rgb(167, 117, 98);
@@ -191,18 +188,7 @@ header .navbar a:hover {
     font-size: 15px;
 }
 
-/*.footer-col ul span{
-    cursor:pointer;
-    font-size:20px;
-    font-weight:bold;
-    color:white;
-    text-decoration: none;
-}
-.footer-col ul span:hover{
-    color:rgb(167, 117, 98);
-    text-decoration: none;
-    font-size: 20px;
-}*/
+
 
 .footer-icons {
     display: grid;
@@ -287,4 +273,106 @@ section h4{
     overflow: hidden;
     text-align: center;
 
+}
+.currys .box-curry .box:hover{
+    transform : scale(1.1);
+}
+.currys .box-curry .box img{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+.currys .box-curry .box span{
+    font-size: 20px;
+}
+.rotis .box-roti .box{
+    margin-left: 2.5rem;
+    font-size: 1.2rem;
+    padding:2.5rem;
+    align-items: center;
+    background: #fff;
+    border-radius: .5rem;
+    border: .1rem solid rgba(0,0,0,.2);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+.rotis .box-roti .box:hover{
+    transform : scale(1.1);
+}
+.rotis .box-roti .box img{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+.rotis .box-roti .box span{
+    font-size: 20px;
+}
+.starters .box-starters .box{
+    margin-left: 2.5rem;
+    font-size: 1.2rem;
+    padding:2.5rem;
+    align-items: center;
+    background: #fff;
+    border-radius: .5rem;
+    border: .1rem solid rgba(0,0,0,.2);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+.starters .box-starters .box:hover{
+    transform: scale(1.1);
+}
+.starters .box-starters .box img{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+.starters .box-starters .box span{
+    font-size: 20px;
+}
+.barb .box-container .box{
+    margin-left: 2.5rem;
+    font-size: 1.2rem;
+    padding:2.5rem;
+    align-items: center;
+    background: #fff;
+    border-radius: .5rem;
+    border: .1rem solid rgba(0,0,0,.2);
+    box-shadow: var(--box-shadow);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    
+}
+.barb .box-container .box:hover{
+    transform: scale(1.1);
+}
+.barb .box-container .box img{
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    
+}
+.barb .box-container .box span{
+    font-size: 20px;
+}
+
+.btn{
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    text-decoration: none;
+    background: orangered;
+    border-radius: .5rem;
+    cursor: pointer;
+    padding: .8rem 3rem;
+    color:white;
+}
+
+.btn:hover{
+    background: #333;
+    border-bottom: 1.5px solid #bda0a0;
 }
