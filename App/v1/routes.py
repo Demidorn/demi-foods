@@ -4,8 +4,8 @@ import os
 import secrets
 from PIL import Image
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm
-from App.v1.models import User, Product, Order, Address
+from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm
+from App.v1.models import User, Product, Order, Address, Recipe
 from flask import render_template, url_for, flash, redirect, request, current_app
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -72,13 +72,30 @@ def contactUs():
     return render_template('contact.html', title='ContactUs')
 
 
-@app.route('/recipe/new', strict_slashes=False)
+@app.route('/recipe/new', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def new_recipe():
+    """
+        returns the add new recipe Page
+    """
+    recipeform = RecipeForm()
+    if recipeform.validate_on_submit():
+        recipe = Recipe(title=recipeform.title.data,
+                        content=recipeform.content.data,
+                        user_id=current_user.id)
+        db.session.add(recipe)
+        db.session.commit()
+        return redirect(url_for('recipe.html'))
+    return render_template('new_recipe.html', recipeform=recipeform, title='New | Recipe')
+
+
+@app.route('/recipe', strict_slashes=False)
 def recipe():
     """
-        returns the recipe Page
+        returns the add new recipe Page
     """
-    return render_template('recipe.html', title='Recipe')
-
+    recipes = Recipe.query.all()
+    return render_template('recipe.html', recipes=recipes, title='Recipe')
 
 @app.route('/order', strict_slashes=False)
 def orders():

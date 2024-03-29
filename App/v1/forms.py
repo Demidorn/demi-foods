@@ -63,3 +63,10 @@ class ProdForm(FlaskForm):
         food_name = Product.query.filter_by(food_name=food_name.data).first()
         if food_name:
             raise ValidationError('Food is available')
+
+
+class RecipeForm(FlaskForm):
+    """ Form to add Users recipe to database """
+    title = StringField('Name of your Recipe', validators=[DataRequired()])
+    content = TextAreaField('Enter your ingredients, methods and steps for prepartion')
+    submit = SubmitField('Save')

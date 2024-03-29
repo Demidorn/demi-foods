@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     order = db.relationship('Order', backref='customer', lazy=True)
+    recipe = db.relationship('Recipe', backref='customer', lazy=True)
     address = db.relationship('Address', uselist=False, backref='user' )
 
     def __repr__(self):
@@ -35,7 +36,7 @@ class Product(db.Model):
     food_name = db.Column(db.String(120), unique=True, nullable=False)
     price = db.Column(db.Integer, nullable=False)
     image_path = db.Column(db.String(60), nullable=False, default='prod_img.jpg')
-    status = db.Column(db.Boolean, nullable=False, default=True)
+    status = db.Column(db.Boolean, nullable=False, default=False)
     description = db.Column(db.Text, nullable=True)
 
     def __repr__(self):
