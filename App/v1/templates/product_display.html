@@ -1,113 +1,311 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}MamaPut Delivery{% endblock %}</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/styles/product-display.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="../static/styles/new-product_display.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-
+    <title>MamaPut Delivery</title>
 </head>
+
 <body>
-    
-
-<!--Rating Form starts-->
-
-
-
-<section class="home" id="home">
-    <div class="barb">
-        <img src="../static/images/mamaputimages/jollof-with-white-background.jpg" type="image/icon type">
-        <img src="../static/images/mamaputimages/meat-sauce-soup-with-greens-potatoes-dark-desk-soup-meal-sauce-meat.jpg" type="image/icon type">
-        <img src="../static/images/mamaputimages/traditional-thai-food-thai-curry-with-river-snail.jpg" type="image/icon type">
-    </div>
-    <div class="cont">
-        {% block content %}
-        {% endblock %}
-    </div>
-
-</section>
-
-<!--Footer Section-->
-<!--<footer class="footer">
-    <div class="container">
-        <div class="row">
-            
-            <div class="footer-col">
-                <ul>
-                    <i class="fa fa-utensils"></i>
-                    <span>Mamaput.</span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img class="navbar-img" src="../static/images/images/mamaput_2.jpeg"
+                    alt=""></a>
+            <form action="" id="search-form">
+                <input type="search" placeholder="search here..." name="" id="search-box" id="search-icon">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" action="active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="openAbout()">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Orders</a>
+                    </li>
                 </ul>
-                <div class="map">
-                    <ul>
-                        <i class="fa fa-map-marker"></i>
-                            <span> Suluya village<br>
-                                   Anambra state
-                            </span>
-                    </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- End header-->
+    <!-- Main Body-->
+    <section class="food-combos" id="food-combo">
+        <div class="bg-color">
+            <div class="small-cont">
+                <h2 class="note">
+                    <marquee direction="left">Find your favourite combo here...</marquee>
+                </h2>
+            </div>
+            <div class="flex-card">
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
                     </div>
-                <div class="mail">
-                    <ul>
-                        <i class="fas fa-inbox"></i>
-                        <span>
-                            support@mamaput.com
-                        </span>
-                    </ul>
                 </div>
-            </div>
-            
-            <div class="footer-col">
-                <h4>Maamaput</h4>
-                <ul>
-                    <li><a href="#">about us</a></li>
-                    <li><a href="#">Our services</a></li>
-                    <li><a href="#">Privacy policy</a></li>
-                    <li><a href="#">Payment policy</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Get help</h4>
-                <ul>
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Delivery</a></li>
-                    <li><a href="#">My orders</a></li>
-                    <li><a href="#">Order Status</a></li>
-                    <li><a href="#">Payment options</a></li>
-
-                </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Order Now</h4>
-                    <ul>
-                        <li><a href="#">Egusi</a></li>
-                        <li><a href="#">Ensansa</a></li>
-                        <li><a href="#">Jollof</a></li>
-                        <li><a href="#">Okra</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Follow us</h4>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
                     </div>
-
                 </div>
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="../static/images/images/lusaniya.jpeg" alt="">
+                    <div class="card-body">
+                        <h3 class="card-title">Lusaniya</h3>
+                        <p class="card-text">Delicious Lusaniya dish prepared with fresh ingredients.</p>
+                        <p class="card-text_2">Price: $10</p>
+                        <div class="rating">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span>(3 Reviews)</span>
+                        </div>
+                        <div class="btn-container">
+                            <button class="btn btn-primary">Add to Cart</button>
+                            <button class="btn btn-success">Order Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!--End of Main Body-->
+
+
+    <!--Footer -->
+    <section class="foot-footer">
+        <footer id="footer">
+            <div class="footer-col">
+                <h4>MAMAPUT</h4>
+                <p>
+                    Lorem ipsum dolor sit amet
+                </p>
+                <div class="footer-icons">
+                    <span><img src="../static/images/mamaputimages/owl.png" alt="" /></span>
+                    <span><img src="../static/images/mamaputimages/facebook.png" alt="" /></span>
+                    <span><img src="../static/images/mamaputimages/twitter.png" alt="" /></span>
+                    <span><img src="../static/images/mamaputimages/instagram.png" alt="" /></span>
+                    <span><img src="../static/images/mamaputimages/banner1.jpg" alt="" /></span>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>OVERVIEW</h4>
+                <ul>
+                    <li><a href="#">Online Delivery</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog Posts</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>RESOURCES</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms of use</a></li>
+                    <li><a href="#">Privacy Pospancy</a></li>
+                </ul>
 
             </div>
+            <div class="footer-col">
+                <h4>CONTACT INFO</h4>
+                <ul>
+                    <li><a href="#">+2347 1204 8561</a></li>
+                    <li><a href="#">info@mamaput.com</a></li>
+                    <li><a href="#">mamaput.com</a></li>
+
+                </ul>
             </div>
-            
+            <div class="footer-col">
+                <h4>LOCATION</h4>
+                <p>732/21 Second Street, Koboko, Nigeria</p>
+            </div>
+        </footer>
 
-</footer>-->
+    </section>
 
-<!--Home  ends-->
-
-
-    <!--JavaScript ends -->
+    <!-- End of Footer Section-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="../static/scripts/fit-body.js"></script>
 </body>
+
 </html>

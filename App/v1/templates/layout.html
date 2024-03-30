@@ -8,11 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/styles/product-display.css">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    {% if title %}
-        <title>{{ title }}</title>
-    {% else %}
-        <title>Mamaput Delivery</title>
-    {% endif %}
+   
 </head>
 
 <body>
@@ -69,8 +65,7 @@
     </header>
 
     <!-- End header-->
-    {%endblock%}
-    {%block content%}
+    
     <!--side bar-->
 
     <nav class="sidebar navbar-expand-lg">
@@ -78,9 +73,9 @@
             <div class="text">
                 <a href="../static/images/mamaputimages/owl.png"><i class="fa fa-home"></i></a>
                 <ul>
-                    <li><a href="../templates/egusi.html" onclick="myfun()">Egusi variety</a></li>
-                    <li><a href="../templates/jollof.html" onclick="myfunction()">Jollof's</a></li>
-                    <li><a href="../templates/okra.html" onclick="myroti()">Okra's</a></li>
+                    <li><a href={{ url_for('templates', filename='egusi.html') }}" onclick="myfun()">Egusi variety</a></li>
+                    <li><a href="../templates/jollof.html" onclick="myfunction()">Jollof variety</a></li>
+                    <li><a href="../templates/okra.html" onclick="myroti()">Okra variety</a></li>
                     <li><a href="../templates/ensansa.html" onclick="mycurry()">Ensansa</a></li>
                 </ul>
     
