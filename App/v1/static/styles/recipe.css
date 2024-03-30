@@ -26,13 +26,13 @@ body {
 }
 
 .padding {
-    padding: 3rem !important
+    padding: 1rem !important
 }
 
 .card {
     border-radius: 5px;
-    -webkit-box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
-    box-shadow: 0 1px 20px 0 rgba(69,90,100,0.08);
+    -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     border: none;
     margin-bottom: 30px;
 }
@@ -43,7 +43,8 @@ body {
     padding: 25px 20px;
 }
 
-.card .card-header+.card-block, .card .card-header+.card-block-big {
+.card .card-header+.card-block,
+.card .card-header+.card-block-big {
     padding-top: 0;
 }
 
@@ -59,8 +60,8 @@ body {
 .card-sub {
     cursor: move;
     border: none;
-    -webkit-box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
-    box-shadow: 0 0 1px 2px rgba(0,0,0,0.05), 0 -2px 1px -2px rgba(0,0,0,0.04), 0 0 0 -1px rgba(0,0,0,0.05);
+    -webkit-box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.05), 0 -2px 1px -2px rgba(0, 0, 0, 0.04), 0 0 0 -1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 0 1px 2px rgba(0, 0, 0, 0.05), 0 -2px 1px -2px rgba(0, 0, 0, 0.04), 0 0 0 -1px rgba(0, 0, 0, 0.05);
 }
 
 .card-block {
@@ -68,4 +69,13 @@ body {
     background-color: #fff;
 }
 
+.col-lg-12.col-xl-6 {
+    -webkit-box-flex: 0;
+    max-width: 100%;
+    flex: 0 0 100%;
+    display: flex;
+    align-items: center; /* Vertically center the content */
+    justify-content: center; /* Horizontally center the content */
+    flex-direction: column;
+}
 
