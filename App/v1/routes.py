@@ -85,7 +85,7 @@ def new_recipe():
                         user_id=current_user.id)
         db.session.add(recipe)
         db.session.commit()
-        return redirect(url_for('recipe.html'))
+        return redirect(url_for('recipe'))
     return render_template('new_recipe.html', recipeform=recipeform, title='New | Recipe')
 
 
