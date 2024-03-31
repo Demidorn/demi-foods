@@ -50,10 +50,12 @@
             <!-- menu when appears on moble version-->
             <ion-icon class="menu-togle" name="menu-outline"></ion-icon>
             <!-- search bar -->
+            {% block recipe %}
             <div class="search">
                 <input type="text" placeholder="What you want to eat?">
                 <button class="search-btn">Search</button>
-            </div> 
+            </div>
+            {% endblock recipe %}
             <!-- cart icon on left side of navbar-->
             <div class="cart">
                 <a class="cart" href="#"><ion-icon name="cart-outline"></ion-icon></a>

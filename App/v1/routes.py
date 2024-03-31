@@ -6,7 +6,7 @@ from PIL import Image
 from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm
 from App.v1.models import User, Product, Order, Address, Recipe
-from flask import render_template, url_for, flash, redirect, request, current_app
+from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -90,13 +90,37 @@ def new_recipe():
 
 
 @app.route('/recipe', strict_slashes=False)
+@login_required
 def recipe():
     """
         returns the add new recipe Page
     """
-    recipes = Recipe.query.all()
-    return render_template('recipe.html', recipes=recipes, title='Recipe')
+    user_recipe = Recipe.query.filter_by(user_id=current_user.id).all()
+    if user_recipe:
+        return render_template('recipe.html', recipes=recipes, title='Recipe')
+    return render_template('empty_recipe.html', title='Recipe')
 
+
+@app.route('/recipe/<int:recipe_id>/update', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def update_recipe(recipe_id):
+    """ returns recipe with the given id to be updated """
+    my_recipe = Recipe.query.get_or_404(recipe_id)
+    if my_recipe.customer != current_user:
+        abort(403)
+    recipeform = RecipeForm()
+    if recipeform.validate_on_submit():
+        my_recipe.title = recipeform.title.data
+        my_recipe.content = recipeform.content.data
+        db.session.commit()
+        flash('Your Recipe has been updated!', 'success')
+        return redirect(url_for('recipe'))
+    elif request.method == 'GET':
+        recipeform.title.data = my_recipe.title
+        recipeform.content.data = my_recipe.content
+    return render_template('new_recipe.html', recipeform=recipeform,
+                           title=my_recipe.title) 
+                           
 @app.route('/order', strict_slashes=False)
 def orders():
     """
