@@ -80,23 +80,25 @@ def new_recipe():
     """
     recipeform = RecipeForm()
     if recipeform.validate_on_submit():
-        recipe = Recipe(title=recipeform.title.data,
+        my_recipe = Recipe(title=recipeform.title.data,
                         content=recipeform.content.data,
                         user_id=current_user.id)
-        db.session.add(recipe)
+        db.session.add(my_recipe)
         db.session.commit()
         return redirect(url_for('recipe'))
-    return render_template('new_recipe.html', recipeform=recipeform, title='New | Recipe')
+    my_recipe = Recipe()
+    return render_template('new_recipe.html', recipeform=recipeform, 
+                           my_recipe=my_recipe, title='New | Recipe')
 
 
 @app.route('/recipe', strict_slashes=False)
 @login_required
 def recipe():
     """
-        returns the add new recipe Page
+        returns the Users recipe Page
     """
-    user_recipe = Recipe.query.filter_by(user_id=current_user.id).all()
-    if user_recipe:
+    recipes = Recipe.query.filter_by(user_id=current_user.id).all()
+    if recipes:
         return render_template('recipe.html', recipes=recipes, title='Recipe')
     return render_template('empty_recipe.html', title='Recipe')
 
@@ -119,8 +121,22 @@ def update_recipe(recipe_id):
         recipeform.title.data = my_recipe.title
         recipeform.content.data = my_recipe.content
     return render_template('new_recipe.html', recipeform=recipeform,
-                           title=my_recipe.title) 
-                           
+                           my_recipe=my_recipe, title=my_recipe.title) 
+
+
+@app.route('/recipe/<int:recipe_id>/delete', methods=['POST'], strict_slashes=False)
+@login_required 
+def delete_recipe(recipe_id):
+    """ deletes recipe with the given id to be updated """
+    my_recipe = Recipe.query.get_or_404(recipe_id)
+    if my_recipe.customer != current_user:
+        abort(403)
+    db.session.delete(my_recipe)
+    db.session.commit()
+    flash('Your recipe has been deleted!.','success')
+    return redirect(url_for('recipe'))
+
+
 @app.route('/order', strict_slashes=False)
 def orders():
     """
