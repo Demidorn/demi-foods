@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ Forms collection """
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, HiddenField, TextAreaField, NumberRange
-from wtforms import DecimalField, FileField, FileAllowed
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, HiddenField, TextAreaField
+from wtforms import DecimalField, FileField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, HiddenField
@@ -63,5 +63,5 @@ class NewProductForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
     description = TextAreaField('Description', validators=[DataRequired()])
     price = DecimalField('Price ($)', validators=[DataRequired(), NumberRange(min=0.01)])
-    image = FileField('Image')
+    image = FileField('Image')  # validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
     submit = SubmitField('Add Product')

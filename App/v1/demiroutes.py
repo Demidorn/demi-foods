@@ -4,9 +4,11 @@ from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm, AddToCartForm, MakeOrderForm, UpdateOrderForm, NewProductForm
 from App.v1.forms import RegForm, LoginForm, AddToCartForm, MakeOrderForm
 from App.v1.models import User, Product, Order
-from flask import render_template, url_for, flash, redirect, session, request, abort, secure_filename
-from flask_login import login_user, current_user, logout_user, login_required, admin_required
-from models import Cart
+from flask import render_template, url_for, flash, redirect, session, request
+from werkzeug.utils import secure_filename
+from App.v1.decorators import admin_required
+from flask_login import login_user, current_user, logout_user, login_required
+from App.v1.models import Cart
 import os
 
 
@@ -66,7 +68,11 @@ def menu():
     """
         returns the menu Page
     """
-    return render_template('menu.html', title='Menu')
+    return render_template('product_display.html', title='Menu')
+
+@app.route('/product-display')
+def new_product_display():
+    return render_template('product_display.html')
 
 @app.route('/contact', strict_slashes=False)
 def contactUs():
@@ -251,9 +257,9 @@ def logout():
 
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
+#@app.errorhandler(404)
+#def page_not_found(e):
+    #return render_template('404.html'), 404
 
 
 @app.route('/product/<int:product_id>')
