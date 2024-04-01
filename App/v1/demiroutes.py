@@ -27,12 +27,12 @@ def dashboard():
 
 
 @app.route('/home')
-@app.route('/', strict_slashes=False)
+@app.route('/', methods=['GET', 'POST'], strict_slashes=False)
 def landingPage():
     """
         returns the landing Page
     """
-    return render_template('landingPage.html', title='Home-Page')
+    return render_template('home.html', title='Home-Page')
 
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
@@ -269,3 +269,8 @@ def product_display(product_id):
         return render_template('product_display.html', product=product)
     else:
         return 'Product not found', 404
+    
+
+@app.route('/layout')
+def layout():
+    return render_template('layout.html')
