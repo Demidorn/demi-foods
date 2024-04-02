@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 """ all site routes """
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm, AddToCartForm, MakeOrderForm, UpdateOrderForm, NewProductForm
-from App.v1.forms import RegForm, LoginForm, AddToCartForm, MakeOrderForm
 from App.v1.models import User, Product, Order
 from flask import render_template, url_for, flash, redirect, session, request
 from werkzeug.utils import secure_filename

@@ -39,7 +39,7 @@ class Product(db.Model):
     image_path = db.Column(db.String(60), nullable=False, default='prod_img.jpg')
     status = db.Column(db.Boolean, nullable=False, default=False)
     description = db.Column(db.Text, nullable=True)
-    orders = db.relationship('Order', backref='product', lazy=True)
+    # orders = db.relationship('Order', backref='product', lazy=True)
     
     def __repr__(self):
         """ returns a string representation of the product """
@@ -56,10 +56,10 @@ class Order(db.Model):
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('Products.id'), nullable=False)
+    # product_id = db.Column(db.Integer, db.ForeignKey('Products.id'), nullable=False)
     order_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     
-    Product = db.relationship('Product', backref=db.backref('product', lazy=True))
+    # Product = db.relationship('Product', backref=db.backref('product', lazy=True))
 
     def __repr__(self):
         """returns a string representation of the product """
@@ -69,8 +69,8 @@ class Order(db.Model):
 #    db.create_all()
 
 
-
-class Cart(db.Model):
+'''
+ class Cart(db.Model):
     __tablename__ = 'cart'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
@@ -83,7 +83,7 @@ class Cart(db.Model):
     def is_product_in_cart(user_id, product_id):
         """Check if the product is already in the user's cart"""
         return Cart.query.filter_by(user_id=user_id, product_id=product_id).first() is not None
-
+'''
 
 class Address(db.Model):
     """ Object representation of the User address table """
@@ -99,7 +99,7 @@ class Address(db.Model):
     def __repr__(self):
         """ returns a string representation of the address """
         return "Address('{}', '{}')".format(self.id, self.address,)
-# with app.app_context():
+
 
 class Recipe(db.Model):
     """ Object representation of the Users recipe table """

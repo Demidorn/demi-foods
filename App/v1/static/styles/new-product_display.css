@@ -1,3 +1,4 @@
+/*
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +7,7 @@
     font-display: var(#5f2e0b);
     
 }
+*/
 
 body {
     height: 100vh;
@@ -25,7 +27,7 @@ header {
     padding: 2rem 1.5rem;
     display: flex;
     align-items: center;
-    font-family: 'Times New Roman', serif;
+ /*   font-family: 'Arial', serif; */
     font-style: oblique;
     font-size: 1rem;
     justify-content: space-between;

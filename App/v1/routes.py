@@ -62,7 +62,9 @@ def menu():
     """
         returns the menu Page
     """
-    return render_template('menu.html', title='Menu')
+    products = Product.query.all()
+    return render_template('product_listing.html', title='Menu',
+                           products=products)
 
 @app.route('/contact', strict_slashes=False)
 def contactUs():
@@ -127,7 +129,7 @@ def update_recipe(recipe_id):
 @app.route('/recipe/<int:recipe_id>/delete', methods=['POST'], strict_slashes=False)
 @login_required 
 def delete_recipe(recipe_id):
-    """ deletes recipe with the given id to be updated """
+    """ deletes recipe with the given id """
     my_recipe = Recipe.query.get_or_404(recipe_id)
     if my_recipe.customer != current_user:
         abort(403)
@@ -231,11 +233,49 @@ def upload():
         db.session.add(product)
         db.session.commit()
         flash('Product added successfully', 'success')
-        return redirect(url_for('admin'))              
-    return render_template('upload.html', title='Admin - area', upload=upload)
+        return redirect(url_for('admin'))
+    product = Product()      
+    return render_template('upload.html', title='Admin - area',
+                           product=product, upload=upload)
 
 
 @app.route('/admin', strict_slashes=False)
 def admin():
     """ returns and renders the admin page """
-    return render_template('admin.html')
+    products = Product.query.all()
+    return render_template('admin.html', products=products)
+
+
+@app.route('/product/<int:product_id>/update', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def update_product(product_id):
+    """ returns product with the given id to be updated """
+    product = Product.query.get_or_404(product_id)
+    upload = ProdForm()
+    if upload.validate_on_submit():
+        food_name = upload.food_name.data
+        price = upload.price.data
+        status = upload.status.data
+        description = upload.description.data
+        image_path = upload.image.data
+        db.session.commit()
+        flash('Product updated successfully!.')
+        return redirect(url_for('admin'))
+    elif request.method == 'GET':
+        upload.food_name.data = product.food_name
+        upload.price.data = product.price
+        upload.status.data = product.status
+        upload.description.data = product.description
+    return render_template('upload.html', title='Admin - area', upload=upload,
+                           product=product)
+
+
+@app.route('/product/<int:product_id>/delete', methods=['POST'], strict_slashes=False)
+@login_required 
+def delete_product(product_id):
+    """ deletes product with the given id """
+    product = Product.query.get_or_404(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully!.')
+    return redirect(url_for('admin'))

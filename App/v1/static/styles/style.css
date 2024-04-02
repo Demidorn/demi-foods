@@ -1,3 +1,4 @@
+/** LandingPage.html css **/
 :root {
     --primaryColor: #0e6253;
     --secondaryColor: #ffc187;
@@ -15,6 +16,7 @@
     box-sizing: border-box;
     outline: none;
     font-family: 'open Sans', sans-serif;
+    font-size: medium;
 }
 
 /** **/

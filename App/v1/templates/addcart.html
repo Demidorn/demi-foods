@@ -1,9 +1,9 @@
 
-{% extends 'product-display.html' %}
+{% extends 'product_listing.html' %}
 
 {% block title %}Add to Cart{% endblock %}
 
-{% block content %
+{% block content %}
 <h1>Add {{ product.name }} to Cart</h1>
     <form method="POST">
         {{ form.csrf_token }}
@@ -19,7 +19,7 @@
 
     <div>
         <h2>{{ product.name }}</h2>
-        <img src="{{url_for(product.image_url }}" alt="{{ product.name }}">
+        <img src="{{url_for(product.image_url) }}" alt="{{ product.name }}">
         <p>Price: ${{ product.price }}</p>
         <p>Available Quantity: {{ product.quantity }}</p>
         <form method="post" action="{{ url_for('make_order') }}">
