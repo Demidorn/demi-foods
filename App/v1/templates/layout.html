@@ -17,21 +17,14 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#"><img class="navbar-img" src="../static/images/images/mamaput_2.jpeg"
                 alt=""></a>
-        <!--<form action="" id="search-form">
-                        <input type="search" placeholder="search here..." name="" id="search-box" id="search-icon">
-                        <label for="search-box" class="fas fa-search"></label>
-                    </form>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>-->
+       
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('landingPage')}}" action="active">Home</a>
+                    <a class="nav-link" href="{{url_for('home')}}" action="active">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('product_display')}}">Menu</a>
+                    <a class="nav-link" href="{{url_for('new_product_display')}}">Menu</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{url_for('aboutPage')}}" onclick="openAbout()">About</a>
@@ -43,7 +36,7 @@
                     <a class="nav-link" href="#">Orders</a>
                 </li>
             </ul>
-            <a  href="{{url_for('add_to_cart')}}" class="flex-cart" ><ion-icon name="cart-outline"></ion-icon></a>
+            <a  href="#" class="flex-cart" ><ion-icon name="cart-outline"></ion-icon></a>
         </div>
     </div>
 
@@ -119,7 +112,6 @@
         </div>
     </div>
 </section>
-
 <!--Footer -->
 <section class="foot-footer">
     <footer id="footer">

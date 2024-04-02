@@ -143,9 +143,13 @@ button[type="submit"] {
     padding: 15px;
     border-radius: 10px;
     border: none;
-    background-color: #4caf50;
+    background-color: var(--secondaryColor);
     color: white;
     cursor: pointer;
     width: 100%;
     font-size: 16px;
+}
+
+.cont-body{
+    background-color: #1b7266;
 }

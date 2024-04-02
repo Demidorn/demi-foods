@@ -79,7 +79,7 @@ def contactUs():
     """
         returns the contact us Page
     """
-    return render_template('contact.html', title='ContactUs')
+    return render_template('contactus.html', title='ContactUs')
 
 
 @app.route('/recipe', strict_slashes=False)
@@ -266,11 +266,11 @@ def logout():
 def product_display(product_id):
     product = Product.get(product_id)
     if product:
-        return render_template('product_display.html', product=product)
+        return render_template('product_display.html')  #product=product)
     else:
         return 'Product not found', 404
     
 
 @app.route('/layout')
-def layout():
-    return render_template('layout.html')
+def home():
+    return render_template('home.html')

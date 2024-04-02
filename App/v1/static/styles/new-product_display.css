@@ -524,3 +524,82 @@ h1{
     text-align: right;
     margin-left: 300px;
 }
+
+.cont-body{
+    background-image: url(../images/images/chapatti.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+}
+
+
+.flex-form{
+    display: flex;
+    padding-left: 20rem;
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+}
+
+.flex-text{
+    background-color: #494745;
+    padding: 1rem;
+    height:  72vh;
+    color: rgb(175, 167, 167);
+}
+
+.flex-msg{
+    background-color: rgb(32, 31, 31);
+    color: whitesmoke;
+    padding: 1rem;
+}
+
+.cont-text{
+    color: whitesmoke;
+    font-family:Arial, Helvetica, sans-serif;
+    font-weight: 200;
+}
+
+.flex-form input{
+    border-radius: 5px;
+    height: 30px;
+    width: 200px;
+}
+
+.flex-msg h3{
+    text-align: center;
+}
+
+.flex-msg #para{
+    color:  gray;
+    font-size: 20px;
+    /* text-align: center; */
+}
+.flex-row{
+    display: flex;
+    margin: 20px;
+}
+
+ion-icon{
+    margin-right: 20px;
+}
+.flex-msg p{
+    font-size: 13px;
+    color: grey;
+}
+.flex-msg b{
+    font-size: 17px;
+    color: aliceblue;
+}
+
+.flex-text #btn{
+    width: 90px;
+    margin-left: 40px;
+}
+
+.flex-text #btn:hover{
+   background-color: #685a4c;
+}
+.flex-text #text{
+    padding-left: 5px;
+}

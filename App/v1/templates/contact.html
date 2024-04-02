@@ -1,11 +1,59 @@
 {% extends "landingPage.html" %}
+
 {% block content %}
-<section>
-    <h1 class="contact">Contact Us</h1>
-    <p class="pGraph">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit minima
-      autem assumenda fuga itaque qui dolorem delectus laboriosam eos id?
-      Nulla, libero aut. Enim cumque iure eaque in illum magnam.
-    </p>
-  </section>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="../static/styles/new-product_display.css">
+<section class="cont-body>
+  <div class=" flex-form">
+    <div class="flex-text">
+      <h1 class="cont-text">Write Us</h1>
+      <form method="post" action="" autocomplete="off">
+        <br>
+        <label for="Username">
+          <i class="fa-user"></i>
+        </label>
+        <input type="text" name="username" placeholder="Username" id="username" autofocus="" required>
+        <br><br>
+        <label for="email">
+          <i class="fa-envelope"></i>
+        </label>
+        <input type="email" name="email" placeholder="Email" id="email" required>
+        <br>
+        <label for="password">
+          <i class="fa-lock"></i>
+        </label>
+        <input type="password" name="password" placeholder="Enter password" required>
+        <br><br>
+        <input type="submit" value="Send Message">
+        <div class="msg">{{msg}}</div>
+      </form>
+    </div>
+    <div class="flex-msg">
+      <h3> Contact Information</h3>
+      <p>We're open to any suggestion or just to have a chat</p>
+      <div class="flex-row">
+        <ion-icon name="location-outline"></ion-icon>
+        <p>Address: 732/21 Second Street, Koboko<br>Nigeria</p>
+      </div>
+      <div class="flex-row">
+        <ion-icon name="call-outline"></ion-icon>
+        <p>Phone: +2347 1204 8561</p>
+      </div>
+      <div class="flex-row">
+        <ion-icon name="mail-outline"></ion-icon>
+        <p>Email: info@mamaput.com</p>
+      </div>
+      <div class="flex-row">
+        <ion-icon name="globe-outline"></ion-icon>
+        <p>Website: mamaput.com</p>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
 {% endblock content %}
