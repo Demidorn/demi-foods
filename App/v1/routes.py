@@ -208,7 +208,7 @@ def save_image(form_image):
     hex_name = secrets.token_hex(8)
     _, file_ext = os.path.splitext(form_image.filename)
     image_name = hex_name + file_ext
-    image_path = os.path.join(current_app.config['UPLOAD_FOLDER'], image_name)
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
 
     resize = (400, 1200)
     img = Image.open(form_image)
