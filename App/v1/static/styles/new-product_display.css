@@ -525,6 +525,13 @@ h1{
     margin-left: 300px;
 }
 
+.flex-container{
+    background-image: url(../images/images/goat\ ribs.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: round    ;
+}
+
 .cont-body{
     background-image: url(../images/images/chapatti.jpg);
     background-size: cover;
