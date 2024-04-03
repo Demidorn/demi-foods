@@ -1,0 +1,31 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="content-section">
+    <div class="container mt-5">
+        <div class="content-section">
+            <div class="subtitle">{{ current_user.first_name }}, Recipes</div>
+            <form method="POST" , action="">
+                {{ recipeform.hidden_tag() }}
+                <div class="form-group">
+                    {{ recipeform.title.label(class="form-control-label") }}
+                        {% if recipeform.title.errors %}
+                    {{ recipeform.title(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in recipeform.title.errors %}
+                        <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ recipeform.title(class="form-control form-control") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ recipeform.content.label(class="form-control-label") }}
+                    {{ recipeform.content(class="form-control form-control") }}
+                </div>
+                <button class="btn btn-primary">{{ recipeform.submit }}</button>
+            </form>    
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends "dashboard.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="" enctype="multipart/form-data">
+            {{ upload.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Upload Food</legend>
+                <div class="form-group">
+                    {{ upload.food_name.label(class="form-control-label") }}
+
+                    {% if upload.food_name.errors %}
+                        {{ upload.food_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in upload.food_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ upload.food_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ upload.price.label(class="form-control-label") }}
+                    {% if upload.price.errors %}
+                        {{ upload.price(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in upload.price.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ upload.price(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ upload.description.label(class="form-control-label") }}
+                    {{ upload.description(class="form-control", rows=3) }}
+                </div>
+                <div class="custom-control custom-check">
+                    {{ upload.status(class="custom-control-input") }}
+                    {{ upload.status.label(class="custom-control-label") }}
+                </div>
+                <div class="form-group">
+                    {{ upload.image.label() }}
+                    {{ upload.image(class="form-control-file") }}
+                    {% if upload.image.errors %}
+                        {% for error in upload.image.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ upload.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

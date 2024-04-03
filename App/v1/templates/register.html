@@ -86,37 +86,91 @@
     </div> -->
 
 <div class="main-body">
-  <div class="main">
-    <h2>Register</h2>
-    <form action="">
-      <label for="firstname">First Name:</label>
-      <input type="text" id="first" name="first" required />
-      <label for="last">Last Name:</label>
-      <input type="text" id="last" name="last" required />
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required />
-      <label for="password">Password:</label>
-      <!-- <input
-        type="password"
-        id="password"
-        name="password"
-        pattern=\"^(?=.*\d)(?=.*[a-zA-Z])(?=.[a-zA-Z0-9])\S{8,}$"
-        title="Password must contain at least one number,
-                one alphabet, one symbol, and be at 
-                least 8 chracters long"
-        required
-      /> -->
-      <input
-        type="password"
-        id="password"
-        name="password"
-        required
-      />
-      <label for="repassword">Re-type Password:</label>
-      <input type="password" id="password" name="password" required />
-      </select>
-      <button type="submit">Submit</button>
-    </form>
-  </div>
+    <div class="main">
+        <h2>Register</h2>
+        <form method="POST">
+            {{ regform.hidden_tag() }}
+            <div class="form-group">
+                {{ regform.first_name.label() }}
+                {% if regform.first_name.errors %}
+                    {{ regform.first_name(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.first_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.first_name(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ regform.last_name.label() }}
+                {% if regform.last_name.errors %}
+                    {{ regform.last_name(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.last_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.last_name(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ regform.email.label() }}
+                {% if regform.email.errors %}
+                    {{ regform.email(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.email(class="form-control") }}
+                {% endif %}
+            </div>
+            <div class="form-group">
+                {{ regform.pwd.label() }}
+                {% if regform.pwd.errors %}
+                    {{ regform.pwd(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.pwd.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.pwd(class="form-control") }}
+                {% endif %}
+            </div>
+                    <!--
+                pattern=\"^(?=.*\d)(?=.*[a-zA-Z])(?=.[a-zA-Z0-9])\S{8,}$"
+                title="Password must contain at least one number,
+                        one alphabet, one symbol, and be at 
+                        least 8 chracters long"
+                required
+            /> -->
+            <div class="form-group">
+                {{ regform.confirm_pwd.label() }}
+                {% if regform.confirm_pwd.errors %}
+                    {{ regform.confirm_pwd(class="form-control is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.confirm_pwd.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.confirm_pwd(class="form-control") }}
+                {% endif %}
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    <div>
+        <div>
+            <small>
+                Already have an Account? <a href="{{ url_for ('login')}}">Sign in</a>
+            </small>
+        </div>
+    </div>
+    </div>
 </div>
 {% endblock content %}

@@ -77,7 +77,7 @@ body{
     width: 100%;
     height: max-content;
     min-height: 100vh;
-    padding: 2%;
+    padding: 3%;
     background-color: var(--softGreenColor);
     margin-left: 250px;
 }
@@ -98,6 +98,7 @@ body{
     justify-content: space-around;
     background-color: var(--whiteColor);
     border-radius: 20px;
+
     
     
 }
@@ -152,7 +153,7 @@ body{
 
 .main-highlight{
     margin: 3% 0;
-    padding: 2%;
+    padding: 3%;
     background-color: var(--secondaryColor);
     border-radius: 8px;
 

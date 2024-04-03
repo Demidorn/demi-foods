@@ -21,6 +21,8 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(60), nullable=False)
     order = db.relationship('Order', backref='customer', lazy=True)
+    recipe = db.relationship('Recipe', backref='customer', lazy=True)
+    address = db.relationship('Address', uselist=False, backref='user' )
 
     def __repr__(self):
         """ returns a string representation of the user """
@@ -32,37 +34,33 @@ class Product(db.Model):
     """ Object representation of the Product table """
     __tablename__ = 'Products'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(120), unique=True, nullable=False)
+    food_name = db.Column(db.String(120), unique=True, nullable=False)
     price = db.Column(db.Integer, nullable=False)
-    image = db.Column(db.String(60), nullable=False, default='prod_img.jpg')
-    status = db.Column(db.Boolean, nullable=False, default=True)
+    image_path = db.Column(db.String(60), nullable=False, default='prod_img.jpg')
+    status = db.Column(db.Boolean, nullable=False, default=False)
     description = db.Column(db.Text, nullable=True)
     orders = db.relationship('Order', backref='product', lazy=True)
     
     def __repr__(self):
         """ returns a string representation of the product """
         return "{}('{}', '{}', '{}')".format(self.__class__.__name__, self.id,
-                                             self.name, self.price)
+                                             self.food_name, self.price)
 
 
 class Order(db.Model):
     """ Object representation of the Order table """
     __tablename__ = 'Orders'
     id = db.Column(db.Integer, primary_key=True)
-    
     tracking_id = db.Column(db.String(12), unique=True, nullable=False, default=secrets.token_hex(6))
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('Products.id'), nullable=False)
-    order_date = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    
-    Product = db.relationship('Product', backref=db.backref('product', lazy=True))
 
     def __repr__(self):
-        """returns a string representation of the product """
-        return "order('{}', '{}','{}','{}')".format(self.id, self.tracking_id, self.created_date, self.user_id)   
-    
+        """returns a string representation of the order """
+        return '{}({})'.format(self.__class__.__name__, self.__dict__)
+
+
 
 
 class Cart(db.Model):
@@ -79,13 +77,40 @@ class Cart(db.Model):
         """Check if the product is already in the user's cart"""
         return Cart.query.filter_by(user_id=user_id, product_id=product_id).first() is not None
 
-    
+    def __repr__(self):
+        """returns a string representation of the order """
+        return '{}({})'.format(self.__class__.__name__, self.__dict__)
 
 
+
+class Address(db.Model):
+    """ Object representation of the User address table """
+    __tablename__ = 'User_address'
+    id = db.Column(db.Integer, primary_key=True)
+    address = db.Column(db.String(500), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
+
+    def __str__(self):
+        """ returns only the string address """
+        return self.address
+
+    def __repr__(self):
+        """ returns a string representation of the address """
+        return "Address('{}', '{}')".format(self.id, self.address,)
 # with app.app_context():
-#    db.create_all()
 
+class Recipe(db.Model):
+    """ Object representation of the Users recipe table """
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), nullable=False)
+    date_posted = db.Column(db.DateTime, nullable=False,
+                            default=datetime.utcnow)
+    content = db.Column(db.Text, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
 
-
-
-
+    def __repr__(self):
+        """ returns a string representation of the recipe """
+        return "{}('{}', '{}')".format(self.__class__.__name__, self.id,
+                                       self.title)
+                                       
+db.create_all()

@@ -15,6 +15,11 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'c2a00dc657699d079ab8c8b36d94b4d146b6902b0b05e3bdbe34b4e400685fb5'
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://{}:{}@localhost/{}'.format(usr, passwd, usr_db)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///sqlite.db'
+
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'static', 'images')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
@@ -25,4 +30,4 @@ login_manager.login_message_category = "info"
 app.app_context().push()
 # db.create_all()
 
-from App.v1 import demiroutes
+from App.v1 import routes
