@@ -10,160 +10,118 @@
 
 
     <link rel="stylesheet" href="../static/styles/new-product_display.css">
-
+    {% if title %}
+    <title>
+        {{ title }}
+    </title>
+    {% else %}
     <title>MamaPut Delivery</title>
-</head <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img class="navbar-img" src="../static/images/images/mamaput_2.jpeg"
-                alt=""></a>
-       
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('home')}}" action="active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('new_product_display')}}">Menu</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('aboutPage')}}" onclick="openAbout()">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{url_for('contactUs')}}">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Orders</a>
-                </li>
-            </ul>
-            <a  href="#" class="flex-cart" ><ion-icon name="cart-outline"></ion-icon></a>
+    {% endif %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="flex-nav">
+            <a class="navbar-brand" href="#"><img class="navbar-img" src="../static/images/images/mamaput_2.jpeg"
+                    alt=""></a>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('home')}}" action="active">Home <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('menu')}}">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('aboutPage')}}" onclick="openAbout()">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('contactUs')}}">Contact Us</a>
+                    </li>
+                    
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('profile') }}">Hi, {{ current_user.first_name }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('dashboard')}}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}">SignUp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login_in') }}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+               
+            </div>
+            <a href="#" class="flex-cart"><ion-icon name="cart-outline"></ion-icon></a>
         </div>
+
+    </nav>
+    <div class="content">
+        {% block content %}{% endblock %}
     </div>
 
-</nav>
-
-<section>
-    <div class="container">
-        <div class="bg-blur"></div>
-        <div class="bg-front">
-        </div>
-    </div>
-    <div class="container">
-        <div class="row margin">
-            <div class="col">
-                <img class="shadow_img" src="../static/images/images/lusaniya.jpeg" alt="">
-            </div>
-            <div class="col">
-                <h2>WELCOME TO MAMAPUT</h2>
-                <div class="flex-container">
-                    <p class="flex-item">
-                        Come to experience the exceptional gastronomic voyage in the ultimate venue. Our authentic
-                        cuisine unites people connecting history and traditions in the warm and friendly atmosphere.
-                    </p>
-                    <p class="flex-item">
-                        Our family has been in the restaurant business for a very long time. Nowadays we can proudly
-                        boast our reputation for a well known Italian restaurant in our area. We are famous for the
-                        fabulous authentic cuisine, professional chef and dedicated staff.
-                    </p>
+    <!--Footer -->
+    <section class="foot-footer">
+        <footer id="footer">
+            <div class="footer-col">
+                <h4>MAMAPUT</h4>
+                <p>
+                    Lorem ipsum dolor sit amet
+                </p>
+                <div class="footer-icons">
+                    <span><ion-icon name="logo-linkedin"></ion-icon></span>
+                    <span><ion-icon name="logo-facebook"></ion-icon></span>
+                    <span><ion-icon name="logo-twitter"></ion-icon></span>
+                    <span><ion-icon name="logo-instagram"></ion-icon></span>
+                    <span><ion-icon name="logo-tiktok"></ion-icon></span>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container-row">
-        <div class="flex-container">
-            <div class="detail-title">
-                <h2>CATERING</h2>
+
+            <div class="footer-col">
+                <h4>OVERVIEW</h4>
+                <ul>
+                    <li><a href="#">Online Delivery</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog Posts</a></li>
+                </ul>
             </div>
-            <div class="detail-title">
-                <h3>PLEASE CALL AT LEAST 24 HOURS IN ADVANCE
-                    FOR CATERING ORDERS</h3>
+            <div class="footer-col">
+                <h4>RESOURCES</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms of use</a></li>
+                    <li><a href="#">Privacy Pospancy</a></li>
+                </ul>
+
             </div>
+            <div class="footer-col">
+                <h4>CONTACT INFO</h4>
+                <ul>
+                    <li><a href="#">+2347 1204 8561</a></li>
+                    <li><a href="#">info@mamaput.com</a></li>
+                    <li><a href="#">mamaput.com</a></li>
 
-            <div class="flex-menu">
-                <div class="menu-item">
-                    <ion-icon name="pizza-outline"></ion-icon>
-                    <h4>FOOD 1</h4>
-                </div>
-                <div class="menu-item">
-                    <ion-icon name="restaurant-outline"></ion-icon>
-                    <h4>FOOD 2</h4>
-                </div>
-                <div class="menu-item">
-                    <ion-icon name="restaurant-outline"></ion-icon>
-                    <h4>FOOD 3</h4>
-                </div>
-                <div class="menu-item">
-                    <ion-icon name="pizza-outline"></ion-icon>
-                    <h4>FOOD 4</h4>
-                </div>
+                </ul>
             </div>
-            <h1>OPENING TIMES</h1>
-            <div class="flex-worktime">
-                
-                <div class="col-time">
-                    <h4>Lunch</h4>
-                    <p>Weekdays - 11:30am to 2:00pm</p>
-                </div>
-                <div class="col-time">
-                    <h4>Dinner</h4>
-                    <p>Weekdays - 5:30pm to 9:30pm</p>
-                </div>
+            <div class="footer-col">
+                <h4>LOCATION</h4>
+                <p>732/21 Second Street, Koboko<br>Nigeria</p>
             </div>
-        </div>
-    </div>
-</section>
-<!--Footer -->
-<section class="foot-footer">
-    <footer id="footer">
-        <div class="footer-col">
-            <h4>MAMAPUT</h4>
-            <p>
-                Lorem ipsum dolor sit amet
-            </p>
-            <div class="footer-icons">
-                <span><ion-icon name="logo-linkedin"></ion-icon></span>
-                <span><ion-icon name="logo-facebook"></ion-icon></span>
-                <span><ion-icon name="logo-twitter"></ion-icon></span>
-                <span><ion-icon name="logo-instagram"></ion-icon></span>
-                <span><ion-icon name="logo-tiktok"></ion-icon></span>
-            </div>
-        </div>
+        </footer>
 
-        <div class="footer-col">
-            <h4>OVERVIEW</h4>
-            <ul>
-                <li><a href="#">Online Delivery</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Blog Posts</a></li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>RESOURCES</h4>
-            <ul>
-                <li><a href="#">Help Center</a></li>
-                <li><a href="#">Terms of use</a></li>
-                <li><a href="#">Privacy Pospancy</a></li>
-            </ul>
+    </section>
 
-        </div>
-        <div class="footer-col">
-            <h4>CONTACT INFO</h4>
-            <ul>
-                <li><a href="#">+2347 1204 8561</a></li>
-                <li><a href="#">info@mamaput.com</a></li>
-                <li><a href="#">mamaput.com</a></li>
-
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h4>LOCATION</h4>
-            <p>732/21 Second Street, Koboko<br>Nigeria</p>
-        </div>
-    </footer>
-
-</section>
-
-<!-- End of Footer Section-->
+    <!-- End of Footer Section-->
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

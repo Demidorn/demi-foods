@@ -1,20 +1,40 @@
-<!-- product_listing.html -->
-{% extends "base.html" %}
-{% block title %}{{ title }}{% endblock %}
+{% extends 'layout.html' %}
+
 {% block content %}
-    <h1>{{ title }}</h1>
-    <div class="row">
-        {% for product in products %}
-        <div class="col-md-4">
-            <div class="card mb-4 shadow-sm">
-                <img src="{{ product.image }}" class="card-img-top" alt="{{ product.name }}">
-                <div class="card-body">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
-                    <p class="card-text">${{ product.price }}</p>
-                </div>
+    <section class="food-combos" id="food-combo">
+        <div class="bg-color">
+            <div class="small-cont">
+                <h2 class="note">
+                    <marquee direction="left">Find your favourite combo here...</marquee>
+                </h2>
+            </div>
+           
+            <form class="new-search" action="" id="search_search-form">
+                <input type="search" placeholder="search here..." name="" id="search-box" id="search-icon">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+                
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-md-4 mb-4">
+                        <div class="flex-card">
+                            <div class="card">
+                                <img src="{{ url_for('static', filename='images/' + product.image_path) }}" alt="">
+                                <div class="card-body">
+                                    <h3 class="card-title">{{ product.food_name }}</h3>
+                                    <p class="card-text">{{ product.description }}</p>
+                                    <p class="card-text_2">Price: ₦{{ product.price }}</p>
+                                    <div class="btn-container">
+                                        <button class="btn btn-primary">Add to Cart</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-        {% endfor %}
-    </div>
-{% endblock %}
+
+    </section>
+
+{% endblock content %}

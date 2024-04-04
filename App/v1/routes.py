@@ -6,7 +6,7 @@ from PIL import Image
 from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm
 from App.v1.models import User, Product, Order, Address, Recipe
-from flask import render_template, url_for, flash, redirect, request, abort, current_app
+from flask import render_template, url_for, flash, redirect, request, abort
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -21,11 +21,16 @@ def dashboard():
 
 @app.route('/home')
 @app.route('/', strict_slashes=False)
-def landingPage():
-    """
-        returns the landing Page
-    """
-    return render_template('landingPage.html', title='Home-Page')
+def home():
+    return render_template('home.html', title='Home-page')
+
+# @app.route('/', strict_slashes=False)
+# def landingpage():
+#     """
+#         returns the landing Page
+#     """
+#     # return render_template('landingPage.html', title='Home-Page')
+#     return render_template('layout.html', title='Home-Page')
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
@@ -33,7 +38,7 @@ def login():
         returns the login Page
     """
     if current_user.is_authenticated:
-        return redirect(url_for('landingPage'))
+        return redirect(url_for('home'))
     loginform = LoginForm()
     if loginform.validate_on_submit():
         user = User.query.filter_by(email=loginform.email.data).first()
@@ -41,7 +46,9 @@ def login():
             login_user(user, remember=loginform.remember.data)
             # flash('You have successfully logged in', 'success')
             next_page = request.args.get('next')
-            return redirect(next_page) if next_page else redirect(url_for('landingPage'))
+            # return redirect(next_page) if next_page else redirect(url_for('landingPage'))
+            return redirect(next_page) if next_page else redirect(url_for('home'))
+
         else:
             flash('Email or Password not correct, try again', 'warning')
         
@@ -62,7 +69,9 @@ def menu():
     """
         returns the menu Page
     """
-    return render_template('menu.html', title='Menu')
+    products = Product.query.all()
+    return render_template('product_listing.html', title='Menu',
+                           products=products)
 
 @app.route('/contact', strict_slashes=False)
 def contactUs():
@@ -80,24 +89,26 @@ def new_recipe():
     """
     recipeform = RecipeForm()
     if recipeform.validate_on_submit():
-        recipe = Recipe(title=recipeform.title.data,
+        my_recipe = Recipe(title=recipeform.title.data,
                         content=recipeform.content.data,
                         user_id=current_user.id)
-        db.session.add(recipe)
+        db.session.add(my_recipe)
         db.session.commit()
         return redirect(url_for('recipe'))
-    return render_template('new_recipe.html', recipeform=recipeform, title='New | Recipe')
+    my_recipe = Recipe()
+    return render_template('new_recipe.html', recipeform=recipeform, 
+                           my_recipe=my_recipe, title='New | Recipe')
 
 
 @app.route('/recipe', strict_slashes=False)
 @login_required
 def recipe():
     """
-        returns the add new recipe Page
+        returns the Users recipe Page
     """
-    user_recipe = Recipe.query.filter_by(user_id=current_user.id).all()
-    if user_recipe:
-        return render_template('recipe.html', recipes=recipe, title='Recipe')
+    recipes = Recipe.query.filter_by(user_id=current_user.id).all()
+    if recipes:
+        return render_template('recipe.html', recipes=recipes, title='Recipe')
     return render_template('empty_recipe.html', title='Recipe')
 
 
@@ -119,8 +130,22 @@ def update_recipe(recipe_id):
         recipeform.title.data = my_recipe.title
         recipeform.content.data = my_recipe.content
     return render_template('new_recipe.html', recipeform=recipeform,
-                           title=my_recipe.title) 
-                           
+                           my_recipe=my_recipe, title=my_recipe.title) 
+
+
+@app.route('/recipe/<int:recipe_id>/delete', methods=['POST'], strict_slashes=False)
+@login_required 
+def delete_recipe(recipe_id):
+    """ deletes recipe with the given id """
+    my_recipe = Recipe.query.get_or_404(recipe_id)
+    if my_recipe.customer != current_user:
+        abort(403)
+    db.session.delete(my_recipe)
+    db.session.commit()
+    flash('Your recipe has been deleted!.','success')
+    return redirect(url_for('recipe'))
+
+           
 @app.route('/order', strict_slashes=False)
 def orders():
     """
@@ -161,7 +186,8 @@ def profile():
 def register():
     """ returns the registration page """
     if current_user.is_authenticated:
-        return redirect(url_for('landingPage'))
+        # return redirect(url_for('landingPage'))
+        return redirect(url_for('layout'))
     regform = RegForm()
     if regform.validate_on_submit():
         hash_pwd = bcrypt.generate_password_hash(regform.pwd.data).decode('utf-8')
@@ -190,7 +216,7 @@ def save_image(form_image):
     hex_name = secrets.token_hex(8)
     _, file_ext = os.path.splitext(form_image.filename)
     image_name = hex_name + file_ext
-    image_path = os.path.join(current_app.config['UPLOAD_FOLDER'], image_name)
+    image_path = os.path.join(app.config['UPLOAD_FOLDER'], image_name)
 
     resize = (400, 1200)
     img = Image.open(form_image)
@@ -215,11 +241,76 @@ def upload():
         db.session.add(product)
         db.session.commit()
         flash('Product added successfully', 'success')
-        return redirect(url_for('admin'))              
-    return render_template('upload.html', title='Admin - area', upload=upload)
+        return redirect(url_for('admin'))
+    product = Product()      
+    return render_template('upload.html', title='Admin - area',
+                           product=product, upload=upload)
 
 
 @app.route('/admin', strict_slashes=False)
 def admin():
     """ returns and renders the admin page """
-    return render_template('admin.html')
+    products = Product.query.all()
+    return render_template('admin.html', products=products)
+
+
+@app.route('/product/<int:product_id>/update', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def update_product(product_id):
+    """ returns product with the given id to be updated """
+    product = Product.query.get_or_404(product_id)
+    upload = ProdForm()
+    if upload.validate_on_submit():
+        food_name = upload.food_name.data
+        price = upload.price.data
+        status = upload.status.data
+        description = upload.description.data
+        image_path = upload.image.data
+        db.session.commit()
+        flash('Product updated successfully!.')
+        return redirect(url_for('admin'))
+    elif request.method == 'GET':
+        upload.food_name.data = product.food_name
+        upload.price.data = product.price
+        upload.status.data = product.status
+        upload.description.data = product.description
+    return render_template('upload.html', title='Admin - area', upload=upload,
+                           product=product)
+
+
+@app.route('/product/<int:product_id>/delete', methods=['POST'], strict_slashes=False)
+@login_required 
+def delete_product(product_id):
+    """ deletes product with the given id """
+    product = Product.query.get_or_404(product_id)
+    db.session.delete(product)
+    db.session.commit()
+    flash('Product deleted successfully!.')
+    return redirect(url_for('admin'))
+
+
+
+
+@app.route('/products')
+def products():
+    products = Product.query.all()  
+    return render_template('product_display.html', title='Products')
+
+@app.route('/layout')
+def login_in():
+    if current_user.is_authenticated:
+        return redirect(url_for('landingPage'))
+    loginform = LoginForm()
+    if loginform.validate_on_submit():
+        user = User.query.filter_by(email=loginform.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, loginform.pwd.data):
+            login_user(user, remember=loginform.remember.data)
+            # flash('You have successfully logged in', 'success')
+            next_page = request.args.get('next')
+            # return redirect(next_page) if next_page else redirect(url_for('landingPage'))
+            return redirect(next_page) if next_page else redirect(url_for('layout'))
+
+        else:
+            flash('Email or Password not correct, try again', 'warning')
+        
+    return render_template('login.html', title='Log in', loginform=loginform)

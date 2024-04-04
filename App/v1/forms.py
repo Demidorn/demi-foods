@@ -8,6 +8,7 @@ from flask_login import current_user
 from App.v1.models import User, Product
 
 
+
 class RegForm(FlaskForm):
     """ Registration form """
     first_name = StringField('First name', validators=[DataRequired(), Length(min=2, max=20)])
@@ -50,7 +51,7 @@ class AddressForm(FlaskForm):
 
 class ProdForm(FlaskForm):
     """ Form to add product to database """
-    food_name = StringField('Name of dish', validators=[DataRequired(), Length(min=2, max=20)])
+    food_name = StringField('Name of dish', validators=[DataRequired(), Length(min=2, max=50)])
     price = DecimalField('Price', validators=[DataRequired(), NumberRange(min=0)])
     status = BooleanField('Available')
     description = TextAreaField('Description')
