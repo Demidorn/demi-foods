@@ -389,3 +389,16 @@ header .navbar{
 .card-text_2{
     text-align: right;
 }
+
+/* quantity field css */
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    display: inline-block;
+    width: 100px; /* Adjust width as needed */
+    text-align: right;
+}
+input[type="number"] {
+    width: 100px; /* Adjust width as needed */
+}

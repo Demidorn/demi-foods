@@ -4,9 +4,9 @@ import os
 import secrets
 from PIL import Image
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm
+from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm, QtyForm
 from App.v1.models import User, Product, Order, Address, Recipe
-from flask import render_template, url_for, flash, redirect, request, abort
+from flask import render_template, url_for, flash, redirect, request, abort, session
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -65,6 +65,7 @@ def menu():
     products = Product.query.all()
     return render_template('product_listing.html', title='Menu',
                            products=products)
+
 
 @app.route('/contact', strict_slashes=False)
 def contactUs():
@@ -279,3 +280,65 @@ def delete_product(product_id):
     db.session.commit()
     flash('Product deleted successfully!.')
     return redirect(url_for('admin'))
+
+@app.route('/product/<int:product_id>/add_to_cart', methods=['POST'], strict_slashes=False)
+def add_to_cart(product_id):
+    """ Add Users product to cart with given id """
+    product = Product.query.get_or_404(product_id)
+    qty = int(request.form('quantity'))
+
+    if current_user.is_authenticated:
+        cart_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product.id).first()
+        if cart_item:
+            cart_item.quantity += qty
+        else:
+            cart_item = CartItem(user_id=current_user.id, product_id=product,
+                                quantity=qty)
+            db.session.add(cart_item)
+        db.session.commit()
+        flash('Your food has been added to cart!', 'success')
+        return redirect(url_for('menu'))
+    else:
+        cart = session.get('cart', {})
+        cart_item = cart.get(str(product_id))
+        if cart_item:
+            cart_item['quantity'] += qty
+        else:
+            cart[str(product_id)] = {'quantity': qty}
+        session['cart'] = cart
+        session.modified = True
+        flash('Your food has been added to cart!', 'success')
+        return redirect(url_for('menu'))
+
+def calculate_total_cart_value(cart_items):
+    """ function calculates the total price of all items in cart """
+    total = 0
+    for cart_item in cart_items:
+        product = Product.query.get(cart_item.product_id)
+        if product:
+            total += product.price * cart_item.quantity
+    return total
+
+
+@app.route('/cart_items', strict_slashes=False)
+def show_cart():
+    """ shows Users product in cart with """
+    if current_user.is_authenticated:
+        cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
+        all_qty = sum(item.quantity for item in cart_items)
+        total_price = calculate_total_cart_value(cart_items)
+        if cart_items:
+            return render_template('cart.html', all_qty=all_qty, cart_items=cart_items,
+                                   total_price=total_price)
+        return render_template('empty_cart.html')
+    else:
+        cart = session.get('cart', {})
+        # convert cart session to a list
+        cart_items = [{'product_id': int(product_id), 'quantity': item['quantity']}
+                      for product_id, item in cart.items()]
+        all_qty = sum(item['quantity'] for item in cart.values())
+        total_price = calculate_total_cart_value(cart_items)
+        if cart_items:
+            return render_template('cart.html', all_qty=all_qty, cart_items=cart_items,
+                                   total_price=total_price)
+        return render_template('empty_cart.html')

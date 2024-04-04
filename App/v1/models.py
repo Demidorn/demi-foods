@@ -52,12 +52,11 @@ class Order(db.Model):
     """ Object representation of the Order table """
     __tablename__ = 'Orders'
     id = db.Column(db.Integer, primary_key=True)
-    
     tracking_id = db.Column(db.String(12), unique=True, nullable=False, default=secrets.token_hex(6))
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
-    recipe_title = db.Column(db.String(120), db.ForeignKey('Recipe.id'))
+    recipe_title = db.Column(db.String(120), db.ForeignKey('Recipe.title'))
     order_info = db.relationship('OrderInfo', backref='orders', lazy=True)
     
     def __repr__(self):
@@ -85,9 +84,7 @@ class CartItem(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('Products.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
     
-    def is_product_in_cart(user_id, product_id):
-        """Check if the product is already in the user's cart"""
-        return Cart.query.filter_by(user_id=user_id, product_id=product_id).first() is not None
+
 
 
 class Address(db.Model):
