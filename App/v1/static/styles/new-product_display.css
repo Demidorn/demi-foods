@@ -318,7 +318,8 @@ header .navbar{
     border-bottom: #5f2e0b 1px solid;
 
 }*/
-.btn{
+.btn,
+.btn-container button[type="submit"]{
     display: inline-block;
     /* margin-top: 1rem; */
     font-size: 1rem;
@@ -330,6 +331,20 @@ header .navbar{
     color:white;
     /* margin-bottom: 1rem; */
 }
+
+.btn.btn-primary{
+    display: inline-block;
+    /* margin-top: 1rem; */
+    font-size: 1rem;
+    text-decoration: none;
+    background: orangered;
+    border-radius: .5rem;
+    cursor: pointer;
+    padding: .8rem ;
+    color:white;
+    /* margin-bottom: 1rem; */
+}
+
 .btn:hover{
     color: rgb(50, 50, 153);
     font-weight: bold;
@@ -382,10 +397,6 @@ header .navbar{
     margin-top: .5rem;
 }
 
-.btn-container button {
-    margin-right: 5px; 
-}
-
 .card-text_2{
     text-align: right;
 }
@@ -401,4 +412,8 @@ label {
 }
 input[type="number"] {
     width: 100px; /* Adjust width as needed */
+}
+
+.error {
+    border: 1px solid red;
 }

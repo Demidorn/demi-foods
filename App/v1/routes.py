@@ -5,8 +5,8 @@ import secrets
 from PIL import Image
 from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm, QtyForm
-from App.v1.models import User, Product, Order, Address, Recipe
-from flask import render_template, url_for, flash, redirect, request, abort, session
+from App.v1.models import User, Product, Order, Address, Recipe, CartItem
+from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -285,19 +285,19 @@ def delete_product(product_id):
 def add_to_cart(product_id):
     """ Add Users product to cart with given id """
     product = Product.query.get_or_404(product_id)
-    qty = int(request.form('quantity'))
+    qty = int(request.form.get('quantity'))
 
     if current_user.is_authenticated:
         cart_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product.id).first()
         if cart_item:
             cart_item.quantity += qty
         else:
-            cart_item = CartItem(user_id=current_user.id, product_id=product,
+            cart_item = CartItem(user_id=current_user.id, product_id=product.id,
                                 quantity=qty)
             db.session.add(cart_item)
         db.session.commit()
-        flash('Your food has been added to cart!', 'success')
-        return redirect(url_for('menu'))
+        return jsonify({'success': True,
+                       'message': 'Your food has been added to cart'})
     else:
         cart = session.get('cart', {})
         cart_item = cart.get(str(product_id))
@@ -307,8 +307,8 @@ def add_to_cart(product_id):
             cart[str(product_id)] = {'quantity': qty}
         session['cart'] = cart
         session.modified = True
-        flash('Your food has been added to cart!', 'success')
-        return redirect(url_for('menu'))
+        return jsonify({'success': True,
+                       'message': 'Your food has been added to cart'})
 
 def calculate_total_cart_value(cart_items):
     """ function calculates the total price of all items in cart """
