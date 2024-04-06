@@ -344,7 +344,7 @@ ion-icon:hover {
 }
 
 .card {
-    width: 30%;
+    /* width: 30%; */
     padding: 1rem;
     background: #fff;
     border-radius: 0.5rem;
@@ -576,9 +576,14 @@ h1{
     color: whitesmoke;
     font-size: 2rem;
     text-align: center;
+    font-family: 'regular' sans-serif;
+    font-style: italic;
 }
 .col h2{
     color: whitesmoke;
+    /* font-family: 'poppins', sans-serif; */
+    /* font-size: 2rem; */
+    /* text-align: center; */
 }
 .flex-msg{
     background-color: rgb(32, 31, 31);
