@@ -316,6 +316,10 @@ def login_in():
     return render_template('login.html', title='Log in', loginform=loginform)
 
 
+@app.route('/addcart')
+def add_cart():
+    return render_template('addcart.html')
+
 @app.route('/add_to_cart')
 def add_to_cart():
-    return render_template('addcart.html')
+    return render_template('add_to_cart-page.html')

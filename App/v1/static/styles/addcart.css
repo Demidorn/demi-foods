@@ -88,8 +88,8 @@
     margin-right: 50px;
   }
    
-  Let’s add some basic style to  product name and description.
-  .description {
+  /* Let’s add some basic style to  product name and description. */
+.description {
     padding-top: 10px;
     margin-right: 60px;
     width: 115px;
@@ -116,7 +116,7 @@
     margin-right: 60px;
   }
   .quantity input {
-    -webkit-appearance: none;
+    /* -webkit-appearance: none; */
     border: none;
     text-align: center;
     width: 32px;
