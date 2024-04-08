@@ -27,15 +27,11 @@ header {
     padding: 2rem 1.5rem;
     display: flex;
     align-items: center;
- /*   font-family: 'Arial', serif; */
     font-style: oblique;
     font-size: 1rem;
     justify-content: space-between;
     z-index: 1000;
     border-bottom: #4e341b 5px solid;
-    /* position: fixed;
-    top:0; */
-    /* width: 100vw; */
     
 }
 
@@ -61,9 +57,7 @@ header {
 
 .navbar-nav{
     font-size: 20px;
-    /* align-items: center; */
     margin-left: 30rem;
-    /* padding-right: 100px; */
     text-align: center;
 
 }
@@ -115,25 +109,16 @@ header .navbar{
 }
 
 .new-search {
-    /* display: flex; */
     align-items: center;
-    /* justify-content: center; */
-    /* position: relative; */
-    /* margin-left: 2rem; */
     width: 40%;
     border-radius: 10px;
-    /* align-content: center; */
 }
 #search_search-form {
-
-    /* background: rgba(196, 22, 22, 0); */
     background:whitesmoke ;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 1rem;
-    /* color: white; */
-    /* border-radius: 0.5rem; */
     border: black 1px solid;
 }
 
@@ -178,22 +163,15 @@ header .navbar{
     background-color: #442d18;
     padding: 1rem;
     color: white;
-    /* position: absolute; */
-    /* position: fixed; */
-    /* bottom: 0  ; */
     width: 100%;
 }
 
 #footer {
-    /* display: grid;
-    grid-template-columns: repeat(5, 1fr); */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
     flex-wrap: wrap;
-    /* grid-gap: 3rem; */
-
 }
 
 
@@ -243,19 +221,11 @@ ion-icon:hover {
     color: rgb(23, 23, 24);
 }
 
-
-
-
-
-
 .note{
     width: 100%;
     overflow: hidden;
     text-align: center;
-    /* padding: 1rem; */
 }
-
-
 
 .note marquee{
     font-family: "poppins", sans-serif;
@@ -276,7 +246,6 @@ ion-icon:hover {
 .food-combos .box-combo .box{
     margin-left: 2.5rem;
     font-size: 1.2rem;
-    /* padding:1.5rem; */
     align-items: center;
     background: #fff;
     border-radius: .5rem;
@@ -285,8 +254,6 @@ ion-icon:hover {
     position: relative;
     overflow: hidden;
     text-align: center;
-    
-
 }
 .food-combos .box-combo .box:hover{
     transform : scale(1.1);
@@ -294,27 +261,8 @@ ion-icon:hover {
 
 }
 
-
-
-/*.box a{
-    color: black;
-    font-size: 20px;
-    font-weight: 500px;
-    padding: .5rem;
-   
-    background-color: #5f2e0b;
-    border-radius: 7px;
-}
-
-.box a:hover{
-    color: darkblue;
-    background-color: #b19988;
-    border-bottom: #5f2e0b 1px solid;
-
-}*/
 .btn{
     display: inline-block;
-    /* margin-top: 1rem; */
     font-size: 1rem;
     text-decoration: none;
     background: orangered;
@@ -322,7 +270,6 @@ ion-icon:hover {
     cursor: pointer;
     padding: .8rem ;
     color:white;
-    /* margin-bottom: 1rem; */
 }
 .btn:hover{
     color: rgb(50, 50, 153);
@@ -331,11 +278,8 @@ ion-icon:hover {
     border: orangered 1px solid;
 }
 
-
-
 .flex-card {
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     flex-wrap: wrap;
     margin: 2rem 0;
@@ -344,7 +288,7 @@ ion-icon:hover {
 }
 
 .card {
-    /* width: 30%; */
+
     padding: 1rem;
     background: #fff;
     border-radius: 0.5rem;

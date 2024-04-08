@@ -41,7 +41,9 @@ body {
     background-color: transparent;
     border-bottom: none;
     padding: 25px 20px;
-}
+   
+ }
+
 
 .card .card-header+.card-block,
 .card .card-header+.card-block-big {
@@ -79,3 +81,7 @@ body {
     flex-direction: column;
 }
 
+.card-header{
+    width: 70%;
+    margin-top:3rem;
+}

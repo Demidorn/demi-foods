@@ -1,13 +1,35 @@
-{% extends 'layout.html' %}
-{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/recipe.css') }}">
     <!-- adding opensans google font-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
-    <title>Mamaput Online food</title>
-    <script src="{{ url_for('static', filename='scripts/recipe.js') }}"></script>
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Mamaput Online food</title>
+    {% endif %}
+    <script src="{{ url_for('static', filename='scripts/recipe.js') }}"></script>
+</head>
+
+<body>
     <!-- sidebar-->
     <div class="sidebar">
         <!--logo-->
@@ -58,7 +80,8 @@
         {% endfor %}
         {% endif %}
         {% endwith %}
-       
+        {% block content %}
+        {% endblock content %}
         <!-- main menu/oder -->
     </div>
     <!-- Optional JavaScript -->
@@ -72,5 +95,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <!-- Include jQuery and jQuery UI libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-{% endblock content %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Include your static JavaScript file -->
+</body>
+<!-- adding icons-->
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</html>

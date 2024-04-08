@@ -314,3 +314,8 @@ def login_in():
             flash('Email or Password not correct, try again', 'warning')
         
     return render_template('login.html', title='Log in', loginform=loginform)
+
+
+@app.route('/add_to_cart')
+def add_to_cart():
+    return render_template('addcart.html')
