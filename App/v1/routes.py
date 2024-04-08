@@ -215,7 +215,7 @@ def save_image(form_image):
     img = Image.open(form_image)
     img.thumbnail(resize)
     img.save(image_path)
-    return image_name
+    return url_for('static', filename='images/' + image_name) 
 
 
 @app.route('/upload', methods=['GET', 'POST'], strict_slashes=False)
@@ -254,11 +254,11 @@ def update_product(product_id):
     product = Product.query.get_or_404(product_id)
     upload = ProdForm()
     if upload.validate_on_submit():
-        food_name = upload.food_name.data
-        price = upload.price.data
-        status = upload.status.data
-        description = upload.description.data
-        image_path = upload.image.data
+        product.food_name = upload.food_name.data
+        product.price = upload.price.data
+        product.status = upload.status.data
+        product.description = upload.description.data
+        product.image_path = save_image(upload.image.data)
         db.session.commit()
         flash('Product updated successfully!.')
         return redirect(url_for('admin'))
@@ -281,43 +281,72 @@ def delete_product(product_id):
     flash('Product deleted successfully!.')
     return redirect(url_for('admin'))
 
+
+def calculate_total_cart_value(cart_items):
+    """ function calculates the total price of all items in cart """
+    total = 0
+    if cart_items is not None:
+        for cart_item in cart_items:
+            total += cart_item.product.price * cart_item.quantity
+    return total
+
+def get_cartItems():
+    """ function retrives cartItems based on user authentication """
+    if current_user.is_authenticated:
+        return CartItem.query.filter_by(user_id=current_user.id).all()
+    else:
+        cart = session.get('cart', {})
+        cart_items = []
+        for product_id in cart.keys():
+            product_data = cart[product_id]
+            quantity = product_data['quantity']
+
+            product = Product.query.get_or_404(product_id)
+            cart_item = CartItem(quantity=quantity, product=product)
+            cart_items.append(cart_item)
+        return cart_items if cart_items else None
+
 @app.route('/product/<int:product_id>/add_to_cart', methods=['POST'], strict_slashes=False)
 def add_to_cart(product_id):
     """ Add Users product to cart with given id """
     product = Product.query.get_or_404(product_id)
     qty = int(request.form.get('quantity'))
-
+    
     if current_user.is_authenticated:
         cart_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product.id).first()
         if cart_item:
             cart_item.quantity += qty
         else:
             cart_item = CartItem(user_id=current_user.id, product_id=product.id,
-                                quantity=qty)
+                                 quantity=qty)
             db.session.add(cart_item)
         db.session.commit()
+        cart_items = get_cartItems()
+        all_total = calculate_total_cart_value(cart_items) if cart_items else 0
+
         return jsonify({'success': True,
+                       'cart_items': [cart_item.sterilize()],
+                       'all_total': all_total,
                        'message': 'Your food has been added to cart'})
     else:
+        cart_items = get_cartItems()
         cart = session.get('cart', {})
         cart_item = cart.get(str(product_id))
         if cart_item:
             cart_item['quantity'] += qty
         else:
-            cart[str(product_id)] = {'quantity': qty}
+            cart[str(product_id)] = {'quantity': qty,
+                                     'food_name': product.food_name,
+                                     'price': product.price,
+                                     'image_path': product.image_path
+                                     }
         session['cart'] = cart
         session.modified = True
+        all_total = calculate_total_cart_value(cart_items) if cart_items else 0
         return jsonify({'success': True,
+                       'cart_items': [cart.get(str(product_id))],
+                       'all_total': all_total,
                        'message': 'Your food has been added to cart'})
-
-def calculate_total_cart_value(cart_items):
-    """ function calculates the total price of all items in cart """
-    total = 0
-    for cart_item in cart_items:
-        product = Product.query.get(cart_item.product_id)
-        if product:
-            total += product.price * cart_item.quantity
-    return total
 
 
 @app.route('/cart_items', strict_slashes=False)

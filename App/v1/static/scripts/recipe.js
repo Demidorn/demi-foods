@@ -2,29 +2,8 @@ const $ = window.$;
 $(document).ready(function () {
   $('#sortable').sortable();
   $('#sortable').disableSelection();
-
-  // When "Add to Cart" button is clicked, show the modal
-  //  $('.btn-primary').click(function (event) {
-  //    event.preventDefault();
-  //    $('#qtyform').submit();
-  //    $('#cartModal').modal('show');
-  //  });
-
-  // script to validate form before showing the modal
-
-  //  $('#qtyform').submit(function (event) {
-  // console.log('form submitted');
-  //    const qtyVal = parseInt($('#quantity').val());
-  //  if (qtyVal < 1 || isNaN(qtyVal)) {
-  //  event.preventDefault();
-  //      $('#qtymsg').text('How many do you need?').show();
-  //      $('#quantity').addClass('error');
-  //      $('#quantity').focus();
-  //    } else {
-  //      $('#qtymsg').removeClass('error');
-  //      $('#cartModal').modal('show');
-  //    }
 });
+
 $(document).ready(function () {
   // Event handler for form submission
   $('.btn-primary').click(function (event) {
@@ -51,6 +30,7 @@ $(document).ready(function () {
           quantityField.val('');
           $('#cartModal').modal('show');
           $('#cartModalLabel').html(response.message);
+          updateCart(response.cart_items, response.all_total);
         } else {
           console.error('Failed to add item to cart');
         }
@@ -59,5 +39,45 @@ $(document).ready(function () {
         console.error('Ajax error:', error);
       }
     });
+  });
+  // function creates and update the cart dynamically
+  function updateCart (cartItems, allAmt) {
+    const modalBody = $('#cartModal tbody');
+
+    // modalBody.empty();
+
+    let allTotal = allAmt;
+    if (Array.isArray(cartItems)) {
+      cartItems.forEach(function (cartItem) {
+        const totalAmt = cartItem.price * cartItem.quantity;
+        const modalHtml = `
+       
+         <tr>
+            <td class="w-25">
+              <img src="${cartItem.image_path}" class="img-fluid img-thumbnail" alt="${cartItem.food_name}">
+            </td>
+            <td>${cartItem.food_name}</td>
+            <td>₦${cartItem.price}</td>
+            <td class="qty">${cartItem.quantity}</td>
+            <td>₦${totalAmt}</td>
+            <td>
+              <button class="btn btn-danger btn-sm remove-item" data-product-id="">
+                <i class="fa fa-times"></i>
+              </button>
+            </td>
+          </tr>
+
+        `;
+        modalBody.append(modalHtml);
+        allTotal += totalAmt;
+      });
+    } else {
+      console.error('cartItems is not Array');
+    }
+    $('.text-success').text('₦' + allTotal.toFixed(2));
+  }
+
+  $('#cartModal .close, .btn-secondary').click(function(event) {
+    $('#cartModal').modal('hide');
   });
 });

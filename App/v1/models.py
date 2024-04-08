@@ -40,7 +40,6 @@ class Product(db.Model):
     image_path = db.Column(db.String(60), nullable=False, default='prod_img.jpg')
     status = db.Column(db.Boolean, nullable=False, default=False)
     description = db.Column(db.Text, nullable=True)
-    cart_item = db.relationship('CartItem', backref='product', lazy=True)
     
     def __repr__(self):
         """ returns a string representation of the product """
@@ -83,8 +82,18 @@ class CartItem(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('Products.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
-    
+    product = db.relationship('Product', backref='cart_item', lazy=True)
 
+    def sterilize(self):
+        """ function turns attribute to dictionary to be sterilized """
+        return {'id': self.id,
+                'user_id': self.user_id,
+                'product_id': self.product_id,
+                'quantity': self.quantity,
+                'price': self.product.price if self.product else None,
+                'food_name': self.product.food_name if self.product else None,
+                'image_path': self.product.image_path if self.product else None
+                } 
 
 
 class Address(db.Model):
