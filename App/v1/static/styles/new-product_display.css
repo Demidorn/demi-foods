@@ -294,9 +294,44 @@ ion-icon:hover {
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
 }
 
+.cart-icon{
+    display: flex;
+    position: relative;
+}
+.cart-icon .item-quantity {
+    position: absolute;
+    right: 9px;
+    top: -7px;
+    font-size: 13px;
+    background-color:  #ffc187;
+    width: 17px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.card-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.card-sign{
+    width: 25px;
+    background-color:#007bff;
+    border: transparent;
+    border-radius: 20%;
+}
+.delete-btn{
+    background-color: #0d6ed6;
+    width: 60px;
+    border: transparent;
+    border-radius: 20%;
+}
+.delete-btn .fas{
+    font-size: 13px;
+    color: #fff;
+}
 @media screen and (max-width: 768px) {
     .card {
         width: 100%;
@@ -305,7 +340,7 @@ ion-icon:hover {
 }
 
 .card:hover{
-    transform : scale(1.1);
+    /* transform : scale(1.1); */
     background: #e2d3d3;
 }
 .fas {

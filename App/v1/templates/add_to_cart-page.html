@@ -17,7 +17,7 @@
 
                         <div class="card mb-3">
                             <div class="card-body">
-                                <div class="d-flex align-items-center mb-3">
+                                <div class="d-flex align-items-center mb-3 card-flex">
                                     <div>
                                         <img class="img-fluid rounded-3" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" alt="Shopping item" style="width: 65px;">
                                     </div>
@@ -25,11 +25,17 @@
                                         <h5 class="mb-0">Product Name</h5>
                                         <p class="small mb-0">Description</p>
                                     </div>
+                                    <div class="card-quantity">
+                                        <button class="card-add card-sign">+</button>
+                                        <span class="customer-quantity">2</span>
+                                        <button class="card-minus card-sign">-</button>
+                                    </div>
+                                    
                                     <div class="ms-auto">
                                         <div class="d-flex align-items-center">
-                                            <h5 class="fw-normal mb-0 me-3">2</h5>
+                                            <!-- <h5 class="fw-normal mb-0 me-3">2</h5> -->
                                             <h5 class="mb-0">&#8358;900</h5>
-                                            <a href="#!" style="color: #cecece;" class="ms-3"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="#!" style="color: #0d6ed6;" class="ms-3"> <button class="delete-btn"><i class="fas fa-trash-alt">Delete</i></button></a>
                                         </div>
                                     </div>
                                 </div>
@@ -68,17 +74,17 @@
                             <p class="mb-0">&#8358;100</p>
                         </div>
                         <div class="d-flex justify-content-between mb-3">
-                            <p class="mb-0">Shipping</p>
+                            <p class="mb-0">Delivery</p>
                             <p class="mb-0">&#8358;20</p>
                         </div>
                         <div class="d-flex justify-content-between mb-4">
                             <p class="mb-0">Total (Incl. taxes)</p>
                             <p class="mb-0">&#8358;4818.00</p>
                         </div>
-                        <button type="button" class="btn btn-info btn-lg btn-block mb-4">
+                        <!-- <button type="button" class="btn btn-info btn-lg btn-block mb-4 "> -->
                             <div class="d-flex justify-content-between">
-                                <span>&#8358;4818.00</span>
-                                <span>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+                                <button>&#8358;4818.00</button>
+                                <button>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
                             </div>
                         </button>
                     </div>
