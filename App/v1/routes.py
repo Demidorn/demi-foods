@@ -25,7 +25,8 @@ def landingPage():
     """
         returns the landing Page
     """
-    return render_template('landingPage.html', title='Home-Page')
+    return render_template('home.html', title='Home-Page')
+
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
@@ -371,3 +372,8 @@ def show_cart():
             return render_template('cart.html', all_qty=all_qty, cart_items=cart_items,
                                    total_price=total_price)
         return render_template('empty_cart.html')
+
+@app.route('/tmp/carts', strict_slashes=False)
+def tem():
+    """ showing the cart items """
+    return render_template('add_to_cart-page.html')

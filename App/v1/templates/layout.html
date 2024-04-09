@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/styles/new-product_display.css">
+    <!--JQuery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ 
+    {% if title %}
+    <title>
+        {{ title }}
+    </title>
+    {% else %}
+    <title>MamaPut Delivery</title>
+    {% endif %}
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="flex-nav">
+            <a class="navbar-brand" href="#"><img class="navbar-img" src="../static/images/images/mamaput_2.jpeg"
+                    alt=""></a>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('landingPage')}}" action="active">Home <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('menu')}}">Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('aboutPage')}}" onclick="openAbout()">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('contactUs')}}">Contact Us</a>
+                    </li>
+                    
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('profile') }}">Hi, {{ current_user.first_name }}</a>
+                    </li>
+                    <!--
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{url_for('dashboard')}}">Dashboard</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                    </li>
+                    -->
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('register') }}">SignUp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                    </li>
+                    {% endif %}
+                </ul>
+               
+            </div>
+            <a href="#" class="flex-cart"><ion-icon name="cart-outline"></ion-icon></a>
+            <span class='item-quantity'>2</span>
+        </div>
+
+    </nav>
+    <div class="content">
+      <div class="col-md-8">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div id="alert-message" class="alert alert-{{ category}}">
+              {{ message}}
+            </div>
+            <script>
+              // function to hide alert message after 3 seconds
+              setTimeout(function () {
+                document.getElementById('alert-message').style.display = 'none';
+                }, 3000);
+            </script>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </div> 
+      {% block content %}{% endblock %}
+    </div>
+
+    <!--Footer -->
+    <section class="foot-footer">
+        <footer id="footer">
+            <div class="footer-col">
+                <h4>MAMAPUT</h4>
+                <p>
+                    Lorem ipsum dolor sit amet
+                </p>
+                <div class="footer-icons">
+                    <span><ion-icon name="logo-linkedin"></ion-icon></span>
+                    <span><ion-icon name="logo-facebook"></ion-icon></span>
+                    <span><ion-icon name="logo-twitter"></ion-icon></span>
+                    <span><ion-icon name="logo-instagram"></ion-icon></span>
+                    <span><ion-icon name="logo-tiktok"></ion-icon></span>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>OVERVIEW</h4>
+                <ul>
+                    <li><a href="#">Online Delivery</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Blog Posts</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>RESOURCES</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms of use</a></li>
+                    <li><a href="#">Privacy Pospancy</a></li>
+                </ul>
+
+            </div>
+            <div class="footer-col">
+                <h4>CONTACT INFO</h4>
+                <ul>
+                    <li><a href="#">+2347 1204 8561</a></li>
+                    <li><a href="#">info@mamaput.com</a></li>
+                    <li><a href="#">mamaput.com</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>LOCATION</h4>
+                <p>732/21 Second Street, Koboko<br>Nigeria</p>
+            </div>
+        </footer>
+
+    </section>
+
+    <!-- End of Footer Section-->
+</body>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</html>
