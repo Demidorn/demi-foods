@@ -5,7 +5,7 @@
         <div class="content-section">
             <div class="title">{{ current_user.first_name }}</div>
             <div class="subtitle">Profile</div>
-            <form method="POST" , action="">
+            <form class="user-profile" method="POST" , action="">
                 {{ addrform.hidden_tag() }}
                 <div class="form-group">
                     {{ addrform.first_name.label(class="form-control-label") }}
@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                     {{ addrform.email.label(class="form-control-label") }}
-                        {% if addrform.email.errors %}
+                    {% if addrform.email.errors %}
                     {{ addrform.email(class="form-control is-invalid") }}
                     <div class="invalid-feedback">
                         {% for error in addrform.email.errors %}
@@ -25,7 +25,7 @@
                         {% endfor %}
                     </div>
                     {% else %}
-                        {{ addrform.email(class="form-control form-control") }}
+                    {{ addrform.email(class="form-control form-control") }}
                     {% endif %}
                 </div>
                 <div class="form-group">
@@ -33,7 +33,7 @@
                     {{ addrform.addr(class="form-control form-control") }}
                 </div>
                 <button class="btn btn-primary">{{ addrform.submit }}</button>
-            </form>    
+            </form>
         </div>
     </div>
 </div>

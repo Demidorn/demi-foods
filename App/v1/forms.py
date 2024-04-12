@@ -70,7 +70,3 @@ class RecipeForm(FlaskForm):
     title = StringField('Name of your Recipe', validators=[DataRequired()])
     content = TextAreaField('Enter your ingredients, methods and steps for prepartion')
     submit = SubmitField('Save')
-
-class QtyForm(FlaskForm):
-    """ Form to add quantity to of items """
-    quantity = DecimalField('Qty', validators=[DataRequired(), NumberRange(min=0, max=50)])

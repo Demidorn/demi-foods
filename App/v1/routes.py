@@ -4,10 +4,20 @@ import os
 import secrets
 from PIL import Image
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm, QtyForm
+from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm
 from App.v1.models import User, Product, Order, Address, Recipe, CartItem
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
+
+
+@app.context_processor
+def cart_qty():
+    """ injects the cart quantity in all templates """
+    cart_items = get_cartItems()
+    all_qty = 0
+    if cart_items:
+        all_qty = sum(item.quantity for item in cart_items)
+    return dict(all_qty=all_qty)
 
 
 @app.route('/dashboard', strict_slashes=False)
@@ -42,6 +52,7 @@ def login():
             login_user(user, remember=loginform.remember.data)
             # flash('You have successfully logged in', 'success')
             next_page = request.args.get('next')
+
             return redirect(next_page) if next_page else redirect(url_for('landingPage'))
         else:
             flash('Email or Password not correct, try again', 'warning')
@@ -298,14 +309,14 @@ def get_cartItems():
     else:
         cart = session.get('cart', {})
         cart_items = []
-        for product_id in cart.keys():
-            product_data = cart[product_id]
-            quantity = product_data['quantity']
+        for product_id, product_data in cart.items():
+            # product_data = cart[product_id]
+            quantity = product_data.get('quantity')
 
             product = Product.query.get_or_404(product_id)
             cart_item = CartItem(quantity=quantity, product=product)
             cart_items.append(cart_item)
-        return cart_items if cart_items else None
+        return cart_items if cart_items else None 
 
 @app.route('/product/<int:product_id>/add_to_cart', methods=['POST'], strict_slashes=False)
 def add_to_cart(product_id):
@@ -330,19 +341,22 @@ def add_to_cart(product_id):
                        'all_total': all_total,
                        'message': 'Your food has been added to cart'})
     else:
-        cart_items = get_cartItems()
         cart = session.get('cart', {})
+        # print (cart)
         cart_item = cart.get(str(product_id))
         if cart_item:
             cart_item['quantity'] += qty
         else:
             cart[str(product_id)] = {'quantity': qty,
                                      'food_name': product.food_name,
+                                     'product_id': product.id,
                                      'price': product.price,
+                                     'description': product.description,
                                      'image_path': product.image_path
                                      }
         session['cart'] = cart
         session.modified = True
+        cart_items = get_cartItems()
         all_total = calculate_total_cart_value(cart_items) if cart_items else 0
         return jsonify({'success': True,
                        'cart_items': [cart.get(str(product_id))],
@@ -351,29 +365,128 @@ def add_to_cart(product_id):
 
 
 @app.route('/cart_items', strict_slashes=False)
-def show_cart():
+def get_cart():
     """ shows Users product in cart with """
-    if current_user.is_authenticated:
-        cart_items = CartItem.query.filter_by(user_id=current_user.id).all()
-        all_qty = sum(item.quantity for item in cart_items)
-        total_price = calculate_total_cart_value(cart_items)
-        if cart_items:
-            return render_template('cart.html', all_qty=all_qty, cart_items=cart_items,
-                                   total_price=total_price)
+    cart_items = get_cartItems()
+    if not cart_items:
         return render_template('empty_cart.html')
+    sterilized_cart = []
+
+    if current_user.is_authenticated:
+        sterilized_cart = [item.sterilize() for item in cart_items]
+    else:
+        for item in cart_items:
+            sterilized_item = {
+                    'quantity': item.quantity,
+                    'food_name': item.product.food_name,
+                    'product_id': item.product.id,
+                    'price': item.product.price,
+                    'description': item.product.description,
+                    'image_path': item.product.image_path}
+            sterilized_cart.append(sterilized_item)
+		
+    all_qty = sum(item.quantity for item in cart_items)  
+    total_price = calculate_total_cart_value(cart_items)
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return jsonify ({'cart_items': sterilized_cart,
+                        'total_price': total_price})
+    return render_template('cart.html', all_qty=all_qty, cart_items=cart_items,
+                           total_price=total_price)
+
+
+@app.route('/cart_items/<int:product_id>/update_cart_items', methods=['POST'], strict_slashes=False)
+def update_cart(product_id):
+    """ function update CartItems by the given product id """
+    qty = request.form.get('quantity')
+    if qty:
+        qty = int(qty)
+    if current_user.is_authenticated:
+       cart_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+       if not qty:
+           db.session.delete(cart_item)
+       else:
+           cart_item.quantity = qty
+       db.session.commit()
+       return redirect(url_for('get_cart')) 
     else:
         cart = session.get('cart', {})
-        # convert cart session to a list
-        cart_items = [{'product_id': int(product_id), 'quantity': item['quantity']}
-                      for product_id, item in cart.items()]
-        all_qty = sum(item['quantity'] for item in cart.values())
-        total_price = calculate_total_cart_value(cart_items)
-        if cart_items:
-            return render_template('cart.html', all_qty=all_qty, cart_items=cart_items,
-                                   total_price=total_price)
-        return render_template('empty_cart.html')
+        cart_item = cart.get(str(product_id))
+        if cart_item:
+            if not qty:
+                del cart[str(product_id)]
+            else:
+                cart_item['quantity'] = qty
+            session['cart'] = cart
+            session.modified = True
+        return redirect(url_for('get_cart')) 
 
-@app.route('/tmp/carts', strict_slashes=False)
-def tem():
-    """ showing the cart items """
-    return render_template('add_to_cart-page.html')
+
+@app.route('/cart_items/<int:product_id>/delete_cart_items', strict_slashes=False)
+def delete_cart_item(product_id):
+    """ function deletes cartItem by the given product id """
+    if current_user.is_authenticated:
+        cart_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id).first()  
+        db.session.delete(cart_item)
+        db.session.commit()
+        return redirect(url_for('get_cart'))
+    else:
+        cart = session.get('cart', {})
+        cart_item = cart.get(str(product_id))
+        del cart[str(product_id)]
+        session['cart'] = cart
+        session.modified = True
+        return redirect(url_for('get_cart'))
+
+
+@app.route('/cart_items/<int:product_id>/add_quantity', methods=['POST'], strict_slashes=False)
+def add_quantity(product_id):
+    """ function update CartItems by the given product id """
+    qty = request.form.get('quantity')
+    if qty:
+        qty = int(qty)
+    if current_user.is_authenticated:
+       cart_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+       if not qty:
+           db.session.delete(cart_item)
+       else:
+           cart_item.quantity = qty + 1
+       db.session.commit()
+       return redirect(url_for('get_cart')) 
+    else:
+        cart = session.get('cart', {})
+        cart_item = cart.get(str(product_id))
+        if cart_item:
+            if not qty:
+                del cart[str(product_id)]
+            else:
+                cart_item['quantity'] = qty + 1
+            session['cart'] = cart
+            session.modified = True
+        return redirect(url_for('get_cart'))
+
+
+@app.route('/cart_items/<int:product_id>/subract_quantity', methods=['POST'], strict_slashes=False)
+def sub_quantity(product_id):
+    """ function update CartItems by the given product id """
+    qty = request.form.get('quantity')
+    if qty:
+        qty = int(qty)
+    if current_user.is_authenticated:
+       cart_item = CartItem.query.filter_by(user_id=current_user.id, product_id=product_id).first()
+       if not qty or qty == 1:
+           db.session.delete(cart_item)
+       else:
+           cart_item.quantity = qty - 1
+       db.session.commit()
+       return redirect(url_for('get_cart')) 
+    else:
+        cart = session.get('cart', {})
+        cart_item = cart.get(str(product_id))
+        if cart_item:
+            if not qty or qty == 1:
+                del cart[str(product_id)]
+            else:
+                cart_item['quantity'] = qty - 1
+            session['cart'] = cart
+            session.modified = True
+        return redirect(url_for('get_cart'))

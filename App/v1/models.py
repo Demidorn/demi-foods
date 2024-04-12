@@ -91,6 +91,7 @@ class CartItem(db.Model):
                 'product_id': self.product_id,
                 'quantity': self.quantity,
                 'price': self.product.price if self.product else None,
+                'description': self.product.description if self.product else None,
                 'food_name': self.product.food_name if self.product else None,
                 'image_path': self.product.image_path if self.product else None
                 } 

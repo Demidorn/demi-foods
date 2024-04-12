@@ -21,8 +21,13 @@
 body{
     width: 100%;
     height: auto;
-    /* display: flex; */
 }
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
 .container {
     display: flex;
 }
@@ -224,3 +229,71 @@ body{
     background-color: var(--whiteColor);
     box-shadow: rgba(176, 176, 176, 0.2) 0px 2px 8px 0px;
 }
+
+
+.user-profile{
+    
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--whiteColor);
+    border-radius: 8px;
+    margin: 2% 0;
+    width : 45rem;
+    font-size: 20px;
+}
+.subtitle{
+    font-size: 3rem;
+}
+#first_name, #last_name, #email, #address{
+    font-size: 16px;
+}
+/* .profile-img {
+    width: 120px;
+    height: 120px;
+}
+.profile-img[src="#"] {
+    display: none;
+}
+.profile-img {
+    background: url(https://thenounproject.com/icon/identity-897141/);
+    background-position: -20px -10px;
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+} */
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 100%;
+    }
+    
+}
+
+.contect-section{
+    width: 90%;
+    justify-content: center;
+}
+
+/* .form-group{
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0 1rem;
+    background-color: var(--whiteColor);
+    border-radius: 1rem;
+    margin: 2% 0;
+    width : 50rem;
+    font-size: 18px;
+} */
+
+.upload-content{
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    /* background-color: var(--whiteColor); */
+    border-radius: 8px;
+    margin: 2% 0;
+    width : 45rem;
+    font-size: 20px
+}
+

@@ -318,9 +318,9 @@ ion-icon:hover {
 }
 .card-sign{
     width: 25px;
-    background-color:#007bff;
     border: transparent;
     border-radius: 20%;
+    font-size: 16px;
 }
 .delete-btn{
     background-color: #0d6ed6;
@@ -338,11 +338,12 @@ ion-icon:hover {
     }
     
 }
-
+/*
 .card:hover{
-    /* transform : scale(1.1); */
+    transform : scale(1.1);
     background: #e2d3d3;
-}
+}*/
+
 .fas {
     color: #ffc187;
     transition: all 0.3s ease;

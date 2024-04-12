@@ -82,10 +82,8 @@
           </ul>
         </div>
         <div class="cart-icon">
-          <a href="#" class="flex-cart"
-            ><ion-icon name="cart-outline"></ion-icon
-          ></a>
-          <span class="item-quantity">2</span>
+          <a href="{{ url_for('get_cart') }}" class="flex-cart"><ion-icon name="cart-outline"></ion-icon></a>
+            <span class="item-quantity">{{ all_qty }}</span>
         </div>
       </div>
     </nav>

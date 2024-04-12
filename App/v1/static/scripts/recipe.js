@@ -30,7 +30,8 @@ $(document).ready(function () {
           quantityField.val('');
           $('#cartModal').modal('show');
           $('#cartModalLabel').html(response.message);
-          updateCart(response.cart_items, response.all_total);
+          $('.text-success').text('₦' + response.all_total.toFixed(2));
+          updateCart(response.cart_items);
         } else {
           console.error('Failed to add item to cart');
         }
@@ -41,18 +42,18 @@ $(document).ready(function () {
     });
   });
   // function creates and update the cart dynamically
-  function updateCart (cartItems, allAmt) {
+  function updateCart (cartItems) {
     const modalBody = $('#cartModal tbody');
 
-    // modalBody.empty();
+    modalBody.empty();
 
-    let allTotal = allAmt;
+    // let allTotal = allAmt;
+    const existingProduct = {};
     if (Array.isArray(cartItems)) {
       cartItems.forEach(function (cartItem) {
         const totalAmt = cartItem.price * cartItem.quantity;
         const modalHtml = `
-       
-         <tr>
+          <tr>
             <td class="w-25">
               <img src="${cartItem.image_path}" class="img-fluid img-thumbnail" alt="${cartItem.food_name}">
             </td>
@@ -69,15 +70,18 @@ $(document).ready(function () {
 
         `;
         modalBody.append(modalHtml);
-        allTotal += totalAmt;
+        existingProduct[cartItem.product_id] = true;
+
+        // if (!(cartItem.product_id in seenProduct)) {
+        //   allTotal += totalAmt;
+        //   seenProduct[cartItem.product_id] = true;
       });
     } else {
       console.error('cartItems is not Array');
     }
-    $('.text-success').text('₦' + allTotal.toFixed(2));
   }
 
-  $('#cartModal .close, .btn-secondary').click(function(event) {
+  $('#cartModal .close, .btn-secondary').click(function (event) {
     $('#cartModal').modal('hide');
   });
 });

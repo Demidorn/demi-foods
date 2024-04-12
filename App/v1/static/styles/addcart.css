@@ -186,3 +186,38 @@
     margin-left: auto;
     padding: 30px 15px;
 }
+
+
+/* Hide spinner arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+    width: 30px;
+    text-align: center;
+}
+
+.ms-auto {
+    display: flex; 
+    align-items: center; 
+}
+
+.ms-auto form {
+    margin-right: 5px; /* Adjust spacing between form elements */
+}
+
+button[type="submit"].card-sign {
+    width: 25px;
+    border: transparent;
+    border-radius: 20%;
+    font-size: 16px;
+}
+
+.card-sign {
+    width: 25px;
+    border: transparent;
+    border-radius: 20%;
+    font-size: 16px;
