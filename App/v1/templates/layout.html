@@ -5,36 +5,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>{% if title %}{{ title }}{% else %}MamaPut Online{% endif %}</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../static/styles/new-product_display.css">
-    {% if title %}
-    <title>
-        {{ title }}
-    </title>
-    {% else %}
-    <title>MamaPut Delivery</title>
-    {% endif %}
+    
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container"> <!-- Added container class -->
+        <div class="container">
             <a class="navbar-brand" href="#"><img class="navbar-img" src="../static/images/images/mamaput_2.jpeg"
                     alt=""></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <!-- Added toggler button -->
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{url_for('home')}}" action="active">Home <span
-                                class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{url_for('home')}}" action="active">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{url_for('menu')}}">Menu</a>
@@ -58,7 +51,7 @@
                     </li>
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('register') }}">SignUp</a>
+                        <a class="nav-link" href="{{ url_for('register') }}">Sign Up</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('login_in') }}">Login</a>
@@ -69,6 +62,7 @@
             <a href="{{url_for('add_to_cart')}}" class="flex-cart"><ion-icon name="cart-outline"></ion-icon></a>
         </div>
     </nav>
+
 
     <div class="content">
         {% block content %}{% endblock %}
@@ -104,7 +98,7 @@
                 <ul>
                     <li><a href="#">Help Center</a></li>
                     <li><a href="#">Terms of use</a></li>
-                    <li><a href="#">Privacy Pospancy</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
                 </ul>
 
             </div>
@@ -126,11 +120,14 @@
     </section>
 
     <!-- End of Footer Section-->
+    <!-- Javascript anf jQuery for Bootstrap navbar collapse-->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 
 </html>

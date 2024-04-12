@@ -9,9 +9,15 @@
                 </h2>
             </div>
            
-            <form class="new-search" action="" id="search_search-form">
-                <input type="search" placeholder="search here..." name="" id="search-box" id="search-icon">
-                <label for="search-box" class="fas fa-search"></label>
+            <form class="new-search" action="" method="GET">
+                <div class="search-container">
+                    <input type="search" placeholder="search here..." name="search-box" id="search-box" ></input>
+                    <ion-icon name="search-outline"></ion-icon>
+                    <!-- <div type="search" class="search-button">
+                        
+                    </div> -->
+                </div>
+               
             </form>
                 
             <div class="row">
@@ -19,8 +25,11 @@
                     <div class="col-md-4 mb-4">
                         <div class="flex-card">
                             <div class="card">
-                                <img src="{{ url_for('static', filename='images/' + product.image_path) }}" alt="">
-                                <div class="card-body">
+                                <div class="img-icon">
+                                    <img src="{{ url_for('static', filename='images/' + product.image_path) }}" alt="">
+                                </div>
+                                
+                                <div class="card-body height-l">
                                     <h3 class="card-title">{{ product.food_name }}</h3>
                                     <p class="card-text">{{ product.description }}</p>
                                     <p class="card-text_2">Price: ₦{{ product.price }}</p>

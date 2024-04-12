@@ -1,21 +1,29 @@
-
+/* General styles */
 * {
     margin: 0;
     padding: 0;
     font-family: "Poppins", serif;
     text-decoration: none;
     font-display: var(#5f2e0b);
+    /* box-sizing: border-box; */
     
 }
-
 
 body {
     min-height: 100%;
     width: auto;
     list-style: none;
     background-color: #1b1b1b;
+    /* font-family: "Poppins", sans-serif; */
 
 }
+
+/* .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+} */
 
 html {
     font-size: 62.5%;
@@ -24,16 +32,26 @@ html {
 
 header {
     background: rgb(255, 255, 255);
+    background: #fff;
     padding: 2rem 1.5rem;
+    padding: 20px;
     display: flex;
     align-items: center;
     font-style: oblique;
     font-size: 1rem;
     justify-content: space-between;
     z-index: 1000;
-    border-bottom: #4e341b 5px solid;
-    
+    position: fixed;
+    /* top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999; */
+    border-bottom: #4e341b 5px solid;   
 }
+/* .navbar{
+    position:fixed;
+} */
+
 
 .flex-nav {
     display: flex;
@@ -47,6 +65,7 @@ header {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
 }
 
 .navbar-img {
@@ -57,8 +76,9 @@ header {
 
 .navbar-nav{
     font-size: 20px;
-    margin-left: 30rem;
-    text-align: center;
+    /* margin-left: 30rem; */
+    /* text-align: center; */
+    margin-left: auto;
 
 }
 
@@ -70,8 +90,6 @@ header .logo {
 ul{
     list-style: none;
 }
-
-
 header .logo img{
     width: 90px;
     height: 90px;
@@ -108,56 +126,69 @@ header .navbar{
     justify-content: space-between;
 }
 
-.new-search {
+
+.new-search{
+    display: flex;
+    justify-content: center;
     align-items: center;
+    padding: 1rem;
+    margin: 0 auto;
+    background:whitesmoke ;
+    padding: 0 1rem;
+    border: black 1px solid;
     width: 40%;
     border-radius: 10px;
 }
-#search_search-form {
-    background:whitesmoke ;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 1rem;
-    border: black 1px solid;
-}
 
-#search_search-form.active {
+.new-search.active {
     top: 0;
 }
 
-#search_search-form #search-box {
-    padding: 0;
-    font-size: 1.3rem;
-    text-transform: none;
-    background: transparent;
+.search-container {
+    display: flex;
+    padding: 0.5rem;
+    width: 100%;
+    margin: 0 1rem;
+}
+
+#search-box {
+    padding: 0.5rem;  
+    border-radius: 4px; 
     border: none;
+    width: 90%;
     outline: none;
 }
 
-#search_search-form #search-box::placeholder {
-    color: #cfcbcb;
-}
-
-#search_search-form label {
-    color: rgb(97, 85, 85);
+.search-container ion-icon {
+    font-size: 2rem;
+    color: #201f1f;
     cursor: pointer;
-    font-size: 3rem;
+    padding: .5rem;
 }
+/* Adjust styles for smaller screens */
+@media (max-width: 768px) {
+    .navbar-nav{
+        margin-left: 0;
+    }
+    .new-search {
+        /* flex-direction: column; */
+        /* align-items: stretch; */
+        width: 100%;
+    }
 
-#search_search-form label:hover {
-    color: rgb(73, 68, 63);
+    .search-container {
+        margin-right: 0;
+        margin-top: 0.5rem;
+    }
+
+    #search-box {
+        border-radius: 4px;
+    }
+
+    .search-container ion-icon {
+        border-radius: 4px;
+    }
 }
-
-#search_search-form #close1 {
-
-    color: #fff;
-    cursor: pointer;
-    top: 2rem;
-    right: 3rem;
-    font-size: 20px;
-}
-
 
 .foot-footer {
     background-color: #442d18;
@@ -174,7 +205,6 @@ header .navbar{
     flex-wrap: wrap;
 }
 
-
 .footer-col h4 {
     font-size: 13.5pt;
     font-weight: normal;
@@ -182,7 +212,6 @@ header .navbar{
     padding-bottom: 10px;
 
 }
-
 .footer-col ul {
     list-style: none;
     padding: 0;
@@ -193,22 +222,17 @@ header .navbar{
     color: rgb(231, 223, 221);
 }
 
-
-
 .footer-col ul a:hover {
     color: rgb(167, 117, 98);
     text-decoration: none;
     font-size: 15px;
 }
 
-
-
 .footer-icons {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 1rem;
 }
-
 
 ion-icon {
     font: 2em sans-serif;
@@ -241,8 +265,6 @@ ion-icon:hover {
 .small-cont {
    padding: 1.5rem 0;
 }
-
-
 .food-combos .box-combo .box{
     margin-left: 2.5rem;
     font-size: 1.2rem;
@@ -277,7 +299,7 @@ ion-icon:hover {
     background: rgb(156, 123, 110);
     border: orangered 1px solid;
 }
-
+ 
 .flex-card {
     display: flex;
     align-items: center;
@@ -289,14 +311,14 @@ ion-icon:hover {
 
 .card {
 
-    padding: 1rem;
+    /* padding: 1rem; */
     background: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
-
 @media screen and (max-width: 768px) {
     .card {
         width: 100%;
@@ -308,20 +330,48 @@ ion-icon:hover {
     transform : scale(1.1);
     background: #e2d3d3;
 }
+.img-icon{
+    height: 18rem;
+    width: 24rem;
+}
+.img-icon img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 0.5rem;
+
+}
+.card-body{
+    justify-content: space-between;
+    padding: 1rem;
+    /* height: 20rem; */
+}
+.height-l{
+    height: 20rem;
+}
 .fas {
     color: #ffc187;
     transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1.5rem;
+    
+}
+.fas:hover{
+    color: rgb(73, 68, 63);
 }
 
 .btn-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-around; 
+    justify-content: center; 
     margin-top: .5rem;
+    position: relative;
+    /* bottom: 1rem; */
+    padding-top: 2rem;
 }
 
 .btn-container button {
-    margin-right: 5px; 
+    margin-right: 2.5rem; 
 }
 
 .card-text_2{
@@ -435,17 +485,13 @@ ion-icon:hover {
 .flex-worktime{
     display: flex;
     justify-content: center;
-    text-align: center;
-    
+    text-align: center;   
 }
-
-
 .col-time{
     padding: .5rem;
     border: whitesmoke .2rem solid;
     margin: 2rem;
     border-style: ridge;
-
 }
 
 .col-time p{
@@ -486,14 +532,6 @@ h1{
     text-align: right;
 }
 
-/* .container-row{
-    background-image: url(../images/images/meat\ pices.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: opacity(0.5);
-} */
-
 .cont-body{
     background-image: url(../images/images/chapatti.jpg);
     background-size: cover;
@@ -501,20 +539,25 @@ h1{
     background-repeat: no-repeat;
     opacity: .3px;
 }
-
-
 .flex-form{
     display: flex;
-    padding-left: 20rem;
-    padding-top: 5rem;
-    padding-bottom: 3rem;
+    align-items: center;
+    justify-content: center;
+   margin: 0 auto;
+    width: 60%;
+    padding: 3rem;
+    /* height: 50rem; */
+
 }
 
 .flex-text{
     background-color: #494745;
-    padding: 1rem;
-    height:  72vh;
+    padding: 2rem;
+    height:  40rem;
     color: rgb(175, 167, 167);
+    width: 100%;
+    /* margin: 5rem 0; */
+
 }
 .flex-item{
     color: whitesmoke;
@@ -525,14 +568,14 @@ h1{
 }
 .col h2{
     color: whitesmoke;
-    /* font-family: 'poppins', sans-serif; */
-    /* font-size: 2rem; */
-    /* text-align: center; */
 }
 .flex-msg{
     background-color: rgb(32, 31, 31);
+    height: 40rem;
     color: whitesmoke;
-    padding: 1rem;
+    padding: 3rem 1rem;
+    width: 100%;
+
 }
 
 .cont-text{
@@ -543,22 +586,26 @@ h1{
 
 .flex-form input{
     border-radius: 5px;
-    height: 30px;
-    width: 200px;
+    height: 3rem;
+    width: 10rem;
+
 }
 
 .flex-msg h3{
     text-align: center;
+    /* padding: 2rem; */
 }
 
 .flex-msg #para{
     color:  gray;
     font-size: 20px;
-    /* text-align: center; */
+    text-align: center;
+    padding: 2rem 0;
 }
 .flex-row{
     display: flex;
     margin: 20px;
+    text-align: center;
 }
 
 ion-icon{
@@ -585,8 +632,6 @@ ion-icon{
     padding-left: 5px;
 }
 
-
-
 .main-body {
     font-family: Arial, sans-serif;
     background-color: #f3f3f3;
@@ -596,9 +641,7 @@ ion-icon{
     justify-content: center;
     align-items: center;
     height: auto;
-    
 }
-
 
 .main {
     background-color: var(---greyColor);
@@ -608,8 +651,6 @@ ion-icon{
     padding: 20px;
     width: 600px;
 }
-
-
 .main h2 {
     color: #4caf50;
     margin-bottom: 20px;
