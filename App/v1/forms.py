@@ -2,7 +2,7 @@
 """ Forms collection """
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed, FileRequired
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, DecimalField, TextAreaField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, DecimalField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, NumberRange
 from flask_login import current_user
 from App.v1.models import User
@@ -58,7 +58,7 @@ class ProdForm(FlaskForm):
                       FileAllowed(['jpg', 'png', 'jpeg'])])
     submit = SubmitField('Upload')
 
-    def validate_email(self, food_name):
+    def validate_food_name(self, food_name):
         """ custom validation to check if food_name is in database """
         food_name = Product.query.filter_by(food_name=food_name.data).first()
         if food_name:
@@ -70,3 +70,10 @@ class RecipeForm(FlaskForm):
     title = StringField('Name of your Recipe', validators=[DataRequired()])
     content = TextAreaField('Enter your ingredients, methods and steps for prepartion')
     submit = SubmitField('Save')
+
+class OrderForm(FlaskForm):
+    """ Order form """
+    first_name = StringField('First name', validators=[DataRequired(), Length(min=2, max=20)])
+    last_name = StringField('Last name', validators=[DataRequired(), Length(min=2, max=20)])
+    email = StringField('Email address', validators=[DataRequired(), Email()])
+    recipe = SelectField('Add recipe(optional)')

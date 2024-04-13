@@ -126,5 +126,5 @@ class Recipe(db.Model):
         """ returns a string representation of the recipe """
         return "{}('{}', '{}')".format(self.__class__.__name__, self.id,
                                        self.title)
-                                       
+                        
 db.create_all()

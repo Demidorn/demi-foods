@@ -4,7 +4,7 @@ import os
 import secrets
 from PIL import Image
 from App.v1 import app, db, bcrypt
-from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm
+from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm, OrderForm
 from App.v1.models import User, Product, Order, Address, Recipe, CartItem
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
@@ -342,7 +342,6 @@ def add_to_cart(product_id):
                        'message': 'Your food has been added to cart'})
     else:
         cart = session.get('cart', {})
-        # print (cart)
         cart_item = cart.get(str(product_id))
         if cart_item:
             cart_item['quantity'] += qty
@@ -490,3 +489,37 @@ def sub_quantity(product_id):
             session['cart'] = cart
             session.modified = True
         return redirect(url_for('get_cart'))
+
+
+@app.route('/checkout', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def checkout():
+    """ function renders the checkout page """
+    orderform = OrderForm()
+    user_recipe = current_user.recipe
+    if not user_recipe:
+        orderform.recipe.choices = [('', 'Add your recipe')]
+    else:
+        orderform.recipe.choices = [('', 'Add your recipe')] + [(recipe.id, recipe.title) for recipe in current_user.recipe] 
+    
+    cart_items = current_user.cart_item
+    if not cart_items:
+        return redirect(url_for('empty_cart.html'))
+    all_qty = sum(item.quantity for item in cart_items) 
+    total_price = calculate_total_cart_value(cart_items)
+    vat = 750
+    amount = vat + total_price
+    
+    
+    if orderform.validate_on_submit():
+        email = orderform.email.data
+        recipe = orderform.recipe.data
+        return jsonify({'email': email,
+                       'recipe': recipe,
+                       'amount': amount})
+    elif request.method == 'GET':
+        orderform.first_name.data = current_user.first_name
+        orderform.last_name.data = current_user.last_name
+        orderform.email.data = current_user.email
+    return render_template('checkout.html', total_price=total_price, all_qty=all_qty, cart_items=cart_items,
+                           vat=vat, amount=amount, orderform=orderform, title="Check Out")
