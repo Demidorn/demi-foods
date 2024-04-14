@@ -2,6 +2,7 @@
 """ all site routes """
 import os
 import secrets
+import requests
 from PIL import Image
 from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm, OrderForm
@@ -510,16 +511,56 @@ def checkout():
     vat = 750
     amount = vat + total_price
     
-    
     if orderform.validate_on_submit():
         email = orderform.email.data
         recipe = orderform.recipe.data
-        return jsonify({'email': email,
-                       'recipe': recipe,
-                       'amount': amount})
+        amt = str(amount * 100)
+        secret_key = app.config['PAYSTACK_SECRET_KEY']
+        callback_url = url_for('verify_payment', recipe=recipe, _external=True)
+
+        headers = {"Authorization": "Bearer {}".format(secret_key),
+                "Content-Type": "application/json"}
+        data = {
+                "amount": amt,
+                "email": email,
+                "callback_url": callback_url,
+                "metadata":{
+                            "cancel_action": url_for('cancel_payment', _external=True),
+                            "user_recipe": recipe
+                            }
+                }
+        
+        response = requests.post(app.config['PAYSTACK_URL'], headers=headers, data=data)
+        print('gateway response:', response)
+        auth_url = response['data']['authorization_url']
+        return redirect(auth_url)
+
     elif request.method == 'GET':
         orderform.first_name.data = current_user.first_name
         orderform.last_name.data = current_user.last_name
         orderform.email.data = current_user.email
     return render_template('checkout.html', total_price=total_price, all_qty=all_qty, cart_items=cart_items,
-                           vat=vat, amount=amount, orderform=orderform, title="Check Out")
+                           vat=vat, amount=amount, orderform=orderform, title="Checkout")
+
+@app.route('/verify_payment', methods=['POST'], strict_slashes=False)
+@login_required
+def verify_payment():
+    """ function verifies the user payment before giving user order receipt """
+    recipe_id = request.args.get('recipe')
+    trx_ref = request.args.get('reference')
+    recipe = Recipe.query.get(recipe_id)
+
+    headers = {"Authorization": "Bearer {}".format(secret_key),
+                "Content-Type": "application/json"}
+    response = requests.post("{}/verify/{}".format(app.config['PAYSTACK_URL']),trx_ref, headers=headers)
+    print('payment status:', response)
+    status = response.get('data',{}).get('status')
+    if status == 'success':
+        order = Order(user_id=current_user.id, recipe_title= recipe.title)
+        db.session.add(order)
+        db.session.commit()
+        return render_template('verify_payment.html', title='Payment Verification')
+    else:
+        return redirect(url_for('cancel_payment'))
+
+@app.route('/cancel_payment', strict_slashes=False)

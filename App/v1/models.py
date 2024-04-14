@@ -63,8 +63,6 @@ class Order(db.Model):
         return "{}({}, '{}', '{}', '{}' )".format(self.__class__.__name__, self.id,
                                                   self.tracking_id, self.user_id,self.created_date)
 
-# with app.app_context():
-#    db.create_all()
 
 class OrderInfo(db.Model):
     """ Object representation of the Order information table """
@@ -126,5 +124,4 @@ class Recipe(db.Model):
         """ returns a string representation of the recipe """
         return "{}('{}', '{}')".format(self.__class__.__name__, self.id,
                                        self.title)
-                        
 db.create_all()
