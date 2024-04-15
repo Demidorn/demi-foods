@@ -1,4 +1,4 @@
-/* General styles */
+/**Layout.html**/
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +14,6 @@ body {
     width: auto;
     list-style: none;
     background-color: #1b1b1b;
-    /* font-family: "Poppins", sans-serif; */
 
 }
 
@@ -41,17 +40,9 @@ header {
     font-size: 1rem;
     justify-content: space-between;
     z-index: 1000;
-    position: fixed;
-    /* top: 0;
-    left: 0;
-    right: 0;
-    z-index: 999; */
-    border-bottom: #4e341b 5px solid;   
+    border-bottom: #4e341b 5px solid;
+    
 }
-/* .navbar{
-    position:fixed;
-} */
-
 
 .flex-nav {
     display: flex;
@@ -62,10 +53,9 @@ header {
 
 #navbarNav {
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     width: 100%;
-
 }
 
 .navbar-img {
@@ -76,10 +66,9 @@ header {
 
 .navbar-nav{
     font-size: 20px;
-    /* margin-left: 30rem; */
-    /* text-align: center; */
-    margin-left: auto;
-
+    margin-left: 30rem;
+    text-align: center;
+    padding-right: 10px;
 }
 
 header .logo {
@@ -126,8 +115,13 @@ header .navbar{
     justify-content: space-between;
 }
 
-
-.new-search{
+.new-search {
+    align-items: center;
+    width: 40%;
+    border-radius: 10px;
+}
+#search_search-form {
+    background:whitesmoke ;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -299,7 +293,6 @@ ion-icon:hover {
     background: rgb(156, 123, 110);
     border: orangered 1px solid;
 }
- 
 .flex-card {
     display: flex;
     align-items: center;
@@ -311,13 +304,48 @@ ion-icon:hover {
 
 .card {
 
-    /* padding: 1rem; */
+    padding: 1rem;
     background: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    /* transition: all 0.3s ease; */
+}
+
+.cart-icon{
+    display: flex;
+    position: relative;
+}
+.cart-icon .item-quantity {
+    position: absolute;
+    right: 9px;
+    top: -7px;
+    font-size: 13px;
+    background-color:  #ffc187;
+    width: 17px;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.card-flex{
+    display: flex;
+    justify-content: space-between;
+}
+.card-sign{
+    width: 25px;
+    border: transparent;
+    border-radius: 20%;
+    font-size: 16px;
+}
+.delete-btn{
+    background-color: #0d6ed6;
+    width: 60px;
+    border: transparent;
+    border-radius: 20%;
+}
+.delete-btn .fas{
+    font-size: 13px;
+    color: #fff;
 }
 @media screen and (max-width: 768px) {
     .card {
@@ -325,30 +353,12 @@ ion-icon:hover {
     }
     
 }
-
+/*
 .card:hover{
     transform : scale(1.1);
     background: #e2d3d3;
-}
-.img-icon{
-    height: 18rem;
-    width: 24rem;
-}
-.img-icon img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 0.5rem;
+}*/
 
-}
-.card-body{
-    justify-content: space-between;
-    padding: 1rem;
-    /* height: 20rem; */
-}
-.height-l{
-    height: 20rem;
-}
 .fas {
     color: #ffc187;
     transition: all 0.3s ease;
@@ -485,8 +495,11 @@ ion-icon:hover {
 .flex-worktime{
     display: flex;
     justify-content: center;
-    text-align: center;   
+    text-align: center;
+    
 }
+
+
 .col-time{
     padding: .5rem;
     border: whitesmoke .2rem solid;
@@ -532,6 +545,14 @@ h1{
     text-align: right;
 }
 
+/* .container-row{
+    background-image: url(../images/images/meat\ pices.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: opacity(0.5);
+} */
+
 .cont-body{
     background-image: url(../images/images/chapatti.jpg);
     background-size: cover;
@@ -539,25 +560,20 @@ h1{
     background-repeat: no-repeat;
     opacity: .3px;
 }
+
+
 .flex-form{
     display: flex;
-    align-items: center;
-    justify-content: center;
-   margin: 0 auto;
-    width: 60%;
-    padding: 3rem;
-    /* height: 50rem; */
-
+    padding-left: 20rem;
+    padding-top: 5rem;
+    padding-bottom: 3rem;
 }
 
 .flex-text{
     background-color: #494745;
-    padding: 2rem;
-    height:  40rem;
+    padding: 1rem;
+    height:  72vh;
     color: rgb(175, 167, 167);
-    width: 100%;
-    /* margin: 5rem 0; */
-
 }
 .flex-item{
     color: whitesmoke;
@@ -568,14 +584,14 @@ h1{
 }
 .col h2{
     color: whitesmoke;
+    /* font-family: 'poppins', sans-serif; */
+    /* font-size: 2rem; */
+    /* text-align: center; */
 }
 .flex-msg{
     background-color: rgb(32, 31, 31);
-    height: 40rem;
     color: whitesmoke;
-    padding: 3rem 1rem;
-    width: 100%;
-
+    padding: 1rem;
 }
 
 .cont-text{
@@ -586,26 +602,22 @@ h1{
 
 .flex-form input{
     border-radius: 5px;
-    height: 3rem;
-    width: 10rem;
-
+    height: 30px;
+    width: 200px;
 }
 
 .flex-msg h3{
     text-align: center;
-    /* padding: 2rem; */
 }
 
 .flex-msg #para{
     color:  gray;
     font-size: 20px;
-    text-align: center;
-    padding: 2rem 0;
+    /* text-align: center; */
 }
 .flex-row{
     display: flex;
     margin: 20px;
-    text-align: center;
 }
 
 ion-icon{
@@ -632,6 +644,8 @@ ion-icon{
     padding-left: 5px;
 }
 
+
+
 .main-body {
     font-family: Arial, sans-serif;
     background-color: #f3f3f3;
@@ -641,7 +655,9 @@ ion-icon{
     justify-content: center;
     align-items: center;
     height: auto;
+    
 }
+
 
 .main {
     background-color: var(---greyColor);
@@ -651,6 +667,8 @@ ion-icon{
     padding: 20px;
     width: 600px;
 }
+
+
 .main h2 {
     color: #4caf50;
     margin-bottom: 20px;

@@ -1,86 +1,80 @@
-{% extends "landingPage.html" %} 
+{% extends "layout.html" %} 
 {% block content %}
-<!-- <link rel="stylesheet" href="../static/styles/style.css" /> -->
-    <div class="main-body">
-        <div class="main">
-            <h2>Register</h2>
-            <form method="POST">
-                {{ regform.hidden_tag() }}
-                <div class="form-group">
-                    {{ regform.first_name.label() }}
-                    {% if regform.first_name.errors %}
-                        {{ regform.first_name(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in regform.first_name.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ regform.first_name(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ regform.last_name.label() }}
-                    {% if regform.last_name.errors %}
-                        {{ regform.last_name(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in regform.last_name.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ regform.last_name(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ regform.email.label() }}
-                    {% if regform.email.errors %}
-                        {{ regform.email(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in regform.email.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ regform.email(class="form-control") }}
-                    {% endif %}
-                </div>
-                <div class="form-group">
-                    {{ regform.pwd.label() }}
-                    {% if regform.pwd.errors %}
-                        {{ regform.pwd(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in regform.pwd.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ regform.pwd(class="form-control") }}
-                    {% endif %}
-                </div>
-                        <!--
-                    pattern=\"^(?=.*\d)(?=.*[a-zA-Z])(?=.[a-zA-Z0-9])\S{8,}$"
-                    title="Password must contain at least one number,
-                            one alphabet, one symbol, and be at 
-                            least 8 chracters long"
-                    required
-                /> -->
-                <div class="form-group">
-                    {{ regform.confirm_pwd.label() }}
-                    {% if regform.confirm_pwd.errors %}
-                        {{ regform.confirm_pwd(class="form-control is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in regform.confirm_pwd.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ regform.confirm_pwd(class="form-control") }}
-                    {% endif %}
-                </div>
-                <button type="submit">Submit</button>
-            </form>
-        <div>
+<div class="form">
+        <div class="title">Welcome</div>
+        <div class="subtitle">Let's create your account!</div>
+        <form method="POST", action="">
+            {{ regform.hidden_tag() }}
+            <div class="form-group required">
+                {{ regform.first_name(class="input") }}
+        
+                {% if regform.first_name.errors %}
+                    {{ regform.first_name(class="control-label needs-validation") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.first_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.first_name.label(class="control-label") }}
+                {% endif %}
+            </div>
+            <div class="form-group required">
+                {{ regform.last_name(class="input") }}
+                
+                {% if regform.last_name.errors %}
+                    {{ regform.last_name(class="control-label needs-validation") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.last_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.last_name.label(class="control-label") }}
+                {% endif %}
+            </div>
+            <div class="form-group required">
+                {{ regform.email(class="input") }}
+                
+                {% if regform.email.errors %}
+                    {{ regform.email(class="control-label needs-validation") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.email.label(class="control-label") }}
+                {% endif %}
+            </div>
+            <div class="form-group required">
+                {{ regform.pwd(class="input") }}
+                <div class="cut"></div>
+                {% if regform.pwd.errors %}
+                    {{ regform.pwd(class="control-label was-validated") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.pwd.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.pwd.label(class="control-label") }}
+                {% endif %}
+            </div>
+            <div class="form-group required">
+                {{ regform.confirm_pwd(class="input") }}
+                <div class="cut"></div>
+                {% if regform.confirm_pwd.errors %}
+                    {{ regform.confirm_pwd(class="control label was-validated") }}
+                    <div class="invalid-feedback">
+                        {% for error in regform.confirm_pwd.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ regform.confirm_pwd.label(class="control-label") }}
+                {% endif %}
+            </div>
             <div>
                 <small>
                     Already have an Account? <a href="{{ url_for ('login')}}">Sign in</a>

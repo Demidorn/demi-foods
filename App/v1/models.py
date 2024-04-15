@@ -40,7 +40,6 @@ class Product(db.Model):
     image_path = db.Column(db.String(60), nullable=False, default='prod_img.jpg')
     status = db.Column(db.Boolean, nullable=False, default=False)
     description = db.Column(db.Text, nullable=True)
-    cart_item = db.relationship('CartItem', backref='product', lazy=True)
     
     def __repr__(self):
         """ returns a string representation of the product """
@@ -55,9 +54,8 @@ class Order(db.Model):
     tracking_id = db.Column(db.String(12), unique=True, nullable=False, default=secrets.token_hex(6))
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False) 
-    # recipe_title = db.Column(db.String(120), db.ForeignKey('Recipe.id'))
-    recipe_title = db.Column(db.String(120), db.ForeignKey('Recipe.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
+    recipe_title = db.Column(db.String(120), db.ForeignKey('Recipe.title'))
     order_info = db.relationship('OrderInfo', backref='orders', lazy=True)
     
     def __repr__(self):
@@ -84,17 +82,19 @@ class CartItem(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('Products.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
-    
-    def is_product_in_cart(user_id, product_id):
-        """Check if the product is already in the user's cart"""
-        return CartItem.query.filter_by(user_id=user_id, product_id=product_id).first() is not None
+    product = db.relationship('Product', backref='cart_item', lazy=True)
 
-
-    def __repr__(self):
-        """returns a string representation of the order """
-        return '{}({})'.format(self.__class__.__name__, self.__dict__)
-
-
+    def sterilize(self):
+        """ function turns attribute to dictionary to be sterilized """
+        return {'id': self.id,
+                'user_id': self.user_id,
+                'product_id': self.product_id,
+                'quantity': self.quantity,
+                'price': self.product.price if self.product else None,
+                'description': self.product.description if self.product else None,
+                'food_name': self.product.food_name if self.product else None,
+                'image_path': self.product.image_path if self.product else None
+                } 
 
 
 class Address(db.Model):

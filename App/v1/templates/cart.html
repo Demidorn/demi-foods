@@ -1,0 +1,84 @@
+{% extends 'layout.html' %}
+{% block content %}
+<link rel="stylesheet" href="../static/styles/addcart.css">
+<section class="flex-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card mb-3">
+                    <div class="card-body">
+			<h5 class="card-title mb-3"><a href="{{ url_for('menu') }}" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                        <hr>
+
+                        <div class="mb-3">
+                            <p class="mb-1">Shopping cart</p>
+			    <p class="mb-0">You have {{ all_qty }} items in your cart.</p>
+                        </div>
+			{% for cart_item in cart_items %}
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3 card-flex">
+                                    <div>
+					    <img class="img-fluid rounded-3" src="{{ cart_item.product.image_path }}" style="width: 65px;">
+                                    </div>
+                                    	<div class="ms-3">
+						<h5 class="mb-0">{{ cart_item.product.food_name }}</h5>
+						<p class="small mb-0">{{ cart_item.product.description }}</p>
+                                    	</div>
+                                           <div class="ms-auto">
+					      <form action="{{ url_for('sub_quantity', product_id=cart_item.product.id) }}" method="POST">
+						 <input type="hidden" name="quantity" value="{{ cart_item.quantity }}">
+						 <button class="card-sign">-</button>
+					      </form>
+					      <form action="{{ url_for('update_cart', product_id=cart_item.product.id) }}" method="POST"> 
+					         <input type="number" class="customer-quantity" id="quantity" name="quantity"
+						 value="{{ cart_item.quantity }}" min=0 inputmode="number">
+					      </form>
+					      <form action="{{ url_for('add_quantity', product_id=cart_item.product.id) }}" method="POST">
+						 <input type="hidden" name="quantity" value="{{ cart_item.quantity }}">
+						 <button type="submit" class="card-sign">+</button>
+					      </form>
+                                       	   </div>               
+					    <div class="ms-auto">
+					         <h5 class="mb-0">₦{{ cart_item.product.price }}</h5>
+					    </div>
+					    <div>
+					        <a href="{{ url_for('delete_cart_item', product_id=cart_item.product.id) }}"  class="ms-3"> <ion-icon name="trash-bin"></ion-icon></a>
+					    </div>
+                                </div>
+                            </div>
+                        </div>
+			{% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card bg-primary text-white rounded-3">
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <p class="mb-0">Subtotal</p>
+			    <p class="mb-0">₦{{ total_price }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <p class="mb-0">Delivery</p>
+			    {% set vat = 750 %}
+			    {% set total_amount = vat + total_price %}
+			    <p class="mb-0">₦{{ vat }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <p class="mb-0">Total (Incl. taxes)</p>
+			    <p class="mb-0">₦{{ total_amount }}</p>
+                        </div>
+                        <!-- <button type="button" class="btn btn-info btn-lg btn-block mb-4 "> -->
+                            <div class="d-flex justify-content-between">
+                                <button>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

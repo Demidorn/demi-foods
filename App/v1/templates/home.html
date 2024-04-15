@@ -10,23 +10,6 @@
                 <!-- <div class="nav-title">
                     <h1>Choose MamaPut delivery Get Satisfy </h1>
                 </div> -->
-                <div class="col-md-8">
-                    {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                    {% for category, message in messages %}
-                    <div id="alert-message" class="alert alert-{{ category}}">
-                        {{ message}}
-                    </div>
-                    <script>
-                        // function to hide alert message after 3 seconds
-                        setTimeout(function () {
-                            document.getElementById('alert-message').style.display = 'none';
-                        }, 3000);
-                    </script>
-                    {% endfor %}
-                    {% endif %}
-                    {% endwith %}
-                </div>
             </div>
         </div>
         <div class="container">

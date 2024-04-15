@@ -1,0 +1,99 @@
+
+{% extends 'layout.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="../static/styles/addcart.css">
+<section class="flex-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                        <hr>
+
+                        <div class="mb-3">
+                            <p class="mb-1">Shopping cart</p>
+			    <p class="mb-0">You have items in your cart.</p>
+                        </div>
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3 card-flex">
+                                    <div>
+                                        <img class="img-fluid rounded-3" src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-shopping-carts/img1.webp" alt="Shopping item" style="width: 65px;">
+                                    </div>
+                                    <div class="ms-3">
+                                        <h5 class="mb-0">Product Name</h5>
+                                        <p class="small mb-0">Description</p>
+                                    </div>
+				    <form action="", method="">
+                                    	<div class="card-quantity">
+                                          <button class="card-add card-sign">+</button>
+                                          <input type="number" class="customer-quantity" id="quantity" name="quantity" min=0 inputmode="number">
+                                          <button class="card-minus card-sign">-</button>
+                                       </div>
+				     </form>
+                                    
+                                    <div class="ms-auto">
+                                        <div class="d-flex align-items-center">
+                                            <!-- <h5 class="fw-normal mb-0 me-3">2</h5> -->
+                                            <h5 class="mb-0">&#8358;900</h5>
+                                            <a href="#!" style="color: #0d6ed6;" class="ms-3"> <button class="delete-btn"><i class="fas fa-trash-alt">Delete</i></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="card bg-primary text-white rounded-3">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Card details</h5>
+                        <img src="../static/images/mamaputimages/default-user.png" class="img-fluid rounded-3 mb-3" style="width: 45px;" alt="Avatar">
+                        
+                        <form class="mb-4">
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-control-lg" placeholder="Cardholder's Name">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-control-lg" placeholder="1234 5678 9012 3457">
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control form-control-lg" placeholder="MM/YYYY">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="password" class="form-control form-control-lg" placeholder="CVV">
+                                </div>
+                            </div>
+                        </form>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between mb-3">
+                            <p class="mb-0">Subtotal</p>
+                            <p class="mb-0">&#8358;100</p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-3">
+                            <p class="mb-0">Delivery</p>
+                            <p class="mb-0">&#8358;20</p>
+                        </div>
+                        <div class="d-flex justify-content-between mb-4">
+                            <p class="mb-0">Total (Incl. taxes)</p>
+                            <p class="mb-0">&#8358;4818.00</p>
+                        </div>
+                        <!-- <button type="button" class="btn btn-info btn-lg btn-block mb-4 "> -->
+                            <div class="d-flex justify-content-between">
+                                <button>&#8358;4818.00</button>
+                                <button>Checkout <i class="fas fa-long-arrow-alt-right ms-2"></i></button>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
