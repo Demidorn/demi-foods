@@ -664,20 +664,28 @@ input[type="email"],
 input[type="password"],
 select {
     width: 100%;
-    margin-bottom: 15px;
-    padding: 10px;
+    margin-bottom: 0px;
+    padding: 5px;
     box-sizing: border-box;
     border: 1px solid #ddd;
     border-radius: 5px;
+    font-size: 15px;
 }
 
 button[type="submit"] {
-    padding: 15px;
+    padding: 5px;
     border-radius: 10px;
-    border: none;
     background-color: var(--secondaryColor);
-    color: white;
+    color: black;
     cursor: pointer;
     width: 100%;
     font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/** i added for all paragraph tags **/
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  word-wrap: break-word;
 }

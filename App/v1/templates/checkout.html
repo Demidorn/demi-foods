@@ -14,24 +14,58 @@
 		    <div class="row">
 			<span class="header">Your Payment Information</span>
 		    </div>
-		    <form action="" method="POST">
+		    <form id="orderform1" action="" method="POST">
 			{{ orderform.hidden_tag() }}
-			{{ orderform.first_name.label() }}
-			{{ orderform.first_name() }}
-			{{ orderform.last_name.label() }}
-			{{ orderform.last_name() }}
-			{{ orderform.email.label() }}
-			{{ orderform.email() }}
-			<div class="row">
-			    {{ orderform.recipe.label() }} 
-			    <select class="form-control">
+			<div class="form-group">
+			    {{ orderform.first_name.label(class="form-control-label") }}
+			    {% if orderform.first_name.errors %}
+			    {{ orderform.first_name(class="form-control is-invalid") }}
+				    <div class="invalid-feedback">
+					{% for error in orderform.first_name.errors %}
+					<span>{{ error }}</span>
+					{% endfor %}
+				    </div>
+			    {% else %}
+			    {{ orderform.first_name(class="form-control form-control") }}
+			    {% endif %}
+			</div>
+			<div class="form-group">
+			    {{ orderform.last_name.label(class="form-control-label") }}
+			    {% if orderform.last_name.errors %}
+			    {{ orderform.last_name(class="form-control is-invalid") }}
+				    <div class="invalid-feedback">
+					{% for error in orderform.last_name.errors %}
+					<span>{{ error }}</span>
+					{% endfor %}
+				    </div>
+			    {% else %}
+			    {{ orderform.last_name(class="form-control form-control") }}
+			    {% endif %}
+			</div>
+			<div class="form-group">
+			    {{ orderform.email.label(class="form-control-label") }}
+			    {% if orderform.email.errors %}
+			    {{ orderform.email(class="form-control is-invalid") }}
+				    <div class="invalid-feedback">
+					{% for error in orderform.email.errors %}
+					<span>{{ error }}</span>
+					{% endfor %}
+				    </div>
+			    {% else %}
+			    {{ orderform.email(class="form-control form-control") }}
+			    {% endif %}
+			</div> 
+			    <select class="form-control" name="recipe">
 				{% for value, label in orderform.recipe.choices %}
 				   <option value="{{ value }}">{{ label }}</option>
 				{% endfor %}
 			    </select>
-			</div>
+		       <div class="special">
+			{{ orderform.submit() }}
+	               </div>   
 		    </form>
-		</div>                        
+		     
+		</div>
 	    </div>
 	    <div class="col-md-5">
 		<div class="right border">
@@ -41,7 +75,7 @@
 		    <div class="row item">
 			<div class="col-4 align-self-center"><img class="img-fluid" src="{{ item.product.image_path }}"></div>
 			<div class="col-8">
-			  <div class="row"><b>₦{{ item.product.price }}</b></div>
+			  <div class="row item"><b>₦{{ item.product.price }}</b></div>
 			  <div class="row text-muted">{{ item.product.food_name }}</div>
 			  <div class="row">Qty: {{ item.quantity }}</div>
 			</div>
@@ -60,7 +94,6 @@
 			<div class="col text-left"><b>Total to pay</b></div>
 			<div class="col text-right"><b>₦{{ amount }}</b></div>
 		    </div>
-		    <button class="btn">Place order</button>
 		</div>
 	    </div>
 	</div>

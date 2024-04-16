@@ -55,7 +55,7 @@ class Order(db.Model):
     created_date = db.Column(db.DateTime, nullable=False,
                              default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
-    recipe_title = db.Column(db.String(120), db.ForeignKey('Recipe.title'))
+    recipe_id = db.Column(db.String(120), db.ForeignKey('Recipe.id'))
     order_info = db.relationship('OrderInfo', backref='orders', lazy=True)
     
     def __repr__(self):
@@ -108,11 +108,12 @@ class Address(db.Model):
 
     def __repr__(self):
         """ returns a string representation of the address """
-        return "Address('{}', '{}')".format(self.id, self.address,)
+        return "Address('{}', '{}')".format(self.id, self.address)
 
 
 class Recipe(db.Model):
     """ Object representation of the Users recipe table """
+    __tablename__= "Recipe"
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False,
