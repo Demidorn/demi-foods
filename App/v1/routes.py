@@ -563,4 +563,4 @@ def verify_payment():
     else:
         return redirect(url_for('cancel_payment'))
 
-@app.route('/cancel_payment', strict_slashes=False)
+# @app.route('/cancel_payment', strict_slashes=False)
