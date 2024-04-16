@@ -30,7 +30,7 @@ $(document).ready(function () {
           quantityField.val('');
           $('#cartModal').modal('show');
           $('#cartModalLabel').html(response.message);
-          $('.text-success').text('₦' + response.all_total.toFixed(2));
+          
           updateCart(response.cart_items);
         } else {
           console.error('Failed to add item to cart');
@@ -61,17 +61,12 @@ $(document).ready(function () {
             <td>₦${cartItem.price}</td>
             <td class="qty">${cartItem.quantity}</td>
             <td>₦${totalAmt}</td>
-            <td>
-              <button class="btn btn-danger btn-sm remove-item" data-product-id="">
-                <i class="fa fa-times"></i>
-              </button>
-            </td>
           </tr>
 
         `;
         modalBody.append(modalHtml);
         existingProduct[cartItem.product_id] = true;
-
+        $('.text-success').text('₦' + totalAmt.toFixed(2)); 
         // if (!(cartItem.product_id in seenProduct)) {
         //   allTotal += totalAmt;
         //   seenProduct[cartItem.product_id] = true;
@@ -83,5 +78,10 @@ $(document).ready(function () {
 
   $('#cartModal .close, .btn-secondary').click(function (event) {
     $('#cartModal').modal('hide');
+  });
+
+  // order form submission to the server
+  $('#orderform2 .btn').click(function(event) {
+    $('#orderform1').submit();
   });
 });

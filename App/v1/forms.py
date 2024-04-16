@@ -77,3 +77,4 @@ class OrderForm(FlaskForm):
     last_name = StringField('Last name', validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email address', validators=[DataRequired(), Email()])
     recipe = SelectField('Add recipe(optional)')
+    submit = SubmitField('Place Order')

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="../static/styles/new-product_display.css">
     <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../static/scripts/recipe.js"></script>
 
     {% if title %}
     <title>{{ title }}</title>
@@ -28,13 +29,13 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="flex-nav">
-        <a class="navbar-brand" href="#"
+        <a class="navbar-brand" href="{{ url_for('landingPage') }}"
           ><img
             class="navbar-img"
             src="../static/images/images/mamaput_2.jpeg"
             alt=""
         /></a>
-
+        {% block navbar %}
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
@@ -90,6 +91,7 @@
             <span class="item-quantity">{{ all_qty }}</span>
         </div>
       </div>
+      {% endblock navbar %}
     </nav>
     {% block order %}
     <div class="content">

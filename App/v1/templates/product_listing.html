@@ -15,9 +15,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../static/styles/new-product_display-1.css">
     <!--Java script-->
-    <script>"https://code.jquery.com/jquery-3.3.1.slim.min.js"</script>
+    <script "https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="../static/scripts/recipe.js"></script>
 </head>
 
 <body>
@@ -88,7 +87,6 @@
               <th scope="col">Price</th>
               <th scope="col">Qty</th>
               <th scope="col">Total</th>
-              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -100,6 +98,7 @@
       </div>
       <div class="modal-footer border-top-0 d-flex justify-content-between">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	<a href="{{ url_for('get_cart') }}" class="btn btn-success">Go to Cart</a>
 	<a href="{{ url_for('checkout') }}" class="btn btn-success">Checkout</a>
       </div>
     </div>

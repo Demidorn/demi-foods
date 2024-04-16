@@ -7,86 +7,69 @@ body{
     background-color: rgb(0, 0, 34);
     font-size: 0.8rem;
 }*/
-.card{
-    max-width: 100%;
-    margin: 1vh;
-    padding: 0.3rem;
-}
-.card-top{
-    padding: 0.7rem 5rem;
-}
-.card-top a{
-    float: left;
-    margin-top: 0.7rem;
-}
-#logo{
-    font-family: 'Dancing Script';
-    font-weight: bold;
-    font-size: 1.6rem;
-}
-.card-body{
-    padding: 0 5rem 5rem 5rem;
-    background-image: url("https://i.imgur.com/4bg1e6u.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-@media(max-width:768px){
-    .card-body{
-        padding: 0 1rem 1rem 1rem;
-        background-image: url("https://i.imgur.com/4bg1e6u.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-    }  
-    .card-top{
-        padding: 0.7rem 1rem;
-    }
-}
+
+
 .row{
     margin: 0;
+    justify-content: space-around;
 }
 .upper{
     padding: 1rem 0;
     justify-content: space-evenly;
 }
-#three{
-    border-radius: 1rem;
-        width: 22px;
-    height: 22px;
-    margin-right:3px;
-    border: 1px solid blue;
-    text-align: center;
-    display: inline-block;
+
+.col-md-7 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 58.333333%;
+  flex: 0 0 58.333333%;
+  max-width: 35.333333%;
 }
-#payment{
-    margin:0;
-    color: blue;
-}
-.icons{
-    margin-left: auto;
-}
+
 form span{
     color: rgb(179, 179, 179);
 }
 form{
     padding: 2vh 0;
+    margin-bottom: -7rem;
 }
 input{
     border: 1px solid rgba(0, 0, 0, 0.137);
+    border-radius: 5vh;
     padding: 1vh;
     margin-bottom: 4vh;
     outline: none;
-    width: 100%;
-    background-color: rgb(247, 247, 247);
+    cursor: pointer;  
+    background-color: rgb(8 180 209 / 94%) ;
 }
 input:focus::-webkit-input-placeholder
 {
       color:transparent;
 }
+
+input:focus{
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    color: white;
+    -webkit-box-shadow: none;
+    -webkit-user-select: none;
+    transition: none; 
+}
+
+.input:hover{
+    background-color: white;
+    
+}
+
+.special {
+  border-radius: 2px;
+  transition: none; 
+}
 .header{
     font-size: 1.5rem;
 }
 .left{
-    background-color: #ffffff;
+    background-color: #d1d5d361;;
     padding: 2vh;   
 }
 .left img{
@@ -97,6 +80,8 @@ input:focus::-webkit-input-placeholder
 }
 .right .item{
     padding: 0.3rem 0;
+    margin-right: 1rem;
+    justify-content: end;
 }
 .right{
     background-color: #ffffff;
@@ -108,6 +93,7 @@ input:focus::-webkit-input-placeholder
 .lower{
     line-height: 2;
 }
+/*
 .btn{
     background-color: rgb(23, 4, 189);
     border-color: rgb(23, 4, 189);
@@ -117,19 +103,8 @@ input:focus::-webkit-input-placeholder
     margin: 4vh 0 1.5vh 0;
     padding: 1.5vh;
     border-radius: 0;
-}
-.btn:focus{
-    box-shadow: none;
-    outline: none;
-    box-shadow: none;
-    color: white;
-    -webkit-box-shadow: none;
-    -webkit-user-select: none;
-    transition: none; 
-}
-.btn:hover{
-    color: white;
-}
+}*/
+
 a{
     color: black;
 }
@@ -141,9 +116,22 @@ input[type=checkbox]{
     width: unset;
     margin-bottom: unset;
 }
-#cvv{
-    background-image: linear-gradient(to left, rgba(255, 255, 255, 0.575) , rgba(255, 255, 255, 0.541)), url("https://img.icons8.com/material-outlined/24/000000/help.png");
-    background-repeat: no-repeat;
-    background-position-x: 95%;
-    background-position-y: center;
-} 
+
+select.form-control:not([size]):not([multiple]) {
+  height: calc(3.25rem + 2px);
+  font-size: 15px;
+  margin-bottom: 4vh;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
