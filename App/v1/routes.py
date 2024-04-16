@@ -9,6 +9,7 @@ from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm, 
 from App.v1.models import User, Product, Order, Address, Recipe, CartItem
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
+from sqlalchemy.exc import IntegrityError
 
 
 @app.context_processor
@@ -158,7 +159,10 @@ def orders():
     """
         returns order the Page
     """
-    return render_template('order.html', title='Order')
+    orders = Order.query.filter_by(user_id=current_user.id)
+    if orders:
+        return render_template('order.html', orders=orders, title='Order')
+    return render_template('empty_order.html', title='Order')
 
 
 @app.route('/profile', methods=['GET', 'POST'], strict_slashes=False)
@@ -340,7 +344,7 @@ def add_to_cart(product_id):
         return jsonify({'success': True,
                        'cart_items': [cart_item.sterilize()],
                        'all_total': all_total,
-                       'message': 'Your food has been added to cart'})
+                       'message': 'Your food has been added to cart!!!'})
     else:
         cart = session.get('cart', {})
         cart_item = cart.get(str(product_id))
@@ -505,17 +509,18 @@ def checkout():
     
     cart_items = current_user.cart_item
     if not cart_items:
-        return redirect(url_for('empty_cart.html'))
+        return redirect(url_for('get_cart'))
     all_qty = sum(item.quantity for item in cart_items) 
     total_price = calculate_total_cart_value(cart_items)
     vat = 750
     amount = vat + total_price
-    
+
     if orderform.validate_on_submit():
         email = orderform.email.data
         recipe = orderform.recipe.data
         amt = str(amount * 100)
-        secret_key = app.config['PAYSTACK_SECRET_KEY']
+        
+        secret_key = app.config['PAY_SECRET_KEY']
         callback_url = url_for('verify_payment', recipe=recipe, _external=True)
 
         headers = {"Authorization": "Bearer {}".format(secret_key),
@@ -530,9 +535,9 @@ def checkout():
                             }
                 }
         
-        response = requests.post(app.config['PAYSTACK_URL'], headers=headers, data=data)
-        print('gateway response:', response)
-        auth_url = response['data']['authorization_url']
+        response = requests.post(app.config['PAYSTACK_URL'], headers=headers, json=data)
+        print('gateway response:', response.json())
+        auth_url = response.json()['data']['authorization_url']
         return redirect(auth_url)
 
     elif request.method == 'GET':
@@ -542,25 +547,49 @@ def checkout():
     return render_template('checkout.html', total_price=total_price, all_qty=all_qty, cart_items=cart_items,
                            vat=vat, amount=amount, orderform=orderform, title="Checkout")
 
-@app.route('/verify_payment', methods=['POST'], strict_slashes=False)
+@app.route('/verify_payment', methods=['GET','POST'], strict_slashes=False)
 @login_required
 def verify_payment():
     """ function verifies the user payment before giving user order receipt """
+    cart_items = get_cartItems()
     recipe_id = request.args.get('recipe')
     trx_ref = request.args.get('reference')
     recipe = Recipe.query.get(recipe_id)
-
+    secret_key = app.config['PAY_SECRET_KEY'] 
+    
     headers = {"Authorization": "Bearer {}".format(secret_key),
-                "Content-Type": "application/json"}
-    response = requests.post("{}/verify/{}".format(app.config['PAYSTACK_URL']),trx_ref, headers=headers)
-    print('payment status:', response)
-    status = response.get('data',{}).get('status')
+               "Content-Type": "application/json"}
+    
+    response = requests.get(app.config['VERIFY'] + "{}".format(trx_ref), headers=headers)
+    print('payment reference:', trx_ref, recipe)
+    print('response status:', response.status_code)
+    print('response text:', response.text)
+    print(app.config['VERIFY'] + "{}".format(trx_ref))
+
+    data_response = response.json()
+    print('payment status:', data_response)
+    status = data_response.get('data',{}).get('status')
     if status == 'success':
-        order = Order(user_id=current_user.id, recipe_title= recipe.title)
-        db.session.add(order)
-        db.session.commit()
-        return render_template('verify_payment.html', title='Payment Verification')
+        try:
+            if recipe:
+                order = Order(user_id=current_user.id, recipe_id= recipe.id)
+            else:
+                order = Order(user_id=current_user.id)
+            db.session.add(order)
+            for item in cart_items:
+                db.session.delete(item)
+            db.session.commit()
+            return render_template('verify.html', title='Payment Verification')
+        except IntegrityError as e:
+            db.session.rollback()
+            msg = "Error: Failed to create order due to duplicate tracking id"
+            app.logger.error(msg)
+            return render_template('cancel.html', title='Error')
     else:
         return redirect(url_for('cancel_payment'))
 
 @app.route('/cancel_payment', strict_slashes=False)
+@login_required
+def cancel_payment():
+    """ function is return when user cancels payment transaction process """
+    return render_template('cancel.html')
