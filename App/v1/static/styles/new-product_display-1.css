@@ -384,8 +384,13 @@ header .navbar{
 }
 
 .card {
+<<<<<<< HEAD
     /* width: 100%; */
     padding: 0.5rem;
+=======
+    width: 30%;
+    padding: 0px;
+>>>>>>> 9e36d4a66120adf0855281f44171e88c8cf11d5e
     background: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -442,8 +447,8 @@ header .navbar{
 }
 label {
     display: inline-block;
-    width: 100px; /* Adjust width as needed */
-    text-align: right;
+    width: 15%; /* Adjust width as needed */
+    text-align: -webkit-left;
 }
 
 input[type="number"] {
@@ -452,4 +457,26 @@ input[type="number"] {
 
 .error {
     border: 1px solid red;
+}
+
+/** hovi added modal css*/
+
+
+
+/** hovi added modal css*/
+
+.modal-header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.modal-title {
+  margin-bottom: 0;
+  font-size: 20px;
 }
