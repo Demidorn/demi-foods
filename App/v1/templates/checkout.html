@@ -1,102 +1,97 @@
-{% extends "layout.html" %}
-{% block content %}
-<link rel="stylesheet" href="../static/styles/order.css">
+{% extends "layout.html" %} {% block content %}
+<link rel="stylesheet" href="../static/styles/order.css" />
 <div class="card">
-    <div class="card-body">
-	<div class="row upper">
-	    <span><i class="fa fa-check-circle-o"></i> Shopping bag</span>
-	    <span><i class="fa fa-check-circle-o"></i> Order details</span>
-	    <span id="payment"><span id="three">3</span>Payment</span>
-	</div>
-	<div class="row">
-	    <div class="col-md-7">
-		<div class="left border">
-		    <div class="row">
-			<span class="header">Your Payment Information</span>
-		    </div>
-		    <form id="orderform1" action="" method="POST">
-			{{ orderform.hidden_tag() }}
-			<div class="form-group">
-			    {{ orderform.first_name.label(class="form-control-label") }}
-			    {% if orderform.first_name.errors %}
-			    {{ orderform.first_name(class="form-control is-invalid") }}
-				    <div class="invalid-feedback">
-					{% for error in orderform.first_name.errors %}
-					<span>{{ error }}</span>
-					{% endfor %}
-				    </div>
-			    {% else %}
-			    {{ orderform.first_name(class="form-control form-control") }}
-			    {% endif %}
-			</div>
-			<div class="form-group">
-			    {{ orderform.last_name.label(class="form-control-label") }}
-			    {% if orderform.last_name.errors %}
-			    {{ orderform.last_name(class="form-control is-invalid") }}
-				    <div class="invalid-feedback">
-					{% for error in orderform.last_name.errors %}
-					<span>{{ error }}</span>
-					{% endfor %}
-				    </div>
-			    {% else %}
-			    {{ orderform.last_name(class="form-control form-control") }}
-			    {% endif %}
-			</div>
-			<div class="form-group">
-			    {{ orderform.email.label(class="form-control-label") }}
-			    {% if orderform.email.errors %}
-			    {{ orderform.email(class="form-control is-invalid") }}
-				    <div class="invalid-feedback">
-					{% for error in orderform.email.errors %}
-					<span>{{ error }}</span>
-					{% endfor %}
-				    </div>
-			    {% else %}
-			    {{ orderform.email(class="form-control form-control") }}
-			    {% endif %}
-			</div> 
-			    <select class="form-control" name="recipe">
-				{% for value, label in orderform.recipe.choices %}
-				   <option value="{{ value }}">{{ label }}</option>
-				{% endfor %}
-			    </select>
-		       <div class="special">
-			{{ orderform.submit() }}
-	               </div>   
-		    </form>
-		     
-		</div>
-	    </div>
-	    <div class="col-md-5">
-		<div class="right border">
-		    <div class="header">Order Summary</div>
-		    <p>{{ all_qty }} items</p>
-		    {% for item in cart_items %}
-		    <div class="row item">
-			<div class="col-4 align-self-center"><img class="img-fluid" src="{{ item.product.image_path }}"></div>
-			<div class="col-8">
-			  <div class="row item"><b>₦{{ item.product.price }}</b></div>
-			  <div class="row text-muted">{{ item.product.food_name }}</div>
-			  <div class="row">Qty: {{ item.quantity }}</div>
-			</div>
-		    </div>
-		    {% endfor %} 
-		    <hr>
-		    <div class="row lower">
-			<div class="col text-left">Subtotal</div>
-			<div class="col text-right">₦{{ total_price }}</div>
-		    </div>
-		    <div class="row lower">
-			<div class="col text-left">Delivery</div>
-			<div class="col text-right">₦{{ vat }}</div>
-		    </div>
-		    <div class="row lower">
-			<div class="col text-left"><b>Total to pay</b></div>
-			<div class="col text-right"><b>₦{{ amount }}</b></div>
-		    </div>
-		</div>
-	    </div>
-	</div>
+  <div class="card-body">
+    <div class="row upper">
+      <span><i class="fa fa-check-circle-o"></i> Shopping bag</span>
+      <span><i class="fa fa-check-circle-o"></i> Order details</span>
+      <span id="payment"><span id="three">3</span>Payment</span>
     </div>
+    <div class="row">
+      <div class="col-md-7">
+        <div class="left border">
+          <div class="row">
+            <span class="header">Your Payment Information</span>
+          </div>
+          <form id="orderform1" action="" method="POST">
+            {{ orderform.hidden_tag() }}
+            <div class="form-group">
+              {{ orderform.first_name.label(class="form-control-label") }} {% if
+              orderform.first_name.errors %} {{
+              orderform.first_name(class="form-control is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in orderform.first_name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ orderform.first_name(class="form-control
+              form-control") }} {% endif %}
+            </div>
+            <div class="form-group">
+              {{ orderform.last_name.label(class="form-control-label") }} {% if
+              orderform.last_name.errors %} {{
+              orderform.last_name(class="form-control is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in orderform.last_name.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ orderform.last_name(class="form-control
+              form-control") }} {% endif %}
+            </div>
+            <div class="form-group">
+              {{ orderform.email.label(class="form-control-label") }} {% if
+              orderform.email.errors %} {{ orderform.email(class="form-control
+              is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in orderform.email.errors %}
+                <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+              {% else %} {{ orderform.email(class="form-control form-control")
+              }} {% endif %}
+            </div>
+            <select class="form-control" name="recipe">
+              {% for value, label in orderform.recipe.choices %}
+              <option value="{{ value }}">{{ label }}</option>
+              {% endfor %}
+            </select>
+            <div class="special">{{ orderform.submit() }}</div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="right border">
+          <div class="header">Order Summary</div>
+          <p>{{ all_qty }} items</p>
+          {% for item in cart_items %}
+          <div class="row item">
+            <div class="col-4 align-self-center">
+              <img class="img-fluid" src="{{ item.product.image_path }}" />
+            </div>
+            <div class="col-8">
+              <div class="row item"><b>₦{{ item.product.price }}</b></div>
+              <div class="row text-muted">{{ item.product.food_name }}</div>
+              <div class="row">Qty: {{ item.quantity }}</div>
+            </div>
+          </div>
+          {% endfor %}
+          <hr />
+          <div class="row lower">
+            <div class="col text-left">Subtotal</div>
+            <div class="col text-right">₦{{ total_price }}</div>
+          </div>
+          <div class="row lower">
+            <div class="col text-left">Delivery</div>
+            <div class="col text-right">₦{{ vat }}</div>
+          </div>
+          <div class="row lower">
+            <div class="col text-left"><b>Total to pay</b></div>
+            <div class="col text-right"><b>₦{{ amount }}</b></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}

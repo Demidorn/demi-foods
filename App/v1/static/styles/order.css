@@ -70,9 +70,19 @@ input:focus{
     
 }
 
-.special {
-  border-radius: 2px;
-  transition: none; 
+#orderform1{
+    padding-bottom: 40px;
+}
+
+#orderform1 .special {
+    display: flex;
+    justify-content: right;
+}
+#orderform1 .special input {
+  border-radius: 20px;
+  width: 120px;
+  transition: none;
+  color: white; 
 }
 .header{
     font-size: 1.5rem;
