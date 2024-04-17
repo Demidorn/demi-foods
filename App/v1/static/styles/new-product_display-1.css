@@ -107,7 +107,7 @@ header .navbar{
     align-items: center;
     justify-content: center;
     /* position: relative; */
-    /* margin-left: 2rem; */
+    margin-left: 30rem;
     /* width: 40%; */
     /* border-radius: 20px; */
     /* align-content: center; */
@@ -380,35 +380,44 @@ header .navbar{
     margin: 2rem 0;
     padding: 2rem;
     gap:2rem;
+    width: 30rem;
+    /* height: 30rem; */
    
 }
 
 .card {
-<<<<<<< HEAD
-    /* width: 100%; */
-    padding: 0.5rem;
-=======
-    width: 30%;
+    width: 300px; 
     padding: 0px;
->>>>>>> 9e36d4a66120adf0855281f44171e88c8cf11d5e
     background: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     transition: all 0.3s ease;
-    
+    height: 550px;
+    overflow: hidden;
 }
 
 .card img{
-    width: 17 rem;
-    height: 25 rem;
+    width: 300px;
+    height: 250px;
 }
 .card-text_2{
     text-align: right;
+    color: black;
+    text-shadow: none;
+
 }
 
 .card-text{
     text-align: center;
+    color: black;
+    text-shadow: none;
+    border: 2px solid red;
+    /* margin: 0;  */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Show ellipsis for truncated text */
+    white-space: nowrap;
+    /* height: 5rem; */
     
 
 }
@@ -444,6 +453,7 @@ header .navbar{
 /* quantity field css */
 .form-group {
     margin-bottom: 15px;
+    
 }
 label {
     display: inline-block;

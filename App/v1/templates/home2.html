@@ -1,5 +1,8 @@
 {% extends 'layout.html' %}
 {% block content %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
 <section>
     <div class="">
         <div class="bg-blur"></div>
@@ -24,12 +27,14 @@
         </div>
     </div>
     <div class="container">
+        <!-- <h2>GOOD TIMES CREATE FRIENDS</h2> -->
         <div class="row margin">
             <div class="col">
+
                 <img class="shadow_img"
                     src="../static/images/mamaputimages/freshly-cooked-meat-stew-with-rice-vegetables-generative-ai.jpg"
                     alt="">
-                <h2>GOOD TIMES CREATE FRIENDS</h2>
+
             </div>
 
             <div class="col">
@@ -47,18 +52,18 @@
 
         </div>
     </div>
-    <div class="container">
+    <div class="cont-yummy">
         <div class="img1">
-            <img src="../static/images/mamaputimages/food-1.jpg" alt="">
+            <img src="../static/images/mamaputimages/goat-meat-pepper-soup.jpeg" alt="">
         </div>
         <div class="about-text">
             <h2>TRADITIONAL & YUMY</h2>
-            <P>Embark on a culinary journey like no other with Mamaput<br>and experience the magic of African
+            <P>Embark on a culinary journey like no other<br> with Mamaputand experience the magic of African
                 flavors
             </P>
         </div>
         <div class="img2">
-            <img src="../static/images/mamaputimages/food-2.jpg" alt="">
+            <img src="../static/images/mamaputimages/fufu-with-efo_riro-with-shaki.jpeg" alt="">
         </div>
     </div>
     <div class="container-row">
@@ -79,50 +84,72 @@
                     </div>
                     <div class="menu-item">
                         <ion-icon name="restaurant-outline"></ion-icon>
-                        <h4>INTRODUCTION CEREMONIES</h4>
+                        <h4>INTRODUCTION <br>CEREMONIES</h4>
                     </div>
                     <div class="menu-item">
                         <ion-icon name="restaurant-outline"></ion-icon>
-                        <h4>HOME COMING PARTY</h4>
+                        <h4>HOME COMING <br>PARTY</h4>
                     </div>
                     <div class="menu-item">
                         <ion-icon name="pizza-outline"></ion-icon>
-                        <h4>HOUSE WARMING PARTY</h4>
+                        <h4>HOUSE <br>WARMING PARTY</h4>
                     </div>
                 </div>
-                <div class="special">
-                    <div class="img3">
-                        <img src="../static/images/mamaputimages/food-3.jpg" alt="">
-                    </div>
-                    <div class="special-text">
-                        <h4>Our tasty food</h4>
-                        <h2>OUR SPECIAL</h2>
-                        <ul>
-                            <li><b>Grilled Chicken</b>
-                                <p>mouth watering Chicken</p>
-                                <hr> $100
-                            </li>
-                            <li><b>Grilled Fish</b>
-                                <p>mouth watering Chicken</p>
-                                <hr> $100
-                            </li>
-                            <li><b>Goat Meat Pepper Soup<b>
+                <div class="special__header">
+                    <h4>Our tasty food</h4>
+                    <h2>OUR SPECIAL</h2>
+                    <div class="special">
+                        <div class="img3">
+                            <img class="special__img" src="../static/images/mamaputimages/efo-stewjpg.jpg" alt="">
+                        </div>
+                        <div class="special-text">
+                            <ul>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Grilled Chicken</b>
                                         <p>mouth watering Chicken</p>
-                                        <hr> $100
-                            </li>
-                            <li><b>Beef Pepper Soup</b>
-                                <p>mouth watering Chicken</p>
-                                <hr> $100
-                            </li>
-                            <li><b>Assorted Meat Pepper Soup</b>
-                                <p>mouth watering Chicken</p>
-                                <hr> $100
-                            </li>
-                        </ul>
-                        <button class="btn">Check</button>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p> $100</p>
+                                </li>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Grilled Fish</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p> $100</p>
+                                </li>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Goat Meat Pepper Soup</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p>100</p>
+                                </li>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Beef Pepper Soup</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p>100</p>
+                                </li>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Assorted Meat Pepper Soup</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p>100</p>
+                                </li>
+                            </ul>
+                            <a href="{{url_for('menu')}}"><button class="btn">Check</button></a>
+                        </div>
                     </div>
-
                 </div>
+
                 <h1>OPENING TIMES</h1>
                 <div class="flex-worktime">
 
@@ -136,28 +163,46 @@
                     </div>
                 </div>
             </div>
-            <div class="flex-container">
+            <div class="flex-qn">
                 <div class="">
                     <h1>Questions</h1>
                     <div class="qns">
                         <div class="qn">
-                            <h5>What food do you enjoy best from us?</h5>
+                            <div class="qn__title">
+                                <h5>What food do you enjoy best from us?</h5>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </div>
+                            <div class="qn__content">
+
+                            </div>
                         </div>
                         <div class="qn">
-                            <h5>What food do you enjoy best from us?</h5>
+                            <div class="qn__title">
+                                <h5>What food do you enjoy best from us?</h5>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </div>
+
                         </div>
                         <div class="qn">
-                            <h5>What food do you enjoy best from us?</h5>
+                            <div class="qn__title">
+                                <h5>What food do you enjoy best from us?</h5>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </div>
+
                         </div>
                         <div class="qn">
-                            <h5>What food do you enjoy best from us?</h5>
+                            <div class="qn__title">
+                                <h5>What food do you enjoy best from us?</h5>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </div>
+
                         </div>
                     </div>
                 </div>
 
-                <div class="commu">
+                <!-- <div class="commu">
                     <h1> JOIN THE COMMUNITY</h1>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
