@@ -6,7 +6,7 @@ import requests
 from PIL import Image
 from App.v1 import app, db, bcrypt
 from App.v1.forms import RegForm, LoginForm, AddressForm, ProdForm, RecipeForm, OrderForm
-from App.v1.models import User, Product, Order, Address, Recipe, CartItem
+from App.v1.models import User, Product, Order, Address, Recipe, CartItem, OrderInfo
 from flask import render_template, url_for, flash, redirect, request, abort, session, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy.exc import IntegrityError
@@ -159,10 +159,32 @@ def orders():
     """
         returns order the Page
     """
-    orders = Order.query.filter_by(user_id=current_user.id)
+    orders = Order.query.filter_by(user_id=current_user.id).all()
     if orders:
-        return render_template('order.html', orders=orders, title='Order')
-    return render_template('empty_order.html', title='Order')
+        order_details = []
+        for order in orders:
+            order_info = {}
+
+            order_info['tracking_id'] = order.tracking_id
+            order_info['date'] = order.created_date.strftime('%Y-%m-%d %H:%M')
+
+            order_infos = OrderInfo.query.filter_by(order_id=order.id).all()
+            prod_details = []
+            for order_item in order_infos:
+                prod_info = {}
+
+                prod_info['quantity'] = order_item.quantity
+                prod_info['price'] = order_item.product.price
+                prod_info['name'] = order_item.product.food_name
+                prod_details.append(prod_info)
+            # print(prod_details)
+            order_info['products'] = prod_details
+            order_details.append(order_info)
+            # print(order_details)
+            
+        return render_template('order.html', order_details=order_details,
+                               title='Order | Dashboard')
+    return render_template('order.html', title='Order | Dashboard')
 
 
 @app.route('/profile', methods=['GET', 'POST'], strict_slashes=False)
@@ -547,11 +569,22 @@ def checkout():
     return render_template('checkout.html', total_price=total_price, all_qty=all_qty, cart_items=cart_items,
                            vat=vat, amount=amount, orderform=orderform, title="Checkout")
 
+
+def get_tracking_id():
+    """ function generates new tracking id for orders """
+    while True:
+        tracking_id = secrets.token_hex(6)
+        db_orders = Order.query.filter_by(tracking_id=tracking_id).first()
+        if not db_orders:
+            return tracking_id
+
+
 @app.route('/verify_payment', methods=['GET','POST'], strict_slashes=False)
 @login_required
 def verify_payment():
     """ function verifies the user payment before giving user order receipt """
     cart_items = get_cartItems()
+    # all_qty = cart_qty()["all_qty"]
     recipe_id = request.args.get('recipe')
     trx_ref = request.args.get('reference')
     recipe = Recipe.query.get(recipe_id)
@@ -561,29 +594,37 @@ def verify_payment():
                "Content-Type": "application/json"}
     
     response = requests.get(app.config['VERIFY'] + "{}".format(trx_ref), headers=headers)
-    print('payment reference:', trx_ref, recipe)
+    """print('payment reference:', trx_ref, recipe)
     print('response status:', response.status_code)
     print('response text:', response.text)
-    print(app.config['VERIFY'] + "{}".format(trx_ref))
+    print(app.config['VERIFY'] + "{}".format(trx_ref))"""
 
     data_response = response.json()
     print('payment status:', data_response)
     status = data_response.get('data',{}).get('status')
     if status == 'success':
         try:
+            tracking_id = get_tracking_id()
             if recipe:
-                order = Order(user_id=current_user.id, recipe_id= recipe.id)
+                order = Order(user_id=current_user.id,
+                              tracking_id=tracking_id, recipe_id= recipe.id)
             else:
-                order = Order(user_id=current_user.id)
+                order = Order(user_id=current_user.id, tracking_id=tracking_id)
             db.session.add(order)
+            db.session.commit()
+            for item in cart_items:
+                order_info = OrderInfo(order_id=order.id,
+                                       product_id=item.product.id,
+                                       quantity=item.quantity)
+                db.session.add(order_info)
             for item in cart_items:
                 db.session.delete(item)
             db.session.commit()
             return render_template('verify.html', title='Payment Verification')
         except IntegrityError as e:
             db.session.rollback()
-            msg = "Error: Failed to create order due to duplicate tracking id"
-            app.logger.error(msg)
+            # msg = "Error: Failed to create order due to duplicate tracking id"
+            app.logger.error(e)
             return render_template('cancel.html', title='Error')
     else:
         return redirect(url_for('cancel_payment'))
