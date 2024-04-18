@@ -222,15 +222,14 @@ def register():
         return redirect(url_for('landingPage'))
     regform = RegForm()
     if regform.validate_on_submit():
-        hash_pwd = bcrypt.generate_password_hash(regform.pwd.data).decode('utf-8')
+        hash_pwd = bcrypt.generate_password_hash(regform.pwd.data).decode(utf-8)
         user = User(first_name=regform.first_name.data,
                     last_name=regform.last_name.data,
                     email=regform.email.data,
-                    password=hash_pwd)
-
+                    pwd=hash_pwd)
         db.session.add(user)
         db.session.commit()
-
+                
         flash('Successful account creation for {}'.format(regform.first_name.data), 'success')
         return redirect(url_for('login'))
     return render_template('register.html', title='Registration', regform=regform)

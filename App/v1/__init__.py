@@ -38,7 +38,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 login_manager.login_message = "Can\'t access this page. Log in first"
 login_manager.login_message_category = "info"
-# Ensure that database tables are accessed within the application context when using the python terminal
+# Ensure that database tables are created within the application context
 app.app_context().push()
 
 # print(app.config['SECRET_KEY'])
