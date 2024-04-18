@@ -42,7 +42,9 @@ body {
     background-color: transparent;
     border-bottom: none;
     padding: 25px 20px;
-}
+   
+ }
+
 
 .card .card-header+.card-block,
 .card .card-header+.card-block-big {
@@ -80,6 +82,12 @@ body {
     flex-direction: column;
 }
 
+<<<<<<< HEAD
+.card-header{
+    width: 70%;
+    margin-top:3rem;
+}
+=======
 
 .row.container.d-flex.justify-content-center {
   -webkit-box-pack: center !important;
@@ -87,3 +95,4 @@ body {
   justify-content: center !important;
   margin-left: -6rem;
 }
+>>>>>>> 9e36d4a66120adf0855281f44171e88c8cf11d5e

@@ -5,7 +5,8 @@ from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, DecimalField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, NumberRange
 from flask_login import current_user
-from App.v1.models import User
+from App.v1.models import User, Product
+
 
 
 class RegForm(FlaskForm):

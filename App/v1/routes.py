@@ -12,6 +12,10 @@ from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy.exc import IntegrityError
 
 
+# cards = [f"Card {i}" for i in range(1,5)]
+# cards_per_page = 9
+
+
 @app.context_processor
 def cart_qty():
     """ injects the cart quantity in all templates """
@@ -37,7 +41,7 @@ def landingPage():
     """
         returns the landing Page
     """
-    return render_template('home.html', title='Home-Page')
+    return render_template('home2.html', title='Home-Page')
 
 
 @app.route('/login', methods=['GET', 'POST'], strict_slashes=False)
@@ -76,6 +80,11 @@ def menu():
     """
         returns the menu Page
     """
+    # page = int(request.args.get('page', 1))
+    # start_index = (page - 1) * cards_per_page
+    # end_index = start_index + cards_per_page
+    # current_page_cards = cards[start_index:end_index]
+    # total_pages = (len(cards) + cards_per_page - 1) 
     products = Product.query.all()
     return render_template('product_listing.html', title='Menu',
                            products=products)
