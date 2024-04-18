@@ -6,7 +6,7 @@
     text-decoration: none;
     font-size: 16px;
     font-display: var(#5f2e0b);
-    /* box-sizing: border-box; */
+    
     
 }
 
@@ -15,16 +15,7 @@ body {
     width: auto;
     list-style: none;
     background-color: #1b1b1b;
-
 }
-
-/* .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1rem;
-} */
-
 html {
     font-size: 62.5%;
     overflow-x: hidden;
@@ -166,8 +157,6 @@ header .navbar{
         margin-left: 0;
     }
     .new-search {
-        /* flex-direction: column; */
-        /* align-items: stretch; */
         width: 100%;
     }
 
@@ -199,30 +188,25 @@ header .navbar{
     padding: 1rem;
     flex-wrap: wrap;
 }
-
 .footer-col h4 {
     font-size: 13.5pt;
     font-weight: normal;
     color: orangered;
     padding-bottom: 10px;
-
 }
 .footer-col ul {
     list-style: none;
     padding: 0;
 }
-
 .footer-col ul a {
     font-size: 15px;
     color: rgb(231, 223, 221);
 }
-
 .footer-col ul a:hover {
     color: rgb(167, 117, 98);
     text-decoration: none;
     font-size: 15px;
 }
-
 .footer-icons {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -256,7 +240,6 @@ ion-icon:hover {
     width: 40%;
     margin: 0 auto;
 }
-
 .small-cont {
    padding: 1.5rem 0;
 }
@@ -277,7 +260,6 @@ ion-icon:hover {
     background: #e2d3d3;
 
 }
-
 .btn{
     display: inline-block;
     font-size: 1rem;
@@ -303,16 +285,6 @@ ion-icon:hover {
     gap:2rem;
 }
 
-.card {
-
-    padding: 1rem;
-    background: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
-    /* transition: all 0.3s ease; */
-}
-
 .cart-icon{
     display: flex;
     position: relative;
@@ -327,7 +299,6 @@ ion-icon:hover {
     border-radius: 50%;
     text-align: center;
 }
-
 .card-flex{
     display: flex;
     justify-content: space-between;
@@ -354,41 +325,29 @@ ion-icon:hover {
     }
     
 }
-/*
-.card:hover{
-    transform : scale(1.1);
-    background: #e2d3d3;
-}*/
-
 .fas {
     color: #ffc187;
     transition: all 0.3s ease;
     cursor: pointer;
-    font-size: 1.5rem;
-    
+    font-size: 1.5rem;   
 }
 .fas:hover{
     color: rgb(73, 68, 63);
 }
-
 .btn-container {
     display: flex;
     flex-direction: row;
     justify-content: center; 
     margin-top: .5rem;
     position: relative;
-    /* bottom: 1rem; */
     padding-top: 2rem;
 }
-
 .btn-container button {
     margin-right: 2.5rem; 
 }
-
 .card-text_2{
     text-align: right;
 }
-
 .bg-blur {
     background: url(../images/images/meat\ pices.jpg);
     background-size: cover;
@@ -405,27 +364,24 @@ ion-icon:hover {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 25rem;
+    height: 35rem;
     width: 60%;
     position: absolute;
     top: 25%;
-    left: 30%;
+    left: 20%;
     translate: (-50%, -50%);
     border-radius: 0.5%;
     filter: opacity(0.5);
 }
-
 .shadow_img {
     height: 40rem;
     width: 100%;
     box-shadow: 0 0 10px rgba(0, 0, 0);
     border-radius: 0.5rem;
 }
-
 .margin {
     margin: 5rem 0;
 }
-
 .col h2 {
     font-size: 2rem;
     font-weight: bold;
@@ -434,13 +390,11 @@ ion-icon:hover {
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 .flex-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-
 .flex-container .flex-item {
     padding: 1rem;
     font-size: 1.5rem;
@@ -458,21 +412,18 @@ ion-icon:hover {
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-
 .detail-title h3 {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
     color: whitesmoke;
 }
-
 .flex-menu {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
 }
-
 .menu-item {
     padding: 5rem;
     background: rgb(78, 78, 67);
@@ -482,17 +433,14 @@ ion-icon:hover {
     transition: all 0.3s ease;
     cursor: pointer;
 }
-
 .menu-item:hover {
     transform: scale(1.1);
     background: #e2d3d3;
 }
-
 .menu-item ion-icon {
     font-size: 5rem;
     color: #5f2e0b;
 }
-
 .flex-worktime{
     display: flex;
     justify-content: center;
@@ -507,12 +455,10 @@ ion-icon:hover {
     margin: 2rem;
     border-style: ridge;
 }
-
 .col-time p{
     font-size: 20px;
     color: whitesmoke;
 }
-
 .col-time h4  {
     font-size: 25px;
     color: whitesmoke;
@@ -522,7 +468,6 @@ h1{
     font-size: 40px;
     color: whitesmoke;
 }
-
 .nav-title {
     display: flex;
     justify-content: center;
@@ -530,97 +475,73 @@ h1{
     height: 100%;
     background-color: #1b1b1bab;
 }
-
 .text_two {
     color: black;
 }
 
 .nav-title h1{
-    /* font-size: 2rem; */
     color: rgb(252, 252, 252);
     text-align: center;
 
 }
-
 .flex-cart{
     text-align: right;
 }
-
-/* .container-row{
-    background-image: url(../images/images/meat\ pices.jpg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    filter: opacity(0.5);
-} */
-
 .cont-body{
     background-image: url(../images/images/chapatti.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     opacity: .3px;
+    padding-bottom: 30px;
 }
-
-
 .flex-form{
     display: flex;
     padding-left: 20rem;
     padding-top: 5rem;
     padding-bottom: 3rem;
 }
-
 .flex-text{
     background-color: #494745;
     padding: 1rem;
-    height:  72vh;
     color: rgb(175, 167, 167);
 }
 .flex-item{
     color: whitesmoke;
-    font-size: 2rem;
+    font-size: 2.5rem;
     text-align: center;
-    font-family: 'regular' sans-serif;
+    font-family: "Dancing Script", cursive;
     font-style: italic;
 }
 .col h2{
     color: whitesmoke;
-    /* font-family: 'poppins', sans-serif; */
-    /* font-size: 2rem; */
-    /* text-align: center; */
 }
 .flex-msg{
     background-color: rgb(32, 31, 31);
     color: whitesmoke;
     padding: 1rem;
 }
-
 .cont-text{
     color: whitesmoke;
     font-family:Arial, Helvetica, sans-serif;
     font-weight: 200;
 }
-
 .flex-form input{
     border-radius: 5px;
     height: 30px;
     width: 200px;
 }
-
 .flex-msg h3{
     text-align: center;
 }
-
 .flex-msg #para{
     color:  gray;
     font-size: 20px;
-    /* text-align: center; */
 }
 .flex-row{
     display: flex;
     margin: 20px;
 }
-
 ion-icon{
     margin-right: 20px;
 }
@@ -632,21 +553,16 @@ ion-icon{
     font-size: 17px;
     color: aliceblue;
 }
-
 .flex-text #btn{
-    width: 90px;
+    width: 110px;
     margin-left: 40px;
 }
-
 .flex-text #btn:hover{
    background-color: #685a4c;
 }
 .flex-text #text{
     padding-left: 5px;
 }
-
-
-
 .main-body {
     font-family: Arial, sans-serif;
     background-color: #f3f3f3;
@@ -658,8 +574,6 @@ ion-icon{
     height: auto;
     
 }
-
-
 .main {
     background-color: var(---greyColor);
     border-radius: 15px;
@@ -668,20 +582,16 @@ ion-icon{
     padding: 20px;
     width: 600px;
 }
-
-
 .main h2 {
     color: #4caf50;
     margin-bottom: 20px;
 }
-
 label {
     display: block;
     margin-bottom: 5px;
     color: #555;
     font-weight: bold;
 }
-
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -694,7 +604,6 @@ select {
     border-radius: 5px;
     font-size: 15px;
 }
-
 button[type="submit"] {
     padding: 5px;
     border-radius: 10px;
@@ -712,32 +621,34 @@ p {
   margin-bottom: 1rem;
   word-wrap: break-word;
 }
-
 .cont-yummy{
     display: flex;
     justify-content: space-between;
     padding: 1rem;
+    background-color: whitesmoke;
+    margin: 1rem;
+    box-shadow: 3px 7px 4px rgba(223, 83, 28, 0.5);
+    margin-bottom: 2rem;
 }
-
 .cont-yummy .about-text h2, p{
-    /* font-size: 2rem; */
-    color: #f3edea;
-    /* margin-bottom: 1rem; */
+    color: #161615;
     padding: 1rem;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 7px rgba(54, 84, 219, 0.5);
+    /* width: 20rem; */
+    
     
 }
-
 .cont-yummy img{
-    width: 30rem;
-    /* height: 100%; */
+    width: 35rem;
     border-radius: 2%;
-    box-shadow: 0 0 10px rgba(0, 0, 0);
+    box-shadow: 0 0 10px rgba(122, 66, 66, 0.5);
     margin: 0 auto;
     opacity: 0.6;
+    margin-top: 6rem;
+    margin-left: 1rem;
+    margin-right: 2rem;
 }
-
 .special__header h4, h2 {
     font-size: 2rem;
     font-weight: bold;
@@ -745,6 +656,9 @@ p {
     margin-bottom: 1rem;
     text-align: center;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.special__header h2{
+    font-size: 5rem;
 }
 .special__header h4, .about-text p{
     font-family: "Dancing Script", cursive;
@@ -757,39 +671,49 @@ p {
     font-size: 2rem;
     margin: 0 2rem;
 }
-
 .special h4 {
     font-size:4rem ;
 }
 .special{
     display: flex;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: center;
     color: whitesmoke;
-    gap: 5rem;
+    padding: 0 5rem;
 }
-
 .special .img3 {
-    width: 30rem;
-    height: 30rem;
-    border-radius: 2%;
+    width: 50rem;
+    height: 45rem;
+    border-radius: 1rem;
     box-shadow: 0 0 10px rgba(0, 0, 0);
     margin: 0 auto;
     opacity: 0.4;
     margin: 0 2rem;
-    box-sizing: border-box;
+    box-shadow: 0 0 20px rgba(212, 8, 8, 0.7);   
 }
-
 .special__img {
     height: 100%;
     width: 100%;
 }
-
 .special ul{
     list-style: none;
-    padding: 0;
+    padding: 0;   
 }
-
+.special-content p{
+    color: whitesmoke;
+}
+.special-text{
+    padding: 1rem;
+    margin-right: 5rem;
+    border-style: ridge;
+    box-shadow: 0 0 20px rgba(212, 8, 8, 0.5);
+}
+.special-text .btn{
+    display: flex;
+    justify-content: center;
+    font-size: 2rem;
+    margin-left: 15rem;
+}
 .special__flex {
     display: flex;
     justify-content: space-between;
@@ -798,25 +722,34 @@ p {
     padding: 1rem;
     margin: 0;
 }
-
+.special__flex p {
+    color: whitesmoke;
+    margin: 0;
+}
 .special__line {
     background-color: whitesmoke;
     height: 0.2rem;
     width: 10rem;
 }
-
 .flex-qn{
-    color: whitesmoke;
+    color: rgb(17, 17, 17);
+    background-image: url(../images/images/goat\ ribs.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    /* box-shadow: 20px(rgba(228, 76, 16, 0.5));  */
 }
-
 .flex-qn h1{
     font-family: 'Courier New', Courier, monospace;
-    font-size: 2rem;
-}
+    font-size: 4rem;
+    text-align: left;
+    margin: 5rem;
+    padding: 0;
+} 
 .qns{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin: 5rem;
 }
 .qn{
     line-height: 1.5;
@@ -825,7 +758,6 @@ p {
     border: 1px solid whitesmoke;
     width: fit-content;
 }
-
 .qn__title {
     display: flex;
     justify-content: space-between;
@@ -833,16 +765,60 @@ p {
     cursor: pointer;
     gap: 3rem;
 }
-
 .qn__title h5{
     font-size: 1.5rem;
     font-weight: bold;
     color: whitesmoke;
     margin-bottom: 0 !important;
 }
-
 .qn__title ion-icon{
     font-size: 1.5rem;
     color: whitesmoke;
     cursor: pointer;
+}
+.commu{
+    display: flex;
+   
+}
+.commu-msg{
+    background-color: #685a4c;
+    padding: 1rem;
+    margin-bottom: 3rem;
+}
+.commu-msg #btn{
+    color: rgb(14, 13, 13);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+.commu-msg #btn:hover{
+    background-color: orangered;
+}
+.about-overlay{
+    color: #ddd;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    padding: 1rem;
+}
+.about-overlay p{
+    font-size: 20px;
+    margin: 1rem;
+    margin-left: 2px;
+    color: #ddd;
+}
+.about-overlay h3, h1{
+    font-size: 5rem;
+}
+
+.form{
+    margin: 3rem;
+    width: 50rem;
+    background-color: #f3f3f3;
+    /* display: flex; */
+    /* align-items: center; */
+    border-radius: 0.5rem;
+    padding-left:1.5rem ;
+    /* justify-content: center; */
 }

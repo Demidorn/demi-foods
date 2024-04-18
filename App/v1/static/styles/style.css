@@ -52,7 +52,13 @@ nav a{
     background-repeat: no-repeat;
     background-size: cover;
 }
-.about, .menu, .contact {
+.about-overlay{
+    color: rgb(221, 161, 161);
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}
+ .menu, .contact {
     display: flex;
     justify-content: center;
     padding: 23px 30px 23px;

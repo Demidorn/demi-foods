@@ -210,17 +210,17 @@ input[type="number"] {
 }
 
 .card-sign {
-<<<<<<< HEAD
-    width: 25px;
-    border: transparent;
-    border-radius: 20%;
-    font-size: 16px;
-}
-=======
   width: 25px;
   border: transparent;
   border-radius: 20%;
   font-size: 16px;
   cursor: pointer;
 }
->>>>>>> 9e36d4a66120adf0855281f44171e88c8cf11d5e
+
+
+
+.flex-sec{
+  padding-top: 50px;
+  padding-bottom: 155px;
+}
+

@@ -70,9 +70,19 @@ input:focus{
     
 }
 
-.special {
-  border-radius: 2px;
-  transition: none; 
+#orderform1{
+    padding-bottom: 40px;
+}
+
+#orderform1 .special {
+    display: flex;
+    justify-content: right;
+}
+#orderform1 .special input {
+  border-radius: 20px;
+  width: 120px;
+  transition: none;
+  color: white; 
 }
 .header{
     font-size: 1.5rem;
@@ -102,17 +112,6 @@ input:focus{
 .lower{
     line-height: 2;
 }
-/*
-.btn{
-    background-color: rgb(23, 4, 189);
-    border-color: rgb(23, 4, 189);
-    color: white;
-    width: 100%;
-    font-size: 0.7rem;
-    margin: 4vh 0 1.5vh 0;
-    padding: 1.5vh;
-    border-radius: 0;
-}*/
 
 a{
     color: black;
@@ -132,15 +131,4 @@ select.form-control:not([size]):not([multiple]) {
   margin-bottom: 4vh;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+/** order css**/

@@ -371,6 +371,10 @@ header .navbar{
     background: rgb(156, 123, 110);
 }
 
+.margin__row {
+    margin: 2rem 5rem 0 0;
+}
+
 
 .flex-card {
     display: flex;
@@ -379,21 +383,21 @@ header .navbar{
     flex-wrap: wrap;
     margin: 2rem 0;
     padding: 2rem;
-    gap:2rem;
+    gap:0.5rem;
     width: 30rem;
     /* height: 30rem; */
    
 }
 
 .card {
-    width: 300px; 
-    padding: 0px;
+    width: 23rem; 
+    /* padding: 0px; */
     background: #fff;
     border-radius: 0.5rem;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
     transition: all 0.3s ease;
-    height: 550px;
+    height: 45rem;
     overflow: hidden;
 }
 
@@ -412,20 +416,11 @@ header .navbar{
     text-align: center;
     color: black;
     text-shadow: none;
-    border: 2px solid red;
-    /* margin: 0;  */
     overflow: hidden;
     text-overflow: ellipsis; /* Show ellipsis for truncated text */
-    white-space: nowrap;
-    /* height: 5rem; */
-    
-
+    white-space: nowrap;  
 }
 
-/* .card{
-    width: 330px;
-    height: 400px;  
-} */
 @media screen and (max-width: 768px) {
     .card {
         width: 100%;
@@ -453,7 +448,7 @@ header .navbar{
 /* quantity field css */
 .form-group {
     margin-bottom: 15px;
-    
+
 }
 label {
     display: inline-block;
