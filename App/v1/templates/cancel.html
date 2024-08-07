@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block navbar %}{% endblock navbar %}
+{% block content %}
+<head>
+   <link rel="stylesheet" href="../static/styles/payment.css">
+</head>
+<div class="serviceBox">
+  <h3>FAILED PAYMENT</h3>
+   <div class="service-icon">
+     <i class="fa fa-globe"></i>
+   </div>
+   <div class="service-content">
+       <p>
+    	  Oops!, your Transaction could not be completed. Please try again later
+       </p>
+     <a href="{{ url_for('menu') }}" class="btn btn-default">Tasty Foods</a>
+   </div>
+</div>
+{% endblock content %}

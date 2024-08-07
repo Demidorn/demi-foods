@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="main-body">
+  <div class="main">
+    <h2>Login</h2>
+    <form action="" method="POST">
+      {{ loginform.hidden_tag() }}
+      <div class="form-group">
+        {{ loginform.email.label() }}
+        {% if loginform.email.errors %}
+          {{ loginform.email(class="form-control is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in loginform.email.errors %}
+            <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ loginform.email(class="form-control") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {{ loginform.pwd.label() }}
+        {{ loginform.pwd(class="form-control") }}
+      </div>
+    <div class="custom-control custom-check">
+      {{ loginform.remember(class="custom-control-input") }}
+      {{ loginform.remember.label(class="custom-control-label") }}
+    </div>
+  <button type="submit">Signin</button>
+  </form>
+  <div>
+    <small>
+      Do not have an Account?
+      <a href="{{ url_for ('register')}}" class="signup-btn" type="button">
+        Sign up</a>
+    </small>
+  </div>
+  </div>
+</div>
+</div>
+{% endblock content %}
+

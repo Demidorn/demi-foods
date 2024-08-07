@@ -1,0 +1,27 @@
+
+{% extends 'layout.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="../static/styles/addcart.css">
+<section class="flex-sec">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title mb-3"><a href="{{ url_for('menu')}}" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+                        <hr>
+
+                        <div class="mb-3">
+                            <p class="mb-1">Shopping cart is empty</p>
+                            <br>
+			    <p class="mb-0">You have zero items in your cart.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

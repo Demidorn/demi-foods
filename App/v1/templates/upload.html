@@ -1,0 +1,80 @@
+{% extends "dashboard.html" %}
+{% block content %}
+    <div class="content-section">
+        <form class="upload-content" method="POST" action="" enctype="multipart/form-data">
+            {{ upload.hidden_tag() }}
+            <fieldset class="form-group_uploads">
+                <legend class="border-bottom mb-4">Upload Food</legend>
+                <div class="form-group">
+                    {{ upload.food_name.label(class="form-control-label") }}
+
+                    {% if upload.food_name.errors %}
+                        {{ upload.food_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in upload.food_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ upload.food_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ upload.price.label(class="form-control-label") }}
+                    {% if upload.price.errors %}
+                        {{ upload.price(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in upload.price.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ upload.price(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ upload.description.label(class="form-control-label") }}
+                    {{ upload.description(class="form-control", rows=3) }}
+                </div>
+                <div class="custom-control custom-check">
+                    {{ upload.status(class="custom-control-input") }}
+                    {{ upload.status.label(class="custom-control-label") }}
+                </div>
+                <div class="form-group">
+                    {{ upload.image.label() }}
+                    {{ upload.image(class="form-control-file") }}
+                    {% if upload.image.errors %}
+                        {% for error in upload.image.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ upload.submit(class="btn btn-outline-info") }}
+            </div>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModalCenter">Delete Product</button>
+        </form>
+    </div>
+    <!-- Modal -->
+<div class="modal fade" id="deleteModalCenter" tabindex="-1" role="dialog" aria-labelledby="deleteModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLongTitle">Delete Product?</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          {% if product.id %}
+            <form action="{{ url_for('delete_product', product_id=product.id)}}" method="POST">
+              <input class="btn btn-danger" type="submit" value="Delete Product">
+            </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

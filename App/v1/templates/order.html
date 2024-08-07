@@ -1,0 +1,35 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<link rel="stylesheet" href="../static/styles/order1.css"</link>
+<div class="container">
+{% if order_details %}
+    <div class="row">
+        {% for order_info in order_details %}
+        <div class="col-md-3 col-sm-6">
+            <div class="pricingTable">
+                <div class="pricingTable-header">
+                    <span class="heading">
+			<h3>Order_id#: {{ order_info.tracking_id }}</h3>
+                    </span>
+		    <span class="mo">{{ order_info.date }}</span>
+                </div>
+		{% for prod_detail in order_info.products %}
+                <div class="pricingContent">
+                    <ul>
+                        <li>
+			   {{ prod_detail.name }}<br>
+			   Qty: {{ prod_detail.quantity}}<br>
+			   Price: ₦ {{ prod_detail.price }}
+			</li>
+                    </ul>
+                </div><!-- /  CONTENT BOX-->
+		{% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% else %}
+   <h1>No order to show</h1>
+{% endif %}
+</div>
+{% endblock content %}

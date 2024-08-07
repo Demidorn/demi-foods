@@ -1,0 +1,300 @@
+/** Dashboard.html css **/
+:root {
+    --primaryColor: #0e6253;
+    --secondaryColor: #ffc187;
+    --whiteColor: #fff;
+    --softGreenColor: #92a8a5;
+    --darkGrayColor: #a7a7a7;
+    --blackColor: #222;
+    ---greyColor: #f5f5f5;
+
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: 'open Sans', sans-serif;
+}
+
+body{
+    width: 100%;
+    height: auto;
+}
+
+html {
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+
+.container {
+    display: flex;
+}
+.sidebar{
+    height: 100%;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 2%;
+    background-color: var(--primaryColor);
+    color: var(--whiteColor);
+}
+
+.sidebar-menu{
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-menu a , .sidebar-logout a{
+    padding: 5% 8%;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--whiteColor);
+}
+
+.sidebar-menu a ion-icon{
+    font-size: 40px;
+}
+
+.sidebar-menu a:hover{
+    background-color: var(--secondaryColor);
+    border-radius: 30px;
+}
+
+.sidebar-logout a ion-icon{
+    font-size: 50px;
+    color: var(--blackColor);
+}
+
+.sidebar-logout a{
+    color: var(--blackColor);
+}
+
+.main{
+    width: 100%;
+    height: max-content;
+    min-height: 100vh;
+    padding: 3%;
+    background-color: var(--softGreenColor);
+    margin-left: 250px;
+}
+.main-navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-togle{
+    display: none;
+}
+
+.search{
+    width: 30pc;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--whiteColor);
+    border-radius: 20px;
+
+    
+    
+}
+
+.search input{
+    width: 80%;
+    height: 100%;
+    padding: 20px;
+    border: none;
+    border-radius:20px ;
+}
+
+.search-btn{
+    background-color: var(--secondaryColor);
+    color: var(--whiteColor);
+    border: none;
+    border-radius: 20px;
+    width: 120px;
+    cursor: pointer;
+}
+
+.search:hover{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.search-btn:hover{
+    background-color: var(--primaryColor);
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+}
+
+.cart, .user{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--whiteColor);
+    font-size: 30px;
+    color: var(--primaryColor);
+    text-decoration: none;
+    padding: 0 10px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.cart:hover, .user:hover{
+    box-shadow: rgba(218, 204, 18, 0.623) 0px 8px 24px;
+}
+
+.main-highlight{
+    margin: 3% 0;
+    padding: 3%;
+    background-color: var(--secondaryColor);
+    border-radius: 8px;
+
+}
+
+.main-header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main-title{
+    font-size: 20px;
+}
+
+.main-arrow{
+    font-size: 30px;
+}
+
+.back, .next{
+    cursor: pointer;
+}
+.back:hover, .next:hover{
+    color: var(--primaryColor);
+
+}
+
+.highligt-wrapper{
+    width: 100%;
+    display: flex;
+    padding: 1%;
+    border-radius: 8px;
+    gap: 1.5rem;
+    overflow-x: hidden;
+}
+
+.highlight-card{
+    display: flex;
+    flex-direction: row;
+    min-width: 200px;
+    width: 80%;
+    height: 100%;
+    gap: 1rem;
+    border-radius: 8px;
+    padding: 1%;
+    background-color: var(---greyColor);
+    cursor: pointer;
+}
+
+.highlight-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    object-position: centers;
+}
+
+.highligt-desc h4{
+    color: var(--primaryColor);
+}
+.highligt-desc p{
+    color: var(--blackColor);
+    font-size: 13px;
+}
+.highlight-card:hover{
+    background-color: var(--whiteColor);
+    box-shadow: rgba(176, 176, 176, 0.2) 0px 2px 8px 0px;
+}
+
+
+.user-profile{
+    
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--whiteColor);
+    border-radius: 8px;
+    margin: 2% 0;
+    width : 45rem;
+    font-size: 20px;
+}
+.subtitle{
+    font-size: 3rem;
+}
+#first_name, #last_name, #email, #address{
+    font-size: 16px;
+}
+/* .profile-img {
+    width: 120px;
+    height: 120px;
+}
+.profile-img[src="#"] {
+    display: none;
+}
+.profile-img {
+    background: url(https://thenounproject.com/icon/identity-897141/);
+    background-position: -20px -10px;
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+} */
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 100%;
+    }
+    
+}
+
+.contect-section{
+    width: 90%;
+    justify-content: center;
+}
+
+
+/* .form-group{
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0 1rem;
+    background-color: var(--whiteColor);
+    border-radius: 1rem;
+    margin: 2% 0;
+    width : 50rem;
+    font-size: 18px;
+} */
+
+.upload-content{
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    /* background-color: var(--whiteColor); */
+    border-radius: 8px;
+    margin: 2% 0;
+    width : 45rem;
+    font-size: 20px
+}
+

@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+
+
+<section class="cont-body">
+    <div class=" flex-form">
+        <div class="flex-text">
+            <h1 class="cont-text">Write Us</h1>
+            <form method="post" action="" autocomplete="off">
+                <br>
+                <label for="Username">
+                    <i class="fa-user"></i>
+                </label>
+                <input type="text" name="username" placeholder="Username" id="username" autofocus="" required>
+                <br><br>
+                <label for="email">
+                    <i class="fa-envelope"></i>
+                </label>
+                <input type="email" name="email" placeholder="Email" id="email" required>
+                <br><br>
+                <label for="password">
+                    <i class="fa-lock"></i>
+                </label>
+                <textarea id="text" name="Message" placeholder="Message" rows="7" cols="35"></textarea>
+                <br><br>
+                <input type="submit" value="Send Message" id="btn">
+                <!-- <div class="msg">{{msg}}</div> -->
+            </form>
+        </div>
+        <div class="flex-msg">
+            <h3> Contact Information</h3>
+            <p id="para">We're open to any suggestion or<br>just to have a chat</p>
+            <div class="flex-row">
+                <ion-icon name="location-outline"></ion-icon>
+                <p><b>Address:</b> 732/21 Second Street<br>KobokoNigeria</p>
+            </div>
+            <div class="flex-row">
+                <ion-icon name="call-outline"></ion-icon>
+                <p> <b>Phone:</b> +2347 1204 8561</p>
+            </div>
+            <div class="flex-row">
+                <ion-icon name="mail-outline"></ion-icon>
+                <p><b>Email:</b> info@mamaput.com</p>
+            </div>
+            <div class="flex-row">
+                <ion-icon name="globe-outline"></ion-icon>
+
+                <p><b>Website:</b> mamaput.com</p>
+            </div>
+        </div>
+    </div>
+  
+
+</section>
+
+{% endblock content %}

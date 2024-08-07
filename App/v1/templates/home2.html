@@ -1,0 +1,221 @@
+{% extends 'layout.html' %}
+{% block content %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+<section>
+    <div class="">
+        <div class="bg-blur"></div>
+        <div class="bg-front">
+            <div class="col-md-8">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                {% for category, message in messages %}
+                <div id="alert-message" class="alert alert-{{ category}}">
+                    {{ message}}
+                </div>
+                <script>
+                    // function to hide alert message after 3 seconds
+                    setTimeout(function () {
+                        document.getElementById('alert-message').style.display = 'none';
+                    }, 3000);
+                </script>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <!-- <h2>GOOD TIMES CREATE FRIENDS</h2> -->
+        <div class="row margin">
+            <div class="col">
+
+                <img class="shadow_img"
+                    src="../static/images/mamaputimages/freshly-cooked-meat-stew-with-rice-vegetables-generative-ai.jpg"
+                    alt="">
+
+            </div>
+
+            <div class="col">
+                <h2>WELCOME TO MAMAPUT</h2>
+                <div class="flexx-container">
+                    <p class="flex-item">
+                        Come to experience the exceptional gastronomic voyage in the ultimate venue. Our authentic
+                        cuisine unites people connecting history and traditions in the warm and friendly atmosphere.
+                    </p>
+                    <p class="flex-item">
+                        Our family has been in the restaurant business for a very long time.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="cont-yummy">
+        <div class="img1">
+            <img src="../static/images/mamaputimages/goat-meat-pepper-soup.jpeg" alt="">
+        </div>
+        <div class="about-text">
+            <h2>TRADITIONAL & YUMY</h2>
+            <P>Embark on a culinary journey like<br> no other with Mamaputand experience<br> the magic of African
+                flavors
+            </P>
+        </div>
+        <div class="img2">
+            <img src="../static/images/mamaputimages/fufu-with-efo_riro-with-shaki.jpeg" alt="">
+        </div>
+    </div>
+    <div class="container-row">
+        <div class="bg-color">
+            <div class="flex-container">
+                <div class="detail-title">
+                    <h2>CATERING SERVICES</h2>
+                </div>
+                <div class="detail-title">
+                    <h3>PLEASE CALL AT LEAST 24 HOURS IN ADVANCE
+                        FOR CATERING ORDERS</h3>
+                </div>
+
+                <div class="flex-menu">
+                    <div class="menu-item">
+                        <ion-icon name="pizza-outline"></ion-icon>
+                        <h4>WEEDINGS</h4>
+                    </div>
+                    <div class="menu-item">
+                        <ion-icon name="restaurant-outline"></ion-icon>
+                        <h4>INTRODUCTION <br>CEREMONIES</h4>
+                    </div>
+                    <div class="menu-item">
+                        <ion-icon name="restaurant-outline"></ion-icon>
+                        <h4>HOME COMING <br>PARTY</h4>
+                    </div>
+                    <div class="menu-item">
+                        <ion-icon name="pizza-outline"></ion-icon>
+                        <h4>HOUSE <br>WARMING PARTY</h4>
+                    </div>
+                </div>
+                <div class="special__header">
+                    <h4>Our tasty food</h4>
+                    <h2>OUR SPECIAL</h2>
+                    <div class="special">
+                        <div class="img3">
+                            <img class="special__img" src="../static/images/mamaputimages/efo-stewjpg.jpg" alt="">
+                        </div>
+                        <div class="special-text">
+                            <ul>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Grilled Chicken</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p> $100</p>
+                                </li>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Grilled Fish</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p> $100</p>
+                                </li>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Goat Meat Pepper Soup</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p>100</p>
+                                </li>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Beef Pepper Soup</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p>100</p>
+                                </li>
+                                <li class="special__flex">
+                                    <div class="special__content">
+                                        <b>Assorted Meat Pepper Soup</b>
+                                        <p>mouth watering Chicken</p>
+                                    </div>
+                                    <div class="special__line"></div>
+                                    <p>100</p>
+                                </li>
+                            </ul>
+                            <a href="{{url_for('menu')}}"><button class="btn">Check</button></a>
+                        </div>
+                    </div>
+                </div>
+
+                <h1>OPENING TIMES</h1>
+                <div class="flex-worktime">
+
+                    <div class="col-time">
+                        <h4>Lunch</h4>
+                        <p>Weekdays - 11:30am to 2:00pm</p>
+                    </div>
+                    <div class="col-time">
+                        <h4>Dinner</h4>
+                        <p>Weekdays - 5:30pm to 9:30pm</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-qn">
+                <div class="">
+                    <h1>Questions</h1>
+                    <div class="qns">
+                        <div class="qn">
+                            <div class="qn__title">
+                                <h5>What food do you enjoy best from us?</h5>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </div>
+                            <div class="qn__content">
+
+                            </div>
+                        </div>
+                        <div class="qn">
+                            <div class="qn__title">
+                                <h5>What food do you enjoy best from us?</h5>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </div>
+
+                        </div>
+                        <div class="qn">
+                            <div class="qn__title">
+                                <h5>What food do you enjoy best from us?</h5>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </div>
+
+                        </div>
+                        <div class="qn">
+                            <div class="qn__title">
+                                <h5>What food do you enjoy best from us?</h5>
+                                <ion-icon name="chevron-down-outline"></ion-icon>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="commu">
+                    <h1> JOIN THE COMMUNITY</h1>
+                    <form method="post" action="" autocomplete="off" class="commu-msg">
+                        <br>
+                       
+                        <input type="text" name="username" placeholder="Username" id="username" autofocus="" required>
+                        <br><br>
+                        <input type="email" name="email" placeholder="Email" id="email" required>
+                        <br><br>
+                        <textarea id="text" name="Message" placeholder="Message" rows="7" cols="35"></textarea>
+                        <br><br>
+                        <input type="submit" value="Submit" id="btn">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

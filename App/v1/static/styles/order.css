@@ -1,0 +1,134 @@
+/*
+body{
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 34);
+    font-size: 0.8rem;
+}*/
+
+#three {
+  border-radius: 1rem;
+  width: 22px;
+  height: 22px;
+  margin-right:3px;
+  border: 1px solid blue;
+  text-align: center;
+  display: inline-block;
+}
+
+.row{
+    margin: 0;
+    justify-content: space-around;
+}
+.upper{
+    padding: 1rem 0;
+    justify-content: space-evenly;
+}
+
+.col-md-7 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 58.333333%;
+  flex: 0 0 58.333333%;
+  max-width: 35.333333%;
+}
+
+form span{
+    color: rgb(179, 179, 179);
+}
+form{
+    padding: 2vh 0;
+    margin-bottom: -7rem;
+}
+input{
+    border: 1px solid rgba(0, 0, 0, 0.137);
+    border-radius: 5vh;
+    padding: 1vh;
+    margin-bottom: 4vh;
+    outline: none;
+    cursor: pointer;  
+    background-color: rgb(8 180 209 / 94%) ;
+}
+input:focus::-webkit-input-placeholder
+{
+      color:transparent;
+}
+
+input:focus{
+    box-shadow: none;
+    outline: none;
+    box-shadow: none;
+    color: white;
+    -webkit-box-shadow: none;
+    -webkit-user-select: none;
+    transition: none; 
+}
+
+.input:hover{
+    background-color: white;
+    
+}
+
+#orderform1{
+    padding-bottom: 40px;
+}
+
+#orderform1 .special {
+    display: flex;
+    justify-content: right;
+}
+#orderform1 .special input {
+  border-radius: 20px;
+  width: 120px;
+  transition: none;
+  color: white; 
+}
+.header{
+    font-size: 1.5rem;
+}
+.left{
+    background-color: #d1d5d361;;
+    padding: 2vh;   
+}
+.left img{
+    width: 2rem;
+}
+.left .col-4{
+    padding-left: 0;
+}
+.right .item{
+    padding: 0.3rem 0;
+    margin-right: 1rem;
+    justify-content: end;
+}
+.right{
+    background-color: #ffffff;
+    padding: 2vh;
+}
+.col-8{
+    padding: 0 1vh;
+}
+.lower{
+    line-height: 2;
+}
+
+a{
+    color: black;
+}
+a:hover{
+    color: black;
+    text-decoration: none;
+}
+input[type=checkbox]{
+    width: unset;
+    margin-bottom: unset;
+}
+
+select.form-control:not([size]):not([multiple]) {
+  height: calc(3.25rem + 2px);
+  font-size: 15px;
+  margin-bottom: 4vh;
+}
+
+/** order css**/
